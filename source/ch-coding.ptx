@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xml:id="ch-coding">
+  <title>Writing and Running Code</title>
+  <section xml:id="sec-codespaces">
+    <title>Codespaces</title>
+    <p>
+While the quick <c>GitHub.dev</c> interface we used
+to get started in <xref ref="ch-first-repo"/> is great
+for quick uploads or edits, many projects require the ability
+to run applications and execute code as you would on
+your personal computer. Fortunately, GitHub offers a
+service to run such programs on their servers.
+    </p>
+    <definition xml:id="def-codespaces">
+      <statement>
+        <p>
+A <term>Codespace</term> is a <q>dev environment</q> service
+<url href="https://github.com/features/codespaces">offered by GitHub</url>.
+Each codespace is essentially a personal virtual computer that
+runs in the cloud, that you access through your web browser.
+        </p>
+        <p>
+Full documentation on Codespaces is available on
+<url href="https://docs.github.com/en/codespaces">docs.github.com</url>.
+        </p>
+      </statement>
+    </definition>
+    <note xml:id="note-create-codespace">
+      <p>
+To create a Codespace on any repository you own, use the green
+<q>Code</q> button, select the Codespaces tab, and press
+the green <q>Create codespace on [branchname]</q> button.
+      </p>
+    </note>
+    <p>
+After the Codespace boots up, you'll have an interface similar
+to the <c>GitHub.dev</c> environment you learned about in
+<xref ref="sec-using-github-dev"/>.
+    </p>
+    <note xml:id="dev-codespace-contrast">
+      <p>
+Here are a few key differences between
+<c>GitHub.dev</c> and Codespaces.
+        <ol>
+          <li>
+            <p>
+A <c>GitHub.dev</c> URL looks like <c>github.dev/username/reponame</c>,
+while a Codespace URL looks like
+<c>random-word-123randomcharacters789.github.dev</c>.
+            </p>
+          </li>
+          <li>
+            <p>
+<c>GitHub.dev</c> is quicker to load than a Codespace.
+            </p>
+          </li>
+          <li>
+            <p>
+<c>GitHub.dev</c> has a much more limited selection of VS Code
+extensions to use.
+            </p>
+          </li>
+          <li>
+            <p>
+You can only install applications and execute code on a Codespace.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </note>
+    <p>
+One similarity between <c>GitHub.dev</c> and Codespaces
+(besides the obviously similar VS Code user interfaces),
+is that your work is still private to you and can only be
+shared with the public (and retained in the long term) by
+committing and pushing your progress every so often to your
+<c>GitHub.com</c> repository. The Source Control tool works slightly
+different in a Codespace, however.
+    </p>
+    <note xml:id="note-commit-sync">
+      <p>
+One quick way to commit and push your changes from a Codespace
+is to use <q>Source Control</q> from the left toolbar.
+        <ul>
+          <li>
+            <p>
+Enter a short commit message describing
+your changes as a note to yourself. (This is
+required and can be a pain to fix if you forget
+to do so!)
+            </p>
+          </li>
+          <li>
+            <p>
+Select <q>Commit &amp; Sync</q> from the menu
+next to the green Commit button.
+            </p>
+          </li>
+          <li>
+            <p>
+In the dialogs that follow, I suggest choosing
+to <q>Always</q> stage all your changes and commit them
+directly, then <q>OK, Don't Show Again</q> when told
+this action will pull and push commits from and to
+<c>origin/main</c>, and finally <q>Yes</q> that you
+would like your Codespace to periodically run
+<c>git fetch</c>.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </note>
+  </section>
+  <section xml:id="sec-run-code">
+    <title>Writing and Running Code</title>
+    <p>
+Now that we've provisioned our Codespace virtual cloud computer,
+we can use it to write and execute code using our web browser for
+essentially any programming lanugage.
+    </p>
+    <p>
+Our first example will be Python, a popular general-purpose programming
+language (and the same language we will use in <xref ref="ch-jupyter"/>
+for Jupyter notebooks). In your Codespace, right-click on the file Explorer
+to create a <q>New File...</q>. Name this file <c>something.py</c> so your
+Codespace recognizes the file as a Python script (due to the <c>.py</c> file
+extension).
+This should trigger the prompt shown in <xref ref="fig-python-extension-screenshot"/>
+to install a Python extension - go ahead and do it.
+    </p>
+    <figure xml:id="fig-python-extension-screenshot">
+      <image width="100%" source="screenshots/codespace-python-extension.png">
+        <shortdescription>
+A screenshot of the prompt that displays in a Codespace
+to install the Python extension.
+        </shortdescription>
+      </image>
+      <caption>Prompt to install the Python extension.</caption>
+    </figure>
+    <p>
+Add the line <c>print("Hello world!")</c> to your file.
+A <q>play</q> icon (<kbd>▶</kbd>) should be displayed
+in the upper-right corner of the text editor (thanks to the
+Python extension you installed). Clicking
+this button should execute the code to print a greeting
+as in <xref ref="fig-python-script-screenshot"/>.
+    </p>
+    <figure xml:id="fig-python-script-screenshot">
+      <image width="100%" source="screenshots/codespace-python-script.png">
+        <shortdescription>
+A screenshot of a Python script being executed within a Codespace.
+        </shortdescription>
+      </image>
+      <caption>Running a Python script in a Codespace.</caption>
+    </figure>
+    <p>
+Unless your Codespace has been customized via a
+<c>.devcontainer.json</c> file (which we won't get
+into here), you'll be using the default Codespace
+image provided by GitHub. This environment is ready
+to execute code from various standard programming
+lanugages, though for some of them you may
+need to run the script using the Terminal.
+    </p>
+    <definition xml:id="def-terminal">
+      <statement>
+        <p>
+A <term>terminal</term> is a command-line prompt used to
+run programs that don't have a graphical user interface.
+Type the command and hit <kbd>Enter</kbd> to run it.
+        </p>
+      </statement>
+    </definition>
+    <remark xml:id="remark-terminal-shortcut">
+      <statement>
+        <p>
+To open a terminal on demand in a Codespace, use the shortcut
+<kbd>Ctrl/Cmd</kbd>+<kbd>Shift</kbd>+<kbd>`</kbd>.
+        </p>
+      </statement>
+    </remark>
+    <p>
+What do you think the programs in
+<xref ref="listing-python-fib"/>,
+<xref ref="listing-ruby-fib"/>, and
+<xref ref="listing-javascript-fib"/>
+will output? Copy-paste them into a file in your Codespace,
+then run to find out!
+    </p>
+    <listing xml:id="listing-python-fib">
+      <program language="python">
+        <input>
+# name this Python file something.py
+# execute using the ▶ button or by running this in a terminal:
+#   python something.rb
+a,b = 1,1
+print(a)
+print(b)
+for _ in range(10):
+  print(a+b)
+  a,b = b,a+b
+        </input>
+      </program>
+      <caption>Sample Python code</caption>
+    </listing>
+    <listing xml:id="listing-ruby-fib">
+      <program language="ruby">
+        <input>
+# name this Ruby file something.rb
+# execute by running this in a terminal:
+#   ruby something.rb
+a,b = 1,1
+puts a
+puts b
+10.times do
+  puts a+b
+  a,b = b,a+b
+end
+        </input>
+      </program>
+      <caption>Sample Ruby code</caption>
+    </listing>
+    <listing xml:id="listing-javascript-fib">
+      <program language="javascript">
+        <input>
+// name this Javascript file something.js
+// execute by running this in a terminal:
+//   node something.js
+let a = 1, b = 1
+console.log(a)
+console.log(b)
+Array.from({ length: 10 }, _ => {
+  console.log(a+b)
+  let _a = a
+  a = b
+  b = _a + b
+})
+
+        </input>
+      </program>
+      <caption>Sample Javascript code</caption>
+    </listing>
+  </section>
+  <section xml:id="sec-codespace-management">
+    <title>Managing Your Codespaces</title>
+    <p>
+GitHub users are provided with a limited amount of free Codespace
+hours and storage each month, with additional resources available
+to Pro users, including those with the free GitHub Education
+benefit (<xref ref="github-education-discount"/>). If needed,
+there is the option to pay for additional resources.
+    </p>
+    <p>
+As a mathematician
+who almost exclusively uses GitHub Codespaces for doing the kinds
+of work described in this handbook (and does so for much longer
+periods of time than a typical mathematician),
+I've only surpassed GitHub's free quota on the rare occassion
+(and when I do, I've paid only <m>\$2</m>-<m>\$6</m> per month).
+I accomplish this by halting
+my Codespaces when I'm not actively working on them.
+    </p>
+    <note xml:id="note-manage-codespaces">
+      <p>
+To manage your Codespace resources, visit
+<url href="https://github.com/codespaces"/>.
+You can stop a Codespace temporarily to preserve your hourly quota,
+and delete a Codespace you don't plan to use for a while to save
+on your storage quota. While actively working in a Codespace,
+you can stop it by pressing
+<kbd>Ctrl/Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>,
+typing <c>stop current codespace</c>, and confirming.
+      </p>
+      <p>
+In any case, a
+stopped Codespace can be restarted later when you want to
+resume work, even if you haven't committed and pushed your changes.
+(But be warned: a stopped Codespace and its uncommitted changes may
+be deleted by GitHub after a few days of inactivity, so don't leave it
+alone for long.)
+      </p>
+      <p>
+A deleted Codespace can always be recreated later based upon your most
+recent commit.
+      </p>
+    </note>
+    <remark xml:id="remark-adjusting-defaults">
+      <p>
+<xref ref="figure-codespace-timeout-retention"/> shows a screenshot of
+some settings available on
+<url href="https://github.com/settings/codespaces">github.com/settings/codespaces</url>
+to adjust the default time your Codespace can idle before it times out
+(to save your compute time resources), and to adjust the default time
+your Codespace will be retained before it is deleted
+(to save your storage resources).
+      </p>
+    </remark>
+    <figure xml:id="figure-codespace-timeout-retention">
+      <caption>Screenshot of Codespace management settings</caption>
+      <image source="screenshots/codespace-timeout-retention.png">
+        <description>
+          <p>Screenshot of a web browser. Its text follows:</p>
+          <p>Default idle timeout</p>
+          <p>A codespace will suspend after a period of inactivity. You can specify a default idle timeout value, which will apply to all codespaces created after the default is changed. You will be charged for the entire time your codespace is running, even if it is idle. The maximum value is 240 minutes (4 hours).</p>
+          <p>Default retention period</p>
+          <p>Inactive codespaces are automatically deleted 30 days after the last time they were stopped. A shorter retention period can be set, and will apply to all codespaces created going forward. The default and maximum value is 30 days. Learn about retention setting</p>
+        </description>
+      </image>
+    </figure>
+    <p>
+Putting it all together, we have seen three ways to access files on your repo.
+Going from the least easy to edit to the most editable we have: <c>GitHub.com</c>,
+<c>GitHub.dev</c>, <c>random-codespace-string.github.dev</c>.
+Here is what these environments look like.
+    </p>
+    <figure xml:id="fig-faces-of-github">
+      <image width="100%" source="screenshots/github-com.png"/>
+      <image width="100%" source="screenshots/github-dev.png"/>
+      <image width="100%" source="screenshots/github-codespace.png"/>
+      <caption>Repo from different points of view.</caption>
+    </figure>
+  </section>
+  <section xml:id="sec-powering-up-your-codespce">
+    <title>Powering up your Codespce</title>
+    <p>
+As of January 2025, a default codespace will use a
+2-core processor and 8GB of RAM, with a quota of
+60 usage hours and 15GB storage per month. (This is increased
+to 90 usage hours and 20GB storage for Pro/Education users.)
+This is fine for many tasks,
+but if you're doing data analysis (<xref ref="ch-jupyter"/>) or
+formalized mathematics (<xref ref="sec-lean"/>) you may want some
+more resources at your disposal.
+    </p>
+    <remark xml:id="remark-change-machine-type">
+      <p>
+You can double (or quadruple, or <m>8\times</m>, etc.) your resources
+by <q>changing the machine type</q>. There are several ways to accomplish
+this, via <url href="https://github.com/codespaces/"/>, or by typing
+<q>Change Machine Type</q> in the Codespace command pallette
+(accessed via <kbd>Ctrl/Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>).
+      </p>
+      <p>
+Note however, that if you double your resources, you are also doubling your
+usage time (e.g. running a 4-core machine uses one hour of your quota
+every 30 minutes).
+      </p>
+    </remark>
+  </section>
+  <section xml:id="sec-custom-codespaces">
+    <title>Custom Codespaces</title>
+    <p>
+A key feature of Codespaces is that they can be customized by the use of a
+<c>.devcontainer.json</c> file (or <c>.devcontainer</c> directory). Such files describe
+the virtual machine that should be provisioned when creating a Codespace,
+allowing for the automatic installation of appropriate software/libraries/dependencies
+necessary for the use of a given repository.
+    </p>
+    <remark>
+      <p>
+        Setting up a custom <c>.devcontainer</c> is a slick way to
+        ensure you and your collaborators/students are running exactly
+        the same software (including versions, dependencies, etc.)!
+        No more <q>It works on my machine</q> while <q>I can't get it
+        to work on my machine</q>!
+      </p>
+      <p>
+        See <url href="https://code.visualstudio.com/docs/devcontainers/create-dev-container#_create-a-devcontainerjson-file">VisualStudio.com/docs/devcontainers</url>
+        to learn more.
+      </p>
+    </remark>
+  </section>
+</chapter>

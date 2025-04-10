@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<frontmatter xml:id="frontmatter" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <titlepage>
+      <author>
+        <personname>Steven Clontz</personname>
+        <department>Department of Mathematics and Statistics</department>
+        <institution>Univeristy of South Alabama</institution>
+      </author>
+      <credit>
+        <title>Contributing Authors</title>
+        <author>
+          <personname>Tien Chih</personname>
+          <department>Natural Science and Mathematics</department>
+          <institution>Emory College at Oxford University</institution>
+        </author>
+        <author>
+          <personname>Oscar Levin</personname>
+            <department>Mathematical Sciences</department>
+            <institution>University of Northern Colorado</institution>
+        </author>
+      </credit>
+      <date>
+        <today />
+      </date>
+    </titlepage>
+
+    <preface xml:id="pr-abstract">
+      <title>Abstract</title>
+      <p>
+        Increasingly, the cyberinfrastructure of mathematics
+        and mathematics education is built using GitHub to
+        organize projects, courses, and their communities.
+        The goal of this book is to help readers learn the basic features
+        of GitHub available using only a web browser, and how
+        to use these features to participate in GitHub-hosted
+        mathematical projects with colleagues and/or students. 
+      </p>
+    </preface>
+
+    <xi:include href="colophon.ptx" />
+  
+    <xi:include href="pr-acknowledgements.ptx" />
+
+  </frontmatter>

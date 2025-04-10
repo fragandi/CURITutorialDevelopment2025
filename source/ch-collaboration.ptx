@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xml:id="ch-collaboration">
+  <title>Collaborating with Others</title>
+  <section xml:id="sec-collaborators-prs">
+    <title>Collaborators and Pull Requests</title>
+    <p>
+A direct way to allow multiple people you trust to work on the
+same repository is to add these GitHub users as collaborators.
+    </p>
+    <definition xml:id="def-collabotors">
+      <statement>
+        <p>
+A <term>collaborator</term> for a GitHub repository has the ability
+to commit and sync changes to the project, as well as adjust certain settings
+of the repository.
+<url href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-user-account-settings/permission-levels-for-a-personal-account-repository">
+  GitHub documentation
+</url>
+provides some details on the different permissions/abilities that owners
+have in comparison to collaborators.
+        </p>
+      </statement>
+    </definition>
+    <p>
+Collaborators are added by going to your repository's Settings tab,
+using the Collaborators link in the sidebar. Each collaborator will
+need their own GitHub account, and must accept the invitation to
+collaborate before gaining access.
+    </p>
+    <p>
+Once they have access, a collaborator can either use <c>GitHub.dev</c>
+(<xref ref="opening-github-dev"/>) or create their own
+Codespace (<xref ref="def-codespaces"/>).
+    </p>
+    <warning>
+      <p>
+If two collaborators on the same repository make commits on
+the same branch, they will desynchronize your project's history:
+person A's history will think that commit <c>X</c> is followed by
+<c>Y</c> on branch <c>main</c>, but person B's history will think that
+commit <c>X</c> is followed by <c>Z</c> on branch <c>main</c>.
+      </p>
+      <p>
+As seen in <xref ref="fig-git-branches"/>, Git is meant to
+support non-linear history. However, to support this, contributors
+must name their distinct branches.
+      </p>
+    </warning>
+    <note>
+      <p>
+Our recommendation to support multiple collaborators on the same
+repository is to <em>never directly commit to the <c>main</c> branch</em>,
+even if you're the owner.
+      </p>
+      <p>
+To commit to an alternative branch in <c>GitHub.dev</c> or Codespaces, select
+<c>main</c> in the bottom toolbar, then type the name of your new branch,
+and select <q>Create new branch</q>. It's a good idea to name your
+branch in the form <c>UserName/short-description-of-topic</c>,
+or if you're unsure of the topic, you can just use the current
+date: <c>UserName/YYYYMMDD</c>. Note that prefixing with your
+<c>UserName</c> helps prevent two people from accidentally using the same
+branch name.
+      </p>
+    </note>
+    <p>
+Once a collaborator is working on a branch, they are free to edit as
+they wish, and can (and should) commit and push/sync with GitHub to
+persist their contributions to the team's repository.
+    </p>
+    <p>
+To facilitate communication among collaborators working on
+different branches, it's good practice to open a draft pull request
+once a new branch is created.
+    </p>
+    <definition xml:id="def-pull-request">
+      <statement>
+        <p>
+A <term>pull request</term> (or <term>PR</term> for short)
+is a discussion thread for a branch
+that proposes changes to a different (often, the <c>main</c>) branch.
+When the branch's changes are ready to be merged, this can be
+accomplished by pressing a button on the pull request webpage.
+        </p>
+        <p>
+A PR can be marked as a <term>draft</term>
+or <term>ready to review</term>.
+        </p>
+      </statement>
+    </definition>
+    <note>
+      <p>
+Depending on whether the collaborator is using <c>GitHub.dev</c> or
+Codespaces, they may be prompted to create a pull request when first
+pushing/syncing changes. If not, a pull request can be created by
+navigating to the repository page on <c>GitHub.com</c>.
+      </p>
+      <p>
+Recent pushes to a
+branch will reveal a prompt to create the pull request immediately.
+Otherwise, the PR can be created by using the Pull Requests tab
+of the page.
+      </p>
+      <p>
+Unless the PR is for a single commit that's immediately
+<q>ready for review</q>, a new PR should be created as
+a draft.
+      </p>
+    </note>
+    <p>
+With a draft pull request created, the contributor can
+continue to commit and push/sync to the branch until it is
+ready for review. The discussion features of GitHub can allow
+contributors to discuss the proposed changes, whether they are in
+draft or review-ready status.
+    </p>
+    <note>
+      <p>
+A draft pull request has a large button near the end of the
+discussion thread to mark the pull request as ready for review.
+      </p>
+      <p>
+A ready for review pull request can be converted to a draft
+by using a small link on the right sidebar.
+      </p>
+    </note>
+    <p>
+Depending on the complexity or maturity of the project,
+you may wish to develop a review process with your collaborators,
+or simply use the PR workflow to clearly communicate when changes
+are being made to the main branch, and ensure no two collaborators
+make incompatible changes to the same branch. Whatever you choose,
+you'll eventually want to incorporate these branched changes into
+your <c>main</c> branch.
+    </p>
+    <note>
+      <p>
+There are several options for merging a branch's pull request.
+I recommend the <q>Squash and Merge</q> option, which converts all
+the branch's commits/changes into a single new commit extending the
+target branch.
+      </p>
+    </note>
+    <p>
+As long as contributions are made using appropriate branches
+and pull requests, you will have minimal problems with conflicting
+changes made between different collaborators, with GitHub handling
+the merging process automatically, even if two collaborators edit
+the same file. (But not always, see <xref ref="sec-conflicts"/>.)
+    </p>
+    <p>
+But a common error that I frequently make myself: what if you forget
+to create a branch with your work, and you acccidentally commit
+to <c>main</c> directly? The first safety rail I recommend is to
+set up a policy on your repository that will prevent this accidental
+commit to be pushed to GitHub.
+    </p>
+    <note xml:id="note-branch-protection">
+      <p>
+To prevent unintended changes to your <c>main</c> branch,
+follow the instructions at
+<url href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule#creating-a-branch-protection-rule">
+  GitHub's documentation</url>,
+using <c>main</c> as your <q>Branch name pattern</q>, and
+enabling required pull requests.
+      </p>
+    </note>
+  </section>
+  <section xml:id="sec-collaborators-undo-main">
+    <title>Undoing accidental commmits to <c>main</c></title>
+    <p>
+Unfortunately, there's no button to push that will fix a commit
+made to the local copy of <c>main</c> accidentally, but there
+is a quick-enough fix nonetheless.
+    </p>
+    <warning>
+      <p>
+        This fix must be done in a Codespace,
+        not GitHub.dev.
+      </p>
+    </warning>
+    <note>
+      <p>
+With branch protection <xref ref="note-branch-protection"/> enabled,
+if you accidentally make updates directly to your personal <c>main</c>
+branch, attempting to push these from a Codespace will result in
+the error message <c>Can't push refs to remote.
+Try running "Pull" first to integrate your changes.</c>
+      </p>
+      <p>
+To fix this, open a Terminal 
+(<xref ref="remark-terminal-shortcut"/>)
+and type <xref ref="lst-branch-fix-1"/>,
+changing <c>my-new-branch</c> to the branch name you want to create.
+Use <kbd>Enter</kbd> to execute the command.
+      </p>
+      <p>
+Then, copy-paste <xref ref="lst-branch-fix-2"/> and your local
+<c>main</c> branch will match the official repository, and any changes
+you've made will be reflected on the <c>my-new-branch</c> branch
+instead.
+      </p>
+    </note>
+    <listing xml:id="lst-branch-fix-1">
+      <program>
+        <input>
+BRANCH=my-new-branch
+        </input>
+      </program>
+      <caption>Defining the name for a new branch</caption>
+    </listing>
+    <listing xml:id="lst-branch-fix-2">
+      <program>
+        <input>
+git stash
+git branch $BRANCH
+git reset --hard origin/main
+git checkout $BRANCH
+git stash pop
+        </input>
+      </program>
+      <caption>Moving local changes to <c>main</c> to a branch</caption>
+    </listing>
+  </section>
+  <section xml:id="sec-forks">
+    <title>Forks</title>
+    <p>
+One great thing about working with open source on GitHub is that
+not only can you collaborate with your trusted colleagues, but
+you can also work with collaborators who do not have write access
+to your repository.
+    </p>
+    <definition xml:id="def-forks">
+      <statement>
+        <p>
+A <term>fork</term> for a public repository is a copy of the project's
+entire history, made either for the main branch or for all publicly
+shared branches.
+        </p>
+      </statement>
+    </definition>
+    <p>
+Managing contributions from forked repositories is done using the
+same workflow as we recommend for collaborating with trusted colleagues
+that you've given write access to your repository
+(<xref ref="sec-collaborators-prs"/>). The only difference
+is that an outside collaborator is creating branches and making commits
+on their forked copy of your project, not a branch of your original
+repository. But GitHub still gives essentially the same options for
+the outside collaborator to create a pull request to your project,
+without given them access to any data you aren't already sharing with
+the public.
+    </p>
+    <note>
+      <p>
+To create a fork of a public repository, press the <q>Fork</q> button
+on its <c>GitHub.com</c> homepage. You can name this fork whatever you like,
+it will be tracked on GitHub as a fork of the original project, with
+the ability to make <q>upstream</q> contributions by way of
+pull requests.
+      </p>
+    </note>
+    <p>
+Those of us who work in open source typically <em>love</em> getting
+pull requests from random collaborators. For example, if you find a
+typo in this book, you can fxi <!-- except this one, it's a joke :-) -->
+it by creating a fork at
+<url href="https://github.com/StevenClontz/github-for-mathematicians/fork"/>,
+editing the appropriate <c>source/*.ptx</c> file to fix the word,
+and open a pull request.
+    </p>
+  </section>
+  <section xml:id="sec-conflicts">
+    <title>Handling Merge Conflicts</title>
+    <p>
+Perhaps the most complicated scenario when collaborating
+on a Git repository is the dreaded <em>merge conflict</em>.
+    </p>
+    <definition xml:id="def-merge-conflict">
+      <statement>
+        <p>
+While Git is fairly good about merging together changes
+made by different contributors to different
+files within a project into a cohesive whole, a
+<term>merge conflict</term> can occur when two different
+contributors attempt to make changes to the same file
+(particularly, the same line) at the same time. When the
+second contributor opens a pull request, GitHub will warn
+about this conflict.
+        </p>
+      </statement>
+    </definition>
+    <p>
+Handling merge conflicts can be tricky!
+Git/GitHub have various tools to help you review and correct
+a merge conflict. If you're fortunate, you'll be able to resolve
+things on the pull request page: see
+<url href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github">
+Resolving a merge conflict on GitHub
+</url> for full details.
+    </p>
+    <p>
+You'll be presented with files with some strange markers as in
+<xref ref="listing-merge-conflict"/>. The lines between
+<c>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</c> and
+<c>=======</c> were merged first, and the lines between
+<c>=======</c> and
+<c>&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a</c> are the conflicting
+changes trying to be merged.
+    </p>
+    <listing xml:id="listing-merge-conflict">
+      <program>
+        <input>If you have questions, please
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+open an Issue
+=======
+ask them in Discussions.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+        </input>
+      </program>
+      <caption>A merge conflict</caption>
+    </listing>
+    <p>
+You can then choose which change to retain, deleting all the
+extra <c>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</c>,
+<c>=======</c>, and
+<c>&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a</c> lines.
+    </p>
+    <p>
+However, sometimes the merge conflict is too involved to be
+corrected using the web interface. In that situation, you will
+need to use a Codespace and follow the instructions at either
+<url href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line">Resolving a merge conflict using the command line</url>
+or
+<url href="https://code.visualstudio.com/docs/sourcecontrol/overview#_merge-conflicts">Using Git source control in VS Code | Merge conflicts</url>.
+    </p>
+  </section>
+</chapter>
