@@ -5,6 +5,28 @@ This repository is designed to help you quickly get started with [PreTeXt](https
 ---
 
 ## 🚀 Quick Start Guide
+
+## 🚀 How to Create Your Own PreTeXt-Codespace Repository
+
+There are two easy ways to set up your own PreTeXt-enabled Codespace:
+
+### ✅ Option 1: Fork This Repository
+
+1. Visit [fragandi/CURITutorialDevelopment2025](https://github.com/fragandi/CURITutorialDevelopment2025).
+
+2. Click **"Fork"** (top-right) to copy it to your GitHub account.
+3. Open your new forked repository and click **"Code" → "Create codespace on main"**.
+
+### 🛠️ Option 2: Set Up a Fresh Repository Manually
+
+1. Create a new GitHub repository in your account.
+2. Copy the entirity of `.devcontainer/`, `.github/`, `.gitignore`, `requirements.txt` folder from [fragandi/CURITutorialDevelopment2025](https://github.com/fragandi/CURITutorialDevelopment2025).
+3. (Recommended) Also copy the following for a smoother experience:
+   - The `README_images/` folder and `README.md` file (for guidance and troubleshooting)
+4. Push your changes and create a Codespace from the repository.
+
+This option gives you more flexibility to customize your setup while keeping the essential PreTeXt environment.
+
 Once the Codespace has finished creating, **check that PreTeXt is installed** by running:
 
 ```bash
