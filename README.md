@@ -45,17 +45,27 @@ If you see an error like **command not found**, follow these steps:
 
 ## 🌐 GitHub Pages Configuration
 
-Make sure to configure GitHub Pages to use **GitHub Actions** as the build and deployment source.
+Make sure to configure GitHub Pages to use **GitHub Actions** as the build and deployment source:
 
-1. Go to your repository's **Settings** → **Pages**.
-2. Under **Build and deployment**, set the source to **GitHub Actions** as shown below:
+1. Go to your repository’s **Settings** → **Pages**.
+2. Under **Build and deployment**, set the source to **GitHub Actions**.
 
-![GitHub Pages Source](README_images/image-pages_source.png)
+<img src="README_images/image-pages_source.png" alt="GitHub Pages Source" style="border: 2px solid green;">
+
+---
+
+## 🛠 GitHub Environment Configuration
+
+Go to your repository **Settings** → **Environments** → click on `github-pages`, and make sure it looks similar to the following:
+
+<img src="README_images/image-environment-pages.png" alt="GitHub Pages Environment Setup" style="border: 2px solid green;">
+<br>
+<img src="README_images/image-environment.png" alt="Environment Overview" style="border: 2px solid green;">
 
 ---
 
 ## ⏱ Deployment Time
 
-Deployment takes about **4 minutes**. After triggering the deployment, wait a few minutes, then check your site via the GitHub Pages link.
+Deployment usually takes about **4 minutes**. After triggering the deployment, wait a few minutes and then visit your GitHub Pages URL.
 
-![GitHub Actions Deployment](README_images/image-actions-deployment.png)
+<img src="README_images/image-actions-deployment.png" alt="GitHub Actions Deployment" style="border: 2px solid green;">
