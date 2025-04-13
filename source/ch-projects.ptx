@@ -37,6 +37,18 @@ up and writing quickly, and helps them share their works on
 GitHub and GitHub Pages.
         </p>
     </section>
+
+    <section xml:id="sec-latex-codespace">
+        <title>Creating a LaTeX Codespace</title>
+        
+        <p>
+            A turn-key repository for creating a Codespace 
+            (<xref ref="sec-codespaces"/>) with a standard LaTeX installation can be found at
+            <url href="https://github.com/fragandi/latex-codespace">
+                fragandi/latex-codespace
+            </url>. To start a LaTeX codespace follow directly the README in the repo.
+        </p>
+    </section>
     <section xml:id="sec-pi-base">
         <title>
 <m>\pi</m>-Base Community Database of Topological Counterexamples

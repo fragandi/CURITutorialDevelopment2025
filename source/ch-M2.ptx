@@ -6,7 +6,7 @@
 This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
         </p>
     </introduction>
-    <section xml:id="sec-template">
+    <!-- <section xml:id="sec-template">
         <title>Template </title>
         <p>
             This is the introduction to the template.
@@ -18,7 +18,12 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
             </p>
             
         </subsection>
-    <subsection xml:id="subsec-notes">
+    </section> -->
+    
+        <section xml:id="sec-notes">
+            <title>Notes</title>
+            
+            <subsection xml:id="subsec-notes">
             <title>Notes Subsection</title>
             <p>
                 To build in pretext use the template subsection and pretext environment features.
