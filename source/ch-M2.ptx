@@ -514,16 +514,202 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
         </section>
         
     </section>
-<section xml:id="sec-theory-invariant-rings">
-        <title>Theory for invariant rings </title>
+<section xml:id="sec-invariantrings-package">
+       <title>InvariantRings package</title>
+       <subsection xml:id="subsec-finite-matrix-groups">
+        <title>Finite Matrix Groups</title>
+                  <p>Example:
+        Consider <me>M =  \begin{pmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{pmatrix} </me> and the vector <m>\bar x = \begin{pmatrix} x\\ y\\ \end{pmatrix}</m>
+This gives <m>M \bar x = \begin{bmatrix}
+x \\
+-y  \\
+\end{bmatrix}</m>. Thus for the polynomial <m> f(\bar x) = f(\begin{bmatrix}
+x \\
+y  \\
+\end{bmatrix}) = x+y</m> we have <m>f(M\bar x) = f(\begin{bmatrix}
+x \\
+-y  \\
+\end{bmatrix})= x-y</m>.
+
+
+    </p>
+    <p>
+        <definition><p> <m>G \leq GLm(\mathbb{K}), |G| &lt; \infty</m>, then <m>G</m> is a finite matrix group.
+        (In other words if <m>G</m> is a group of actions under which <m>\mathbb{K}</m> remains invariant
+        under then it is smaller or equal to the total amount of group actions <m>GLm(\mathbb{K})</m> that
+        would keep the polynomial invariant. AND the <m>|G|</m> is finite then <m>G</m> is a finite matrix
+        group?)
+        </p></definition>
+    </p>
+    <p>
+        NOTE: An action of a finite group <m>G \curvearrowright \mathbb{K}^n</m> given a realization of <m>G</m> as a finite matrix group. </p><p>
+Example: <m>\langle \begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix} \rangle = \{ \begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix},\begin{bmatrix}
+1 \amp 0 \\
+0 \amp 1 \\
+\end{bmatrix}\} \cong C_2</m>
+    </p>
+    </subsection>
+    <subsection xml:id="subsec-invariant-rings">
+        <title>Invariant Rings</title>
         <p>
-            hello <m>4 \in \mathbb{Z}</m> this is true.
-            <theorem> <p>Nöether:  
-            <me>
-                R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]
-            </me>
-            NDB: The ring of invariants is generated in degrees <m>\leq |G|</m> </p>
-            </theorem>
+            \textbf{Notation <m>\bar x = (x_1, x_2,..., x_n)</m>, with <m>R = \mathbb{K}[x_1,x_2,...,x_n]</m>}
+            <definition> <p> <m>G</m> is a finite matrix group within <m>GLm(\mathbb{K})</m> when?
+<m>f\in \mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under the action of <m>G</m> if and only if
+ <m>f(A\bar x) = f(\bar x)</m>, <m>\forall A \in G</m>.
+ </p></definition>
+</p><p>
+Ex. <m>f(\bar x)=x</m> and <m>f(\bar x) = x +y^2</m> in <m>\mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under <m>C_2 = \langle\begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix} \rangle</m>\\
+However <m>f(\bar x)=x+y</m> is not. What are others?
         </p>
-    </section>
+        <p>
+            <definition><p> <m>R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \forall A \in G\} \subseteq R</m>
+            is the invariant ring for the action of <m>G</m>
+            </p></definition>
+        </p>
+        <p>
+        Show this is a subring.</p>
+        <p> How does on find generators for <m>R^G</m>?</p>
+        <p> Is <m>R^G</m> even finitely generated?</p>
+        <p> Work through Hilbert's proof.
+        </p>}
+    </subsection>
+    <subsection xml:id="subsec-reynolds-operator">
+        <title>Reynolds Operator</title>
+        <p>
+            Idea: "Averaging" over the action of <m>G</m> we get an invariant
+        </p>
+        <p>
+            <definition> <p> <m>R_G: R \xrightarrow{} R^G</m> <me>R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) </me>
+        Exercise: <m>R_G</m> has many nice properties? \textbf{WHAT MORE TO SAY HERE}</p></definition>
+        </p>
+        <p>Example: <m>C_2 = \langle\begin{bmatrix}
+            1 \amp 0 \\
+            0 \amp -1 \\
+            \end{bmatrix}\rangle</m> <me>R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G</me>
+
+        </p>
+    </subsection>
+    <subsection xml:id="subsec-noether-degree-bound">
+        <title>Nöether Degree Bound(NDB)</title>
+        <p>
+            <theorem><p> (Noether): <me>R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]</me>
+            <m>\implies</m> NDB : The ring of invariants is generated in degrees <m>\leq |G|</m>
+            </p></theorem>
+        </p>
+        <p>
+            Note: This is a computational tool! We can apply <m>R_G</m> to all the finitely many monomials in degrees <m>\leq |G|</m> to get generators for <m>R^G</m>.
+            Exercise: Try this for <m>C_4</m> ... show!
+        </p>
+    </subsection>
+    <subsection xml:id="subsec-hilbert-ideal">
+        <title>Hildbert Ideal</title>
+        <p>
+            Note: In general for <m>\{ f_1,..., f_s\} \subseteq \R</m>,\\ <m>\{f_1,...f_s\}</m> and <m>\R</m> can be quite different objects
+            Exercise?
+        </p>
+        <p>
+            <theorem><p> Let <m>J_G = R(R^G)_t</m>, ideal generated by all positive degree invariants.\\
+            If <m>J_G = (f_1,...,f_s)</m> and <m>f_i\in R^G, \,\, \forall i</m>
+            (apply <m>R^G</m> if it is not), then <m>R^G = \mathbb{K}[f_1,...f_s]</m>
+            </p></theorem>
+        </p>
+    </subsection>
+    <subsection xml:id="subsec-presentations">
+        <title>Presentations</title>
+            <p>
+                <definition><p>Definition: Let <m>S = \mathbb{K}[f_1,...f_s] \subset R</m>.
+                A presentation of <m>S</m> is a map, <me>T=: \mathbb{K}[u_1,...u_s] \xrightarrow{\phi}S</me>
+                such that <m>\frac{T}{ker(\phi)} \cong S</m> With the syzygies of <m>f_i</m>'s
+                giving the presentation ideal.
+                </p></definition>
+            </p>
+            <p>
+                <proposition><p>(Elimination Theory): In <m>S \bigotimes \mathbb{K}[u_1,...,u_s = \mathbb{K}[x_1,...,x_n,u_1,...u_s]</m> consider the ideal,
+                <me>I = (u_i - f_x(\bar x) | \, \langle f_i\rangle = S</me>
+                Then,
+                <me>ker \phi = I \cap \mathbb{K}[u_1,...,u_s]</me>
+                </p></proposition>
+            </p>
+            <p>
+                <algorithm><p> compute a Groebner Basis <m>G</m> for <m>I</m> with elimination order for the <m>x</m>'s.\\
+                Then, <m>G \cap \mathbb{K}[y_1,...y_s]</m>  is the Groebner Basis for <m>ker \phi</m>
+                </p></algorithm>
+            </p>
+    </subsection>
+    <subsection xml:id="subsec-graph-of-linear-actions">
+        <title>Graph of Linear Actions</title>
+        <p>
+            <definition> <p>let <m>G \leq GL_n(\mathbb{K}), \,\, G\curvearrowright \mathbb{K}^n =:V, \,\, |G|\infty</m>.
+            For <m>A\in G</m> consider,
+            <me>V_A = \{(\bar v, A\bar v)|\,\,v\in V\} \subseteq V\bigotimes V</me>
+            Then <m>A_G = \cup_{A\in G}V_A</m> is the subspace arrangement associated to the action of G.
+            </p></definition>
+        </p>
+        <p>
+            Note: <m>V_A</m> is a linear subspace, <m>\mathbb{I}(V_A):=</m> set of polynomials vanishing on <m>\mathbb{V}_A</m> is a linear ideal.
+            Example: <me>V_{\begin{bmatrix}
+            1 \amp 0 \\
+            0 \amp -1 \\
+            \end{bmatrix}} = \{(x_1,x_2,x_1,-x_2)\} = V(y_1,-x_1, y_2+x_2)</me>
+        </p>
+    </subsection>
+    <subsection xml:id="subsec-subspace-arrangement-approach">
+        <title>Subspace Arrangement Approach</title>
+        <p>
+            <theorem><p>
+                (Dekseu): Let <m>I_G = \mathbb{I}(A_G) = \cap_{A\in G}\mathbb{I}(V_A) \subseteq \mathbb{K}[x_1,...x_n,y_1,...y_n].</m>
+            \textbf{(ARE n and n or m and n THESE DIFFERENT?)}\\
+            Then <me>(I_G +(y_1,...,y_n)) \cap \R = J_G</me> This uses elimination theory and the Hilbert ideal.
+            </p> </theorem>
+        </p>
+        <p>
+            Note: The same approach works in the exterior algebra!
+        </p>
+        <p>
+            <theorem><p>Let <m>I_G^{'} = \cap_{A\in G} \mathbb{I}(V_A) \subseteq \Lambda(\bar x, \bar y)</m>.\\
+            Then <me>(I_G^{'} +(y_1,...y_n)) \cap \Lambda(x_1,...,x_n) = J_G^{'} : = \Lambda(\bar x)(\Lambda(\bar x)^G)_+</me>
+            </p></theorem>
+        </p>
+        <p>
+            Note: This approach is slow for polynomials, but might be fast for skew polynomials.
+        </p>
+    </subsection>
+    <subsection xml:id="subsec-AGWM">
+        <title>Abelian GPS and Weight Matrices</title>
+        <p>
+            Let <m>G \cong \mathbb{Z}_d, \bigoplus....\bigoplus \mathbb{Z}_{dr}, \,\,\,\,\, d_i|d_{i+1}</m> for <m>1 \leq i \leq r-1</m>\\
+            <me>\langle g_1\rangle \bigoplus...\bigoplus\langle g_r \rangle, \,\,\,\,\, |g_i| =d_i</me>
+            A diagonal action of <m>G</m> on <m>R</m> is given by
+            <me>g_i \cdot x_j = \mu_i^{\omega ij}x_j</me>
+            for <m> \mu_i : d_i^{th}</m> primitive root of unity and <m>i \in [x]</m>,<m>j \in [n]</m>.
+             And encoded in the weight matrix <m>W = (\omega_{ij})_{ij} =  ?????????????</m>
+        </p>
+        <p>
+            <theorem><p> <m>\bar x^{\bar \beta} \in R^G \iff W_{\bar \beta}\cong (0,...,0)</m> for
+            zeros being the weight of <m>g_1</m> acting on <m>\bar x^{\bar \beta}</m> and being modulo <m>d_i</m>.
+            </p></theorem>
+        </p>
+        <p>
+            Note: We can examine all monomials <m>|\bar \beta| \leq |G|</m> and sort them by their weight <m>W\bar \beta</m>.
+            The ones with weight <m>\bar 0</m> will be invariant!
+        </p>
+        <p>
+            Question: Does this work for monomials in the exterior algebra?
+        </p>
+    </subsection>
+
+
+   </section>
 </chapter>
