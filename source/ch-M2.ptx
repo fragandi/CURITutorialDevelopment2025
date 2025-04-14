@@ -514,8 +514,8 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
         </section>
         
     </section>
-<section xml:id="sec-invariantrings-package">
-       <title>InvariantRings package</title>
+<section xml:id="sec-invariantrings-theory">
+       <title>InvariantRings Theory</title>
        <subsection xml:id="subsec-finite-matrix-groups">
         <title>Finite Matrix Groups</title>
                   <p>Example:
