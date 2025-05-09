@@ -655,23 +655,104 @@ var ptx_lunr_docs = [
   "type": "Chapter",
   "number": "7",
   "title": "Math Projects Powered by GitHub",
-  "body": " Math Projects Powered by GitHub   PreTeXt authoring system   PreTeXt is an authoring and publishing system for scholarly documents, especially in STEM disciplines. Works authored in PreTeXt can be converted to HTML, PDF, braille, and many other formats. This book was written in PreTeXt!  PreTeXt is particularly well-suited for the creation of interactive and accessible Open Educational Resources in mathematics and computer science. Works authored in PreTeXt can be deployed to Runestone Academy , allowing students to log into their textbook and persist progress on exercises and activities.  The PROSE Consortium forms the broader ecosystem serving open-source STEM open educational resources and offers regular drop-in meetings for community members to learn more about its products, which also include WeBWorK and Doenet .   Getting Started with PreTeXt is a tutorial that uses GitHub Codespaces to get authors up and writing quickly, and helps them share their works on GitHub and GitHub Pages.    Creating a LaTeX Codespace  A turn-key repository for creating a Codespace ( ) with a standard LaTeX installation can be found at fragandi\/latex-codespace . To start a LaTeX codespace follow directly the README in the repo.     -Base Community Database of Topological Counterexamples  To paraphrase Mary Ellen Rudin, topology is a dense forest of counterexamples, and a usable map of the forest is a fine thing. . The -Base aims to serve as this atlas, turning the classic text Counterexamples in Topology into an open, living, and interactive database supported by a community of researchers, instructors, and students.  To learn how to contribute to the -Base, a tutorial is available to walk through the process of editing its data and previewing it in your own Codespace.    Lean Theorem Prover  The Lean theorem prover is an interactive proof assistant that allows mathematicians to formally verify their proofs by computer.  The textbook Mathematics in Lean provides an excellent introduction to authoring in Lean, with GitHub Codespaces support.  (For a more casual experience outside GitHub, the Lean game server has fun tutorials for both Peano axioms and naive set theory.)    code4math  In December 2023, the American Institute of Mathematics hosted a workshop of researchers to explore the future of sociotechnical infrastructure for mathematics. One outcome of this work was the establishment of , a community for mathematicians engaged in this work.    PROSE Consortium  The PROSE Consortium is a community of instructors, developers, and researchers focusd on open-source tools and resources for mathematics and computer science education. You can engage with this group by visiting their homepage at .   "
+  "body": " Math Projects Powered by GitHub   PreTeXt authoring system   PreTeXt is an authoring and publishing system for scholarly documents, especially in STEM disciplines. Works authored in PreTeXt can be converted to HTML, PDF, braille, and many other formats. This book was written in PreTeXt!  PreTeXt is particularly well-suited for the creation of interactive and accessible Open Educational Resources in mathematics and computer science. Works authored in PreTeXt can be deployed to Runestone Academy , allowing students to log into their textbook and persist progress on exercises and activities.  The PROSE Consortium forms the broader ecosystem serving open-source STEM open educational resources and offers regular drop-in meetings for community members to learn more about its products, which also include WeBWorK and Doenet .   Getting Started with PreTeXt is a tutorial that uses GitHub Codespaces to get authors up and writing quickly, and helps them share their works on GitHub and GitHub Pages.     -Base Community Database of Topological Counterexamples  To paraphrase Mary Ellen Rudin, topology is a dense forest of counterexamples, and a usable map of the forest is a fine thing. . The -Base aims to serve as this atlas, turning the classic text Counterexamples in Topology into an open, living, and interactive database supported by a community of researchers, instructors, and students.  To learn how to contribute to the -Base, a tutorial is available to walk through the process of editing its data and previewing it in your own Codespace.    Lean Theorem Prover  The Lean theorem prover is an interactive proof assistant that allows mathematicians to formally verify their proofs by computer.  The textbook Mathematics in Lean provides an excellent introduction to authoring in Lean, with GitHub Codespaces support.  (For a more casual experience outside GitHub, the Lean game server has fun tutorials for both Peano axioms and naive set theory.)    code4math  In December 2023, the American Institute of Mathematics hosted a workshop of researchers to explore the future of sociotechnical infrastructure for mathematics. One outcome of this work was the establishment of , a community for mathematicians engaged in this work.    PROSE Consortium  The PROSE Consortium is a community of instructors, developers, and researchers focusd on open-source tools and resources for mathematics and computer science education. You can engage with this group by visiting their homepage at .   "
+},
+{
+  "id": "ch-manim",
+  "level": "1",
+  "url": "ch-manim.html",
+  "type": "Chapter",
+  "number": "8",
+  "title": "Manim",
+  "body": " Manim   This chapter is co-authored by Tien Chih .    What Is Manim?   Manim stands for Math Animation . The Community Manim Python package is a publically maintained, open-source commmunity version of a custom Python package initially created by Grant Sanderson, more commonly known as 3Blue1Brown .    https:\/\/www.3blue1brown.com\/      https:\/\/www.youtube.com\/c\/3blue1brown      Manim provides tools that can bring mathematical ideas and concepts to life that static words and explanations may not capture. As an example, the TBIL.org Calculus I video series at this YouTube playlist was animated entirely by Tien Chih using Manim.    Creating a Manim Codespace  A turn-key repository for creating a Codespace ( ) for Manim is available at StevenClontz\/manim-workshop . Follow the instructions there to obtain an interface for authoring Manim content using just your web browser (Chrome\/Edge\/Firefox recommended).    Hello World!   Let's run our very first Manim animation.     Open main.py and look for the line class HelloWorld(Scene): .     Open a Terminal and execute the command manim render -ql main.py HelloWorld . (See the README file for other options to render Manim scenes.)      Open the file media\/videos\/main\/480p15\/HelloWorld.mp4 to view your newly rendered video.      See if you can add these lines to the code so the video ends by saying My name is YOUR NAME HERE .    name = MathTex(r\"\\text{My name is YOUR NAME HERE.}\")      self.play(Transform(hello, name))    Don't forget to re-run manim render -ql main.py HelloWorld to update your rendered video.      See if you can make the circle GREEN instead of PINK .       More Animations    Open main.py and look for the line class TanLine(Scene): .  Review the comments and the code within this block. This particular scene TanLine creates a curve, displays the algebraic work needed to find a tangent line, and then displays said tangent line.     Run manim render -ql main.py TanLine to produce a video file at media\/videos\/main\/480p15\/TanLine.mp4 .      Edit the code to find and display the line tangent to the curve when .      Change the window so that ranges from to .      Choose a function and value of your choice, and edit the code to find and display the line tangent to at your chosen value.      The web-based Desmos tool can be very helpful in determining appropriate window sizes and scaling.     Open main.py and look for the line class SinChange(Scene): .  This particular block of code plots a transformed sine function of the form . Where initially . We then adjust the values for and over time.     Run the code to produce a video file.      Edit the array a=[1,2, 2, 2, -1\/3] , and the rhs entries to adjust the vertical stretch.      Edit the array b=[1,1, 1\/2,1\/2,-2] , and the rhs entries to adjust the horizontal stretch.      Edit the array c=[0,0, 0, -3, 2] , and the rhs entries to adjust the vertical shift.       Open main.py and look for the lines class FindProduct(Scene): , class FindQuotient(Scene): , and class FindPower(Scene): .  The scene FindProduct displays a product rule computation, FindQuotient displays a quotient rule computation, and FindPower displays a faux-quotient rule computation using powers.    Run the function FindProduct to produce a video file.    Pick your favorite product of functions and edit the code to produce the appropriate derivation.    Copy and paste the FindProduct function and rename it FindChain .    Edit this new command to display an animation for your favorite chain rule derivation.      Open main.py and look for the line class Riemann(Scene): .  This code displays a Riemann sum for a funcion, and displays the ongoing sum for .     Run the code to see the output.      Change the function to a function of your choice. You may need to resize the window. Recall the identitites        Additional Resources:   Here are a list of helpful links regarding Manim authoring:    https:\/\/docs.manim.community\/en\/stable\/index.html . This is Tien's goto place for FAQ's, working examples etc..     https:\/\/www.youtube.com\/watch?v=KsemDUSJeWk&list=PLwXCBkIf7xBODPeQxULagMeWSK4YtLYog . This is a video playlist of Calculus I material authored by Tien.     https:\/\/www.youtube.com\/@MathVisualProofs . This the youtube video channel Mathematical Visual Proofs by Dr. Tom Edgar, an expert on Manim.     https:\/\/www.free-stock-music.com\/ . This is a website for royalty-free, Creative-Commons licensed stock music.     https:\/\/discord.com\/invite\/bYCyhM9Kz2 a Discord for Manim, people can help here and you can run Python code within the Discord.       "
+},
+{
+  "id": "sec-hello-world-3",
+  "level": "2",
+  "url": "ch-manim.html#sec-hello-world-3",
+  "type": "Activity",
+  "number": "8.3.1",
+  "title": "",
+  "body": "  Open main.py and look for the line class HelloWorld(Scene): .     Open a Terminal and execute the command manim render -ql main.py HelloWorld . (See the README file for other options to render Manim scenes.)      Open the file media\/videos\/main\/480p15\/HelloWorld.mp4 to view your newly rendered video.      See if you can add these lines to the code so the video ends by saying My name is YOUR NAME HERE .    name = MathTex(r\"\\text{My name is YOUR NAME HERE.}\")      self.play(Transform(hello, name))    Don't forget to re-run manim render -ql main.py HelloWorld to update your rendered video.      See if you can make the circle GREEN instead of PINK .    "
+},
+{
+  "id": "sec-more-animations-2",
+  "level": "2",
+  "url": "ch-manim.html#sec-more-animations-2",
+  "type": "Activity",
+  "number": "8.4.1",
+  "title": "",
+  "body": "  Open main.py and look for the line class TanLine(Scene): .  Review the comments and the code within this block. This particular scene TanLine creates a curve, displays the algebraic work needed to find a tangent line, and then displays said tangent line.     Run manim render -ql main.py TanLine to produce a video file at media\/videos\/main\/480p15\/TanLine.mp4 .      Edit the code to find and display the line tangent to the curve when .      Change the window so that ranges from to .      Choose a function and value of your choice, and edit the code to find and display the line tangent to at your chosen value.    "
+},
+{
+  "id": "sec-more-animations-3",
+  "level": "2",
+  "url": "ch-manim.html#sec-more-animations-3",
+  "type": "Remark",
+  "number": "8.4.1",
+  "title": "",
+  "body": " The web-based Desmos tool can be very helpful in determining appropriate window sizes and scaling.  "
+},
+{
+  "id": "sec-more-animations-4",
+  "level": "2",
+  "url": "ch-manim.html#sec-more-animations-4",
+  "type": "Activity",
+  "number": "8.4.2",
+  "title": "",
+  "body": "  Open main.py and look for the line class SinChange(Scene): .  This particular block of code plots a transformed sine function of the form . Where initially . We then adjust the values for and over time.     Run the code to produce a video file.      Edit the array a=[1,2, 2, 2, -1\/3] , and the rhs entries to adjust the vertical stretch.      Edit the array b=[1,1, 1\/2,1\/2,-2] , and the rhs entries to adjust the horizontal stretch.      Edit the array c=[0,0, 0, -3, 2] , and the rhs entries to adjust the vertical shift.    "
+},
+{
+  "id": "sec-more-animations-5",
+  "level": "2",
+  "url": "ch-manim.html#sec-more-animations-5",
+  "type": "Activity",
+  "number": "8.4.3",
+  "title": "",
+  "body": "  Open main.py and look for the lines class FindProduct(Scene): , class FindQuotient(Scene): , and class FindPower(Scene): .  The scene FindProduct displays a product rule computation, FindQuotient displays a quotient rule computation, and FindPower displays a faux-quotient rule computation using powers.    Run the function FindProduct to produce a video file.    Pick your favorite product of functions and edit the code to produce the appropriate derivation.    Copy and paste the FindProduct function and rename it FindChain .    Edit this new command to display an animation for your favorite chain rule derivation.   "
+},
+{
+  "id": "sec-more-animations-6",
+  "level": "2",
+  "url": "ch-manim.html#sec-more-animations-6",
+  "type": "Activity",
+  "number": "8.4.4",
+  "title": "",
+  "body": "  Open main.py and look for the line class Riemann(Scene): .  This code displays a Riemann sum for a funcion, and displays the ongoing sum for .     Run the code to see the output.      Change the function to a function of your choice. You may need to resize the window. Recall the identitites     "
+},
+{
+  "id": "ch-latex",
+  "level": "1",
+  "url": "ch-latex.html",
+  "type": "Chapter",
+  "number": "9",
+  "title": "LaTeX",
+  "body": " LaTeX   This chapter is co-authored by Francesca Gandini, Sumner Strom,    What Is   XXX stands for YYY . more commonly known as ZZZZ . For math . A sample list and links    https:\/\/www.3blue1brown.com\/      https:\/\/www.youtube.com\/c\/3blue1brown      Soething TBIL.org Calculus I video series at this YouTube playlist was animated entirely by Tien Chih using Manim.    Creating a LaTeX Codespace  A turn-key repository for creating a Codespace ( ) for LaTeX is available at fragandi\/latex-codespace . Below we provide detailed instructions. If you have some experience with codespaces, you might be able to follow directly the README in the repo. Otherwise, keep reading!    Hello World!   Let's run our very first Manim animation.     Open main.py and look for the line class HelloWorld(Scene): .     Open a Terminal and execute the command manim render -ql main.py HelloWorld . (See the README file for other options to render Manim scenes.)      Open the file media\/videos\/main\/480p15\/HelloWorld.mp4 to view your newly rendered video.      See if you can add these lines to the code so the video ends by saying My name is YOUR NAME HERE .    name = MathTex(r\"\\text{My name is YOUR NAME HERE.}\")      self.play(Transform(hello, name))    Don't forget to re-run manim render -ql main.py HelloWorld to update your rendered video.      See if you can make the circle GREEN instead of PINK .      "
+},
+{
+  "id": "sec-hello-world2-3",
+  "level": "2",
+  "url": "ch-latex.html#sec-hello-world2-3",
+  "type": "Activity",
+  "number": "9.3.1",
+  "title": "",
+  "body": "  Open main.py and look for the line class HelloWorld(Scene): .     Open a Terminal and execute the command manim render -ql main.py HelloWorld . (See the README file for other options to render Manim scenes.)      Open the file media\/videos\/main\/480p15\/HelloWorld.mp4 to view your newly rendered video.      See if you can add these lines to the code so the video ends by saying My name is YOUR NAME HERE .    name = MathTex(r\"\\text{My name is YOUR NAME HERE.}\")      self.play(Transform(hello, name))    Don't forget to re-run manim render -ql main.py HelloWorld to update your rendered video.      See if you can make the circle GREEN instead of PINK .    "
 },
 {
   "id": "ch-M2",
   "level": "1",
   "url": "ch-M2.html",
   "type": "Chapter",
-  "number": "8",
+  "number": "10",
   "title": "Macaulay 2",
-  "body": " Macaulay 2   This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar     Notes   Notes Subsection  To build in pretext use the template subsection and pretext environment features. Make sure that you are building and compiling from main using preview code chat. Additionally, when running if the compilation fails run the command \"pretext build web\" in terminal. Make sure that all of the xml have unique ids so that you dont run into compilation errors. Follow the other chapters to find out how things are used. Make sure that the sections are properly linked within the main.ptx. Additionally, use the subsections and sections for organization. If something doesnt display there is a paragraph line missing.     Creating a M2 Codespace  A turn-key repository for creating a Codespace ( ) for Macaulay2 is available at fragandi\/M2-codespace . Below we provide detailed instructions. If you are familiar with GitHub Codespaces, you may be able to follow the instructions in the README directly. Otherwise, follow the steps below for a smoother setup.   Step 1:  Fork the Repository: Navigate to fragandi\/M2-codespace and click the Fork button in the top-right corner of the page.   Select \"Create a new fork\" next to the plus icon.   screenshot of M2-codespace with forking instructions.     Step 2:  Create a Codespace: Open your forked repository, click the green Code button, and select Create codespace on main .   Creating codespace on forked GitHub repository.   screenshot of creating codespace on forked GitHub repository.     Step 3:  Reload VS Code: Once the Codespace starts, open the Command Palette ( Ctrl+Shift+P or Cmd+Shift+P ), then type:  Reload Window   Step 4:  Check Macaulay2 Executable Path: If you receive an error like “Cannot find Macaulay2 executable,” open the extension settings for Macaulay2 for Codespace and verify the executable path.   Go to the Macaulay2 for Codespace extension settings as shown in the image above.   screenshot of Macaulay2 for Codespace extension settings.     If your path is different than what it shows in the image above try the steps below:   screenshot of Macaulay2 for Codespace extension settings correct executable path.     Fix: Open the Command Palette and disable VS Code Settings Sync:  Settings Sync: Turn Off  Then reload the window again as in Step 3. If problems persist, you may delete and recreate the Codespace.   Step 5:  Verify Installation: To confirm Macaulay2 installed correctly, open the Command Palette again and run:  Codespaces: View Creation Log  Look for confirmation lines like:  ✅ Macaulay2 installed successfully!  ✅ Following all these steps ensures that Macaulay2 is ready to use inside your Codespace and only the correct environment settings are applied.   Alternative: If you want to create your own repository with Macaulay2 support from scratch, copy the .devcontainer\/ directory and optionally the M2codes\/ , image_files\/ , and README.md from the original repo. Push to GitHub and launch your own Codespace.  For more information on using Macaulay2, visit the official documentation .    Basic M2 Commands   Arithmetic, Strings, and Lists  Make sure you run the code cells sequentially since some functions defined in earlier cells are used in later cells. You can also chnage the code in the block to evaluate any valid Macaulay2 code.  This block introduces basic arithmetic operations in Macaulay2, including exponentiation.   Here we compute large factorials, demonstrate how multiple expressions are separated by semicolons, and how to access the previous output using `oo`.   Strings are created using double quotes, assigned to variables, and concatenated horizontally with `|` or vertically with `||`.   Lists are constructed with curly braces. Indexing starts at 0, and element-wise arithmetic works like vector math.     Functions, Apply, and Loops  Functions are created using the arrow operator `->`. This block defines a cube function `f` and a two-variable multiplication function `g`.   The `apply` function maps a function over a list or range. We also demonstrate a `for` loop to print values and their cubes.     Rings, Matrices, Ideals  This block defines a quotient ring and a free module over it. It also explores indexing of basis vectors and ring metadata using `describe`.   We define a homomorphism using a matrix and investigate its image, ideal, kernel, and related algebraic information like rank and Poincaré polynomial.   This segment combines kernel and cokernel into a subquotient module, and explores its generators, relations, and a simplified (pruned) form.     Homological Algebra and Gröbner Bases  We compute a projective resolution of a module, verify that it is a complex, and examine its Betti table for structure.   We construct a generic matrix, compute its resolution, and build polynomial rings with indexed variables. We generate and analyze a Gröbner basis.      InvariantRings package   InvariantRing Library Demos  The InvariantRing package in Macaulay2 provides tools to study and compute invariant rings of group actions. To get started, install the package:    SL₂ Actions on C² and Variants  A classical example: the standard action of SL₂ on ℂ². The ring R carries a linearly reductive action from SL₂ defined via the matrix SL2std . The invariants and Hilbert ideal are then computed:     Diagonal Actions of Abelian Groups  This example demonstrates a diagonal action of the abelian group ℂ₃ × ℂ₃ on a polynomial ring. After defining the diagonal weights, we compute the invariant ring and its Hilbert series:     Linearly Reductive Actions: Permutations and Binary Forms  Here's how the symmetric group S₂ acts via a matrix of projection operators. We identify which polynomials are invariant under the group action:   Now we compute the invariants of binary quadratics and quartics using SL₂ actions. These involve basis substitutions in a ring of forms and are more computationally demanding:      Matrix Invariants and Conjugation Actions  We define SL₂ actions on 2×2 and 3×3 matrices of binary or ternary forms. The conjugation action creates sophisticated invariants under change of basis:   The same process is repeated for 3×3 matrices. This involves 9-dimensional vector spaces and is more computationally demanding:     Finite Group Actions: S₄ Example  Finally, we examine the symmetric group S₄ acting on 4 variables. We use both King’s algorithm and a slower linear algebra method to compute primary and secondary invariants:       Theory for invariant rings  hello this is true.  Nöether: NDB: The ring of invariants is generated in degrees      "
+  "body": " Macaulay 2   This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar      Creating a M2 Codespace  A turn-key repository for creating a Codespace ( ) for Macaulay2 is available at fragandi\/M2-codespace . Below we provide detailed instructions. If you are familiar with GitHub Codespaces, you may be able to follow the instructions in the README directly. Otherwise, follow the steps below for a smoother setup.   Step 1:  Fork the Repository: Navigate to fragandi\/M2-codespace and click the Fork button in the top-right corner of the page.   Select \"Create a new fork\" next to the plus icon.   screenshot of M2-codespace with forking instructions.     Step 2:  Create a Codespace: Open your forked repository, click the green Code button, and select Create codespace on main .   Creating codespace on forked GitHub repository.   screenshot of creating codespace on forked GitHub repository.     Step 3:  Reload VS Code: Once the Codespace starts, open the Command Palette ( Ctrl+Shift+P or Cmd+Shift+P ), then type:  Reload Window   Step 4:  Check Macaulay2 Executable Path: If you receive an error like “Cannot find Macaulay2 executable,” open the extension settings for Macaulay2 for Codespace and verify the executable path.   Go to the Macaulay2 for Codespace extension settings as shown in the image above.   screenshot of Macaulay2 for Codespace extension settings.     If your path is different than what it shows in the image above try the steps below:   screenshot of Macaulay2 for Codespace extension settings correct executable path.     Fix: Open the Command Palette and disable VS Code Settings Sync:  Settings Sync: Turn Off  Then reload the window again as in Step 3. If problems persist, you may delete and recreate the Codespace.   Step 5:  Verify Installation: To confirm Macaulay2 installed correctly, open the Command Palette again and run:  Codespaces: View Creation Log  Look for confirmation lines like:  ✅ Macaulay2 installed successfully!  ✅ Following all these steps ensures that Macaulay2 is ready to use inside your Codespace and only the correct environment settings are applied.   Alternative: If you want to create your own repository with Macaulay2 support from scratch, copy the .devcontainer\/ directory and optionally the M2codes\/ , image_files\/ , and README.md from the original repo. Push to GitHub and launch your own Codespace.  For more information on using Macaulay2, visit the official documentation .    Basic M2 Commands   Arithmetic, Strings, and Lists  Make sure you run the code cells sequentially since some functions defined in earlier cells are used in later cells. You can also chnage the code in the block to evaluate any valid Macaulay2 code.  This block introduces basic arithmetic operations in Macaulay2, including exponentiation.   Here we compute large factorials, demonstrate how multiple expressions are separated by semicolons, and how to access the previous output using `oo`.   Strings are created using double quotes, assigned to variables, and concatenated horizontally with `|` or vertically with `||`.   Lists are constructed with curly braces. Indexing starts at 0, and element-wise arithmetic works like vector math.     Functions, Apply, and Loops  Functions are created using the arrow operator `->`. This block defines a cube function `f` and a two-variable multiplication function `g`.   The `apply` function maps a function over a list or range. We also demonstrate a `for` loop to print values and their cubes.     Rings, Matrices, Ideals  This block defines a quotient ring and a free module over it. It also explores indexing of basis vectors and ring metadata using `describe`.   We define a homomorphism using a matrix and investigate its image, ideal, kernel, and related algebraic information like rank and Poincaré polynomial.   This segment combines kernel and cokernel into a subquotient module, and explores its generators, relations, and a simplified (pruned) form.     Homological Algebra and Gröbner Bases  We compute a projective resolution of a module, verify that it is a complex, and examine its Betti table for structure.   We construct a generic matrix, compute its resolution, and build polynomial rings with indexed variables. We generate and analyze a Gröbner basis.      InvariantRings package   InvariantRing Library Demos  The InvariantRing package in Macaulay2 provides tools to study and compute invariant rings of group actions. To get started, install the package:    SL₂ Actions on C² and Variants  A classical example: the standard action of SL₂ on ℂ². The ring R carries a linearly reductive action from SL₂ defined via the matrix SL2std . The invariants and Hilbert ideal are then computed:     Diagonal Actions of Abelian Groups  This example demonstrates a diagonal action of the abelian group ℂ₃ × ℂ₃ on a polynomial ring. After defining the diagonal weights, we compute the invariant ring and its Hilbert series:     Linearly Reductive Actions: Permutations and Binary Forms  Here's how the symmetric group S₂ acts via a matrix of projection operators. We identify which polynomials are invariant under the group action:   Now we compute the invariants of binary quadratics and quartics using SL₂ actions. These involve basis substitutions in a ring of forms and are more computationally demanding:      Matrix Invariants and Conjugation Actions  We define SL₂ actions on 2×2 and 3×3 matrices of binary or ternary forms. The conjugation action creates sophisticated invariants under change of basis:   The same process is repeated for 3×3 matrices. This involves 9-dimensional vector spaces and is more computationally demanding:     Finite Group Actions: S₄ Example  Finally, we examine the symmetric group S₄ acting on 4 variables. We use both King’s algorithm and a slower linear algebra method to compute primary and secondary invariants:      "
 },
 {
   "id": "fork-repo-icon",
   "level": "2",
   "url": "ch-M2.html#fork-repo-icon",
   "type": "Figure",
-  "number": "8.2.1",
+  "number": "10.1.1",
   "title": "",
   "body": " Select \"Create a new fork\" next to the plus icon.   screenshot of M2-codespace with forking instructions.   "
 },
@@ -680,7 +761,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "ch-M2.html#create-codespace-icon",
   "type": "Figure",
-  "number": "8.2.2",
+  "number": "10.1.2",
   "title": "",
   "body": " Creating codespace on forked GitHub repository.   screenshot of creating codespace on forked GitHub repository.   "
 },
@@ -689,7 +770,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "ch-M2.html#extension-settings-icon",
   "type": "Figure",
-  "number": "8.2.3",
+  "number": "10.1.3",
   "title": "",
   "body": " Go to the Macaulay2 for Codespace extension settings as shown in the image above.   screenshot of Macaulay2 for Codespace extension settings.   "
 },
@@ -698,18 +779,135 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "ch-M2.html#executable-path-icon",
   "type": "Figure",
-  "number": "8.2.4",
+  "number": "10.1.4",
   "title": "",
   "body": " If your path is different than what it shows in the image above try the steps below:   screenshot of Macaulay2 for Codespace extension settings correct executable path.   "
 },
 {
-  "id": "sec-theory-invariant-rings-2-2",
+  "id": "ch-invarianttheory",
+  "level": "1",
+  "url": "ch-invarianttheory.html",
+  "type": "Chapter",
+  "number": "11",
+  "title": "Invariant Theory",
+  "body": " Invariant Theory   This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar    Invariant Rings Theory   Finite Matrix Groups  Example: Consider and the vector This gives . Thus for the polynomial we have .    , then is a finite matrix group. (In other words if is a group of actions under which remains invariant under then it is smaller or equal to the total amount of group actions that would keep the polynomial invariant. AND the is finite then is a finite matrix group?)   NOTE: An action of a finite group given a realization of as a finite matrix group. Example:     Invariant Rings  Notation , with    is a finite matrix group within when? is invariant under the action of if and only if , .  Ex. and in is invariant under However is not. What are others?    is the invariant ring for the action of    Show this is a subring.  How does on find generators for ?  Is even finitely generated?  Work through Hilbert's proof. }   Reynolds Operator  Idea: \"Averaging\" over the action of we get an invariant      Exercise: has many nice properties?   Example:      Nöether Degree Bound(NDB)   (Noether):  NDB : The ring of invariants is generated in degrees    Note: This is a computational tool! We can apply to all the finitely many monomials in degrees to get generators for . Exercise: Try this for ... show!    Hilbert Ideal  Note: In general for , and can be quite different objects Exercise?   Let , ideal generated by all positive degree invariants. If and (apply if it is not), then      Presentations   Definition: Let . A presentation of is a map, such that With the syzygies of 's giving the presentation ideal.    (Elimination Theory): In consider the ideal, Then,     Compute a Groebner Basis for with elimination order for the 's. Then, is the Groebner Basis for      Graph of Linear Actions    Let . For consider, Then is the subspace arrangement associated to the action of G.   Note: is a linear subspace, set of polynomials vanishing on is a linear ideal. Example:     Subspace Arrangement Approach   (Dekseu): Let Then This uses elimination theory and the Hilbert ideal.    Note: The same approach works in the exterior algebra!   Let .\\\\ Then    Note: This approach is slow for polynomials, but might be fast for skew polynomials.    Abelian GPS and Weight Matrices  Let for \\\\ A diagonal action of on is given by for primitive root of unity and , . And encoded in the weight matrix     for zeros being the weight of acting on and being modulo .   Note: We can examine all monomials and sort them by their weight . The ones with weight will be invariant!  Question: Does this work for monomials in the exterior algebra?    "
+},
+{
+  "id": "subsec-finite-matrix-groups-3-1",
   "level": "2",
-  "url": "ch-M2.html#sec-theory-invariant-rings-2-2",
-  "type": "Theorem",
-  "number": "8.5.1",
+  "url": "ch-invarianttheory.html#subsec-finite-matrix-groups-3-1",
+  "type": "Definition",
+  "number": "11.1.1",
   "title": "",
-  "body": " Nöether: NDB: The ring of invariants is generated in degrees   "
+  "body": " , then is a finite matrix group. (In other words if is a group of actions under which remains invariant under then it is smaller or equal to the total amount of group actions that would keep the polynomial invariant. AND the is finite then is a finite matrix group?) "
+},
+{
+  "id": "subsec-invariant-rings-2-3",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-invariant-rings-2-3",
+  "type": "Definition",
+  "number": "11.1.2",
+  "title": "",
+  "body": "  is a finite matrix group within when? is invariant under the action of if and only if , . "
+},
+{
+  "id": "subsec-invariant-rings-4-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-invariant-rings-4-1",
+  "type": "Definition",
+  "number": "11.1.3",
+  "title": "",
+  "body": " is the invariant ring for the action of  "
+},
+{
+  "id": "subsec-reynolds-operator-3-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-reynolds-operator-3-1",
+  "type": "Definition",
+  "number": "11.1.4",
+  "title": "",
+  "body": "   Exercise: has many nice properties? "
+},
+{
+  "id": "subsec-noether-degree-bound-2-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-noether-degree-bound-2-1",
+  "type": "Theorem",
+  "number": "11.1.5",
+  "title": "",
+  "body": "(Noether):  NDB : The ring of invariants is generated in degrees  "
+},
+{
+  "id": "subsec-hilbert-ideal-3-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-hilbert-ideal-3-1",
+  "type": "Theorem",
+  "number": "11.1.6",
+  "title": "",
+  "body": "Let , ideal generated by all positive degree invariants. If and (apply if it is not), then  "
+},
+{
+  "id": "subsec-presentations-2-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-presentations-2-1",
+  "type": "Definition",
+  "number": "11.1.7",
+  "title": "",
+  "body": "Definition: Let . A presentation of is a map, such that With the syzygies of 's giving the presentation ideal. "
+},
+{
+  "id": "subsec-presentations-3-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-presentations-3-1",
+  "type": "Proposition",
+  "number": "11.1.8",
+  "title": "",
+  "body": "(Elimination Theory): In consider the ideal, Then,  "
+},
+{
+  "id": "subsec-presentations-4-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-presentations-4-1",
+  "type": "Algorithm",
+  "number": "11.1.9",
+  "title": "",
+  "body": "Compute a Groebner Basis for with elimination order for the 's. Then, is the Groebner Basis for  "
+},
+{
+  "id": "subsec-graph-of-linear-actions-2-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-graph-of-linear-actions-2-1",
+  "type": "Definition",
+  "number": "11.1.10",
+  "title": "",
+  "body": " Let . For consider, Then is the subspace arrangement associated to the action of G. "
+},
+{
+  "id": "subsec-subspace-arrangement-approach-2-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-subspace-arrangement-approach-2-1",
+  "type": "Theorem",
+  "number": "11.1.11",
+  "title": "",
+  "body": "(Dekseu): Let Then This uses elimination theory and the Hilbert ideal.  "
+},
+{
+  "id": "subsec-subspace-arrangement-approach-4-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-subspace-arrangement-approach-4-1",
+  "type": "Theorem",
+  "number": "11.1.12",
+  "title": "",
+  "body": "Let .\\\\ Then  "
+},
+{
+  "id": "subsec-AGWM-3-1",
+  "level": "2",
+  "url": "ch-invarianttheory.html#subsec-AGWM-3-1",
+  "type": "Theorem",
+  "number": "11.1.13",
+  "title": "",
+  "body": " for zeros being the weight of acting on and being modulo . "
 },
 {
   "id": "ax-related",
