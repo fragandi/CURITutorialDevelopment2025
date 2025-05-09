@@ -28,6 +28,8 @@
     <xi:include href="ch-manim.ptx"/>
     <xi:include href="ch-latex.ptx"/>
     <xi:include href="ch-M2.ptx"/>
+    <xi:include href="ch-invarianttheory.ptx"/>
+
 
     <backmatter xml:id="backmatter">
       <title>Backmatter</title>
