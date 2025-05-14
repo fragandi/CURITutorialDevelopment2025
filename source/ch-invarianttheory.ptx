@@ -8,7 +8,17 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
     </introduction>
 
 <section xml:id="sec-invariantrings-theory">
-       <title>Invariant Rings Theory</title>
+       <title>Invariant Theory</title>
+       <subsection xml:id="subsec-introduction">
+        <title>Introduction to invariant theory</title>
+                <p>
+                    With our research we also had  a large focus on making the theory behind invariant rings accessible 
+                  and digestible for undergraduate students. This included making a chapter covering some computational tools 
+                  within invariant theory briefly. We used this to work on a packet, Orbit Sums, in Macaulay2 for efficient computing of permutation groups 
+                  within invariant rings.
+
+                </p>
+    </subsection>
        <subsection xml:id="subsec-finite-matrix-groups">
         <title>Finite Matrix Groups</title>
                   <p>Example:
@@ -35,10 +45,10 @@ x \\
     </p>
     <p>
         NOTE: An action of a finite group <m>G \curvearrowright \mathbb{K}^n</m> given a realization of <m>G</m> as a finite matrix group. </p><p>
-Example: <me>\langle \begin{bmatrix}
+Example: <me>\left\langle \begin{bmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix} \rangle = \{ \begin{bmatrix}
+\end{bmatrix} \right\rangle = \{ \begin{bmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
 \end{bmatrix},\begin{bmatrix}
@@ -56,10 +66,10 @@ Example: <me>\langle \begin{bmatrix}
  <m>f(A\bar x) = f(\bar x)</m>,  <m>\forall A \in G</m>.
  </p></definition>
 </p><p>
-Ex. <m>f(\bar x)=x</m> and <m>f(\bar x) = x +y^2</m> in <m>\mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under <me>C_2 = \langle\begin{bmatrix}
+Ex. <m>f(\bar x)=x</m> and <m>f(\bar x) = x +y^2</m> in <m>\mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under <me>C_2 = \left\langle\begin{bmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix} \rangle</me>
+\end{bmatrix} \right\rangle</me>
 However <m>f(\bar x)=x+y</m> is not.
         </p>
         <p>
@@ -77,10 +87,10 @@ However <m>f(\bar x)=x+y</m> is not.
             <definition> <p> <m>R_G: R \xrightarrow{} R^G</m> <me>R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) </me>
         </p></definition>
         </p>
-        <p>Example for the Group action <m>C_2 = \langle\begin{bmatrix}
+        <p>Example for the Group action <m>C_2 = \left\langle\begin{bmatrix}
             1 \amp 0 \\
             0 \amp -1 \\
-            \end{bmatrix}\rangle</m>: <me>R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G</me>
+            \end{bmatrix}\right\rangle</m>: <me>R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G</me>
 
         </p>
     </subsection>
@@ -118,7 +128,7 @@ However <m>f(\bar x)=x+y</m> is not.
             </p>
             <p>
                 <proposition><p>(Elimination Theory): In <m>S \bigotimes \mathbb{K}[u_1,...,u_s] = \mathbb{K}[x_1,...,x_n,u_1,...u_s]</m> consider the ideal,
-                <me>I = (u_i - f_x(\bar x) | \, \langle f_i\rangle = S</me>
+                <me>I = (u_i - f_x(\bar x) | \, \left\langle f_i\right\rangle = S</me>
                 Then,
                 <me>\text{ker} (\phi)= I \cap \mathbb{K}[u_1,...,u_s]</me>
                 </p></proposition>
@@ -170,7 +180,7 @@ However <m>f(\bar x)=x+y</m> is not.
         <title>Abelian GPS and Weight Matrices</title>
         <p>
             Let <m>G \cong \mathbb{Z}_d, \bigoplus....\bigoplus \mathbb{Z}_{dr}, \,\,\,\,\, d_i|d_{i+1}</m> for <m>1 \leq i \leq r-1</m>
-            <me>\langle g_1\rangle \bigoplus...\bigoplus\langle g_r \rangle, \,\,\,\,\, |g_i| =d_i</me>
+            <me>\left\langle g_1\right\rangle \bigoplus...\bigoplus\left\langle g_r \right\rangle, \,\,\,\,\, |g_i| =d_i</me>
             A diagonal action of <m>G</m> on <m>R</m> is given by
             <me>g_i \cdot x_j = \mu_i^{\omega ij}x_j</me>
             for <m> \mu_i : d_i^{th}</m> primitive root of unity and <m>i \in [x]</m>,<m>j \in [n]</m>.
@@ -304,9 +314,24 @@ representations on.
   This theorem is a possibly important tool for reducing computational need to generate these algebra. 
 </p>
 
+
     </subsection>
 
+<subsection xml:id="subsec-references">
+        <title>References</title>
+        <p>
+          Mara D. Neusel, Texas Tech University, Lubbock, TX. Publication: The Student Mathematical Library. Publication Year 2007: Volume 36
+. ISBNs: 978-0-8218-4132-7 (print); 978-1-4704-2147-2 (online)
+. DOI: http://dx.doi.org/10.1090/stml/036
 
+        </p>
+       <p> An elimination theory algorithm that computes the Hilbert ideal for any linearly reductive group: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.1.9, pp 159-164
+       </p><p>A simple and efficient algorithm for invariants of tori based on: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.3.1 pp 174-177
+        </p><p>An adaptation of the tori algorithm for invariants of finite abelian groups based on: Gandini, F. Ideals of Subspace Arrangements. Thesis (Ph.D.)-University of Michigan. 2019. ISBN: 978-1392-76291-2. pp 29-34.
+        </p><p>King's algorithm and the linear algebra method for invariants of finite groups: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 3.8.2, pp 107-109; pp 72-74
+        </p><p>The algorithms for primary and secondary invariants, and Molien series of finite groups implemented in version 1.1.0 of this package by: Hawes, T. Computing the invariant ring of a finite group. JSAG, Vol. 5 (2013). pp 15-19. DOI: 10.2140/jsag.2013.5.15
+        </p>
+    </subsection>
    </section>
    <section xml:id="sec-invariantrings-packages">
         <title>InvariantRings package </title>
@@ -315,7 +340,7 @@ representations on.
         
           <p>
             The <code>InvariantRing</code> package in Macaulay2 provides tools to study and compute invariant rings of group actions.
-            To get started, install the package:
+            To get started, install the package.
           </p>
         
           <sage language="macaulay2">
