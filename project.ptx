@@ -4,6 +4,6 @@
   <targets>
     <target name="web" format="html" deploy="yes" deploy-dir="." />
     <target name="print" format="pdf" deploy="yes" />
-    <target name="latex" format="latex" deploy="no" />
+    <target name="latex" format="latex" deploy="yes" />
   </targets>
 </project>

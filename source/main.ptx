@@ -13,25 +13,25 @@
       source="g4m.png" />
   </docinfo>
 
-  <book xml:id="g4m">
-    <title>GitHub for Mathematicians</title>
-    <xi:include href="frontmatter.ptx" />
+  <book xml:id="irm2">
+    <title>Invariant Rings in Macaulay2</title>
+    <!-- <xi:include href="frontmatter.ptx" />
   
     <xi:include href="ch-git-github.ptx"/>
     <xi:include href="ch-first-repo.ptx"/>
     <xi:include href="ch-coding.ptx"/>
-    <xi:include href="ch-website.ptx"/>
+    <xi:include href="ch-website.ptx"/> -->
     <!-- <xi:include href="ch-copilot.ptx"/> -->
-    <xi:include href="ch-collaboration.ptx"/>
+    <!-- <xi:include href="ch-collaboration.ptx"/>
     <xi:include href="ch-jupyter.ptx"/>
-    <xi:include href="ch-projects.ptx"/>
+    <xi:include href="ch-projects.ptx"/> -->
     <!-- <xi:include href="ch-manim.ptx"/> -->
     <!-- <xi:include href="ch-latex.ptx"/> -->
-    <xi:include href="ch-M2.ptx"/>
+    <!-- <xi:include href="ch-M2.ptx"/> -->
     <xi:include href="ch-invarianttheory.ptx"/>
 
 
-    <backmatter xml:id="backmatter">
+    <!-- <backmatter xml:id="backmatter">
       <title>Backmatter</title>
       <xi:include href="ax-related.ptx"/>
       <xi:include href="ax-additional-topics.ptx"/>
@@ -42,7 +42,7 @@
       <colophon>
         <p> This book was authored in <pretext />. </p>
       </colophon>
-    </backmatter>
+    </backmatter> -->
 
   </book>
 </pretext>
