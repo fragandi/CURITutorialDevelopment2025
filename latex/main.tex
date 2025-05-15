@@ -1,0 +1,1019 @@
+%********************************************%
+%*       Generated from PreTeXt source      *%
+%*       on 2025-05-14T07:05:55Z       *%
+%*   A recent stable commit (2022-07-01):   *%
+%* 6c761d3dba23af92cba35001c852aac04ae99a5f *%
+%*                                          *%
+%*         https://pretextbook.org          *%
+%*                                          *%
+%********************************************%
+\documentclass[oneside,10pt,]{book}
+%% Custom Preamble Entries, early (use latex.preamble.early)
+%% Default LaTeX packages
+%%   1.  always employed (or nearly so) for some purpose, or
+%%   2.  a stylewriter may assume their presence
+\usepackage{geometry}
+%% Some aspects of the preamble are conditional,
+%% the LaTeX engine is one such determinant
+\usepackage{ifthen}
+%% etoolbox has a variety of modern conveniences
+\usepackage{etoolbox}
+\usepackage{ifxetex,ifluatex}
+%% Raster graphics inclusion
+\usepackage{graphicx}
+%% Color support, xcolor package
+%% Always loaded, for: add/delete text, author tools
+%% Here, since tcolorbox loads tikz, and tikz loads xcolor
+\PassOptionsToPackage{dvipsnames,svgnames,table}{xcolor}
+\usepackage{xcolor}
+%% begin: defined colors, via xcolor package, for styling
+%% end: defined colors, via xcolor package, for styling
+%% Colored boxes, and much more, though mostly styling
+%% skins library provides "enhanced" skin, employing tikzpicture
+%% boxes may be configured as "breakable" or "unbreakable"
+%% "raster" controls grids of boxes, aka side-by-side
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\tcbuselibrary{raster}
+%% We load some "stock" tcolorbox styles that we use a lot
+%% Placement here is provisional, there will be some color work also
+%% First, black on white, no border, transparent, but no assumption about titles
+\tcbset{ bwminimalstyle/.style={size=minimal, boxrule=-0.3pt, frame empty,
+colback=white, colbacktitle=white, coltitle=black, opacityfill=0.0} }
+%% Second, bold title, run-in to text/paragraph/heading
+%% Space afterwards will be controlled by environment,
+%% independent of constructions of the tcb title
+%% Places \blocktitlefont onto many block titles
+\tcbset{ runintitlestyle/.style={fonttitle=\blocktitlefont\upshape\bfseries, attach title to upper} }
+%% Spacing prior to each exercise, anywhere
+\tcbset{ exercisespacingstyle/.style={before skip={1.5ex plus 0.5ex}} }
+%% Spacing prior to each block
+\tcbset{ blockspacingstyle/.style={before skip={2.0ex plus 0.5ex}} }
+%% xparse allows the construction of more robust commands,
+%% this is a necessity for isolating styling and behavior
+%% The tcolorbox library of the same name loads the base library
+\tcbuselibrary{xparse}
+%% The tcolorbox library loads TikZ, its calc package is generally useful,
+%% and is necessary for some smaller documents that use partial tcolor boxes
+%% See:  https://github.com/PreTeXtBook/pretext/issues/1624
+\usetikzlibrary{calc}
+%% We use some more exotic tcolorbox keys to restore indentation to parboxes
+\tcbuselibrary{hooks}
+%% Save default paragraph indentation and parskip for use later, when adjusting parboxes
+\newlength{\normalparindent}
+\newlength{\normalparskip}
+\AtBeginDocument{\setlength{\normalparindent}{\parindent}}
+\AtBeginDocument{\setlength{\normalparskip}{\parskip}}
+\newcommand{\setparstyle}{\setlength{\parindent}{\normalparindent}\setlength{\parskip}{\normalparskip}}%% Hyperref should be here, but likes to be loaded late
+%%
+%% Inline math delimiters, \(, \), need to be robust
+%% 2016-01-31:  latexrelease.sty  supersedes  fixltx2e.sty
+%% If  latexrelease.sty  exists, bugfix is in kernel
+%% If not, bugfix is in  fixltx2e.sty
+%% See:  https://tug.org/TUGboat/tb36-3/tb114ltnews22.pdf
+%% and read "Fewer fragile commands" in distribution's  latexchanges.pdf
+\IfFileExists{latexrelease.sty}{}{\usepackage{fixltx2e}}
+%% Text height identically 9 inches, text width varies on point size
+%% See Bringhurst 2.1.1 on measure for recommendations
+%% 75 characters per line (count spaces, punctuation) is target
+%% which is the upper limit of Bringhurst's recommendations
+\geometry{letterpaper,total={340pt,9.0in}}
+%% Custom Page Layout Adjustments (use publisher page-geometry entry)
+%% This LaTeX file may be compiled with pdflatex, xelatex, or lualatex executables
+%% LuaTeX is not explicitly supported, but we do accept additions from knowledgeable users
+%% The conditional below provides  pdflatex  specific configuration last
+%% begin: engine-specific capabilities
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}{%
+%% begin: xelatex and lualatex-specific default configuration
+\ifxetex\usepackage{xltxtra}\fi
+%% realscripts is the only part of xltxtra relevant to lualatex 
+\ifluatex\usepackage{realscripts}\fi
+%% end:   xelatex and lualatex-specific default configuration
+}{
+%% begin: pdflatex-specific default configuration
+%% We assume a PreTeXt XML source file may have Unicode characters
+%% and so we ask LaTeX to parse a UTF-8 encoded file
+%% This may work well for accented characters in Western language,
+%% but not with Greek, Asian languages, etc.
+%% When this is not good enough, switch to the  xelatex  engine
+%% where Unicode is better supported (encouraged, even)
+\usepackage[utf8]{inputenc}
+%% end: pdflatex-specific default configuration
+}
+%% end:   engine-specific capabilities
+%%
+%% Fonts.  Conditional on LaTex engine employed.
+%% Default Text Font: The Latin Modern fonts are
+%% "enhanced versions of the [original TeX] Computer Modern fonts."
+%% We use them as the default text font for PreTeXt output.
+%% Default Monospace font: Inconsolata (aka zi4)
+%% Sponsored by TUG: http://levien.com/type/myfonts/inconsolata.html
+%% Loaded for documents with intentional objects requiring monospace
+%% See package documentation for excellent instructions
+%% fontspec will work universally if we use filename to locate OTF files
+%% Loads the "upquote" package as needed, so we don't have to
+%% Upright quotes might come from the  textcomp  package, which we also use
+%% We employ the shapely \ell to match Google Font version
+%% pdflatex: "varl" package option produces shapely \ell
+%% pdflatex: "var0" package option produces plain zero (not used)
+%% pdflatex: "varqu" package option produces best upright quotes
+%% xelatex,lualatex: add OTF StylisticSet 1 for shapely \ell
+%% xelatex,lualatex: add OTF StylisticSet 2 for plain zero (not used)
+%% xelatex,lualatex: add OTF StylisticSet 3 for upright quotes
+%%
+%% Automatic Font Control
+%% Portions of a document, are, or may, be affected by defined commands
+%% These are perhaps more flexible when using  xelatex  rather than  pdflatex
+%% The following definitions are meant to be re-defined in a style, using \renewcommand
+%% They are scoped when employed (in a TeX group), and so should not be defined with an argument
+\newcommand{\divisionfont}{\relax}
+\newcommand{\blocktitlefont}{\relax}
+\newcommand{\contentsfont}{\relax}
+\newcommand{\pagefont}{\relax}
+\newcommand{\tabularfont}{\relax}
+\newcommand{\xreffont}{\relax}
+\newcommand{\titlepagefont}{\relax}
+%%
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}{%
+%% begin: font setup and configuration for use with xelatex
+%% Generally, xelatex is necessary for non-Western fonts
+%% fontspec package provides extensive control of system fonts,
+%% meaning *.otf (OpenType), and apparently *.ttf (TrueType)
+%% that live *outside* your TeX/MF tree, and are controlled by your *system*
+%% (it is possible that a TeX distribution will place fonts in a system location)
+%%
+%% The fontspec package is the best vehicle for using different fonts in  xelatex
+%% So we load it always, no matter what a publisher or style might want
+%%
+\usepackage{fontspec}
+%%
+%% begin: xelatex main font ("font-xelatex-main" template)
+%% Latin Modern Roman is the default font for xelatex and so is loaded with a TU encoding
+%% *in the format* so we can't touch it, only perhaps adjust it later
+%% in one of two ways (then known by NFSS names such as "lmr")
+%% (1) via NFSS with font family names such as "lmr" and "lmss"
+%% (2) via fontspec with commands like \setmainfont{Latin Modern Roman}
+%% The latter requires the font to be known at the system-level by its font name,
+%% but will give access to OTF font features through optional arguments
+%% https://tex.stackexchange.com/questions/470008/
+%% where-and-how-does-fontspec-sty-specify-the-default-font-latin-modern-roman
+%% http://tex.stackexchange.com/questions/115321
+%% /how-to-optimize-latin-modern-font-with-xelatex
+%%
+%% end:   xelatex main font ("font-xelatex-main" template)
+%% begin: xelatex mono font ("font-xelatex-mono" template)
+%% (conditional on non-trivial uses being present in source)
+\IfFontExistsTF{Inconsolatazi4-Regular.otf}{}{\GenericError{}{The font "Inconsolatazi4-Regular.otf" requested by PreTeXt output processed by the  xelatex  executable is not available.  Either a file cannot be located in default locations via a filename, or a font is not known by its name as part of your system.}{Consult the PreTeXt Guide for help with LaTeX fonts, or perhaps try using  pdflatex  as a test.}{}}
+\IfFontExistsTF{Inconsolatazi4-Bold.otf}{}{\GenericError{}{The font "Inconsolatazi4-Bold.otf" requested by PreTeXt output processed by the  xelatex  executable is not available.  Either a file cannot be located in default locations via a filename, or a font is not known by its name as part of your system.}{Consult the PreTeXt Guide for help with LaTeX fonts, or perhaps try using  pdflatex  as a test.}{}}
+\usepackage{zi4}
+\setmonofont[BoldFont=Inconsolatazi4-Bold.otf,StylisticSet={1,3}]{Inconsolatazi4-Regular.otf}
+%% end:   xelatex mono font ("font-xelatex-mono" template)
+%% begin: xelatex font adjustments ("font-xelatex-style" template)
+%% end:   xelatex font adjustments ("font-xelatex-style" template)
+%%
+%% Extensive support for other languages
+\usepackage{polyglossia}
+%% Set main/default language based on pretext/@xml:lang value
+%% document language code is "en-US", US English
+%% usmax variant has extra hypenation
+\setmainlanguage[variant=usmax]{english}
+%% Enable secondary languages based on discovery of @xml:lang values
+%% Enable fonts/scripts based on discovery of @xml:lang values
+%% Western languages should be ably covered by Latin Modern Roman
+%% end:   font setup and configuration for use with xelatex
+}{%
+%% begin: font setup and configuration for use with pdflatex
+%% begin: pdflatex main font ("font-pdflatex-main" template)
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+%% end:   pdflatex main font ("font-pdflatex-main" template)
+%% begin: pdflatex mono font ("font-pdflatex-mono" template)
+%% (conditional on non-trivial uses being present in source)
+\usepackage[varqu,varl]{inconsolata}
+%% end:   pdflatex mono font ("font-pdflatex-mono" template)
+%% begin: pdflatex font adjustments ("font-pdflatex-style" template)
+%% end:   pdflatex font adjustments ("font-pdflatex-style" template)
+%% end:   font setup and configuration for use with pdflatex
+}
+%% Micromanage spacing, etc.  The named "microtype-options"
+%% template may be employed to fine-tune package behavior
+\usepackage{microtype}
+%% Symbols, align environment, commutative diagrams, bracket-matrix
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amssymb}
+%% allow page breaks within display mathematics anywhere
+%% level 4 is maximally permissive
+%% this is exactly the opposite of AMSmath package philosophy
+%% there are per-display, and per-equation options to control this
+%% split, aligned, gathered, and alignedat are not affected
+\allowdisplaybreaks[4]
+%% allow more columns to a matrix
+%% can make this even bigger by overriding with  latex.preamble.late  processing option
+\setcounter{MaxMatrixCols}{30}
+%%
+%%
+%% Division Titles, and Page Headers/Footers
+%% titlesec package, loading "titleps" package cooperatively
+%% See code comments about the necessity and purpose of "explicit" option.
+%% The "newparttoc" option causes a consistent entry for parts in the ToC 
+%% file, but it is only effective if there is a \titleformat for \part.
+%% "pagestyles" loads the  titleps  package cooperatively.
+\usepackage[explicit, newparttoc, pagestyles]{titlesec}
+%% The companion titletoc package for the ToC.
+\usepackage{titletoc}
+%% Fixes a bug with transition from chapters to appendices in a "book"
+%% See generating XSL code for more details about necessity
+\newtitlemark{\chaptertitlename}
+%% begin: customizations of page styles via the modal "titleps-style" template
+%% Designed to use commands from the LaTeX "titleps" package
+%% Plain pages should have the same font for page numbers
+\renewpagestyle{plain}{%
+\setfoot{}{\pagefont\thepage}{}%
+}%
+%% Single pages as in default LaTeX
+\renewpagestyle{headings}{%
+\sethead{\pagefont\slshape\MakeUppercase{\ifthechapter{\chaptertitlename\space\thechapter.\space}{}\chaptertitle}}{}{\pagefont\thepage}%
+}%
+\pagestyle{headings}
+%% end: customizations of page styles via the modal "titleps-style" template
+%%
+%% Create globally-available macros to be provided for style writers
+%% These are redefined for each occurence of each division
+\newcommand{\divisionnameptx}{\relax}%
+\newcommand{\titleptx}{\relax}%
+\newcommand{\subtitleptx}{\relax}%
+\newcommand{\shortitleptx}{\relax}%
+\newcommand{\authorsptx}{\relax}%
+\newcommand{\epigraphptx}{\relax}%
+%% Create environments for possible occurences of each division
+%% Environment for a PTX "chapter" at the level of a LaTeX "chapter"
+\NewDocumentEnvironment{chapterptx}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\chapter[{#4}]{#2}%
+\label{#7}%
+}{}%
+%% Environment for a PTX "section" at the level of a LaTeX "section"
+\NewDocumentEnvironment{sectionptx}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\section[{#4}]{#2}%
+\label{#7}%
+}{}%
+%% Environment for a PTX "subsection" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{subsectionptx}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\subsection[{#4}]{#2}%
+\label{#7}%
+}{}%
+%%
+%% Styles for six traditional LaTeX divisions
+\titleformat{\part}[display]
+{\divisionfont\Huge\bfseries\centering}{\divisionnameptx\space\thepart}{30pt}{\Huge#1}
+[{\Large\centering\authorsptx}]
+\titleformat{\chapter}[display]
+{\divisionfont\huge\bfseries}{\divisionnameptx\space\thechapter}{20pt}{\Huge#1}
+[{\Large\authorsptx}]
+\titleformat{name=\chapter,numberless}[display]
+{\divisionfont\huge\bfseries}{}{0pt}{#1}
+[{\Large\authorsptx}]
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+\titleformat{\section}[hang]
+{\divisionfont\Large\bfseries}{\thesection}{1ex}{#1}
+[{\large\authorsptx}]
+\titleformat{name=\section,numberless}[block]
+{\divisionfont\Large\bfseries}{}{0pt}{#1}
+[{\large\authorsptx}]
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titleformat{\subsection}[hang]
+{\divisionfont\large\bfseries}{\thesubsection}{1ex}{#1}
+[{\normalsize\authorsptx}]
+\titleformat{name=\subsection,numberless}[block]
+{\divisionfont\large\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titleformat{\subsubsection}[hang]
+{\divisionfont\normalsize\bfseries}{\thesubsubsection}{1em}{#1}
+[{\small\authorsptx}]
+\titleformat{name=\subsubsection,numberless}[block]
+{\divisionfont\normalsize\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titleformat{\paragraph}[hang]
+{\divisionfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+[{\small\authorsptx}]
+\titleformat{name=\paragraph,numberless}[block]
+{\divisionfont\normalsize\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5em}
+%%
+%% Styles for five traditional LaTeX divisions
+\titlecontents{part}%
+[0pt]{\contentsmargin{0em}\addvspace{1pc}\contentsfont\bfseries}%
+{\Large\thecontentslabel\enspace}{\Large}%
+{}%
+[\addvspace{.5pc}]%
+\titlecontents{chapter}%
+[0pt]{\contentsmargin{0em}\addvspace{1pc}\contentsfont\bfseries}%
+{\large\thecontentslabel\enspace}{\large}%
+{\hfill\bfseries\thecontentspage}%
+[\addvspace{.5pc}]%
+\dottedcontents{section}[3.8em]{\contentsfont}{2.3em}{1pc}%
+\dottedcontents{subsection}[6.1em]{\contentsfont}{3.2em}{1pc}%
+\dottedcontents{subsubsection}[9.3em]{\contentsfont}{4.3em}{1pc}%
+%%
+%% Begin: Semantic Macros
+%% To preserve meaning in a LaTeX file
+%%
+%% \mono macro for content of "c", "cd", "tag", etc elements
+%% Also used automatically in other constructions
+%% Simply an alias for \texttt
+%% Always defined, even if there is no need, or if a specific tt font is not loaded
+\newcommand{\mono}[1]{\texttt{#1}}
+%%
+%% Following semantic macros are only defined here if their
+%% use is required only in this specific document
+%%
+%% End: Semantic Macros
+%% Program listing support: for listings, programs, consoles, and Sage code
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}%
+  {\tcbuselibrary{listings}}%
+  {\tcbuselibrary{listingsutf8}}%
+%% We define the listings font style to be the default "ttfamily"
+%% To fix hyphens/dashes rendered in PDF as fancy minus signs by listing
+%% http://tex.stackexchange.com/questions/33185/listings-package-changes-hyphens-to-minus-signs
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+%% We define a null language, free of any formatting or style
+%% for use when a language is not supported, or pseudo-code, or consoles
+%% Not necessary for Sage code, so in limited cases included unnecessarily
+\lstdefinelanguage{none}{identifierstyle=,commentstyle=,stringstyle=,keywordstyle=}
+\ifthenelse{\boolean{xetex}}{}{%
+%% begin: pdflatex-specific listings configuration
+%% translate U+0080 - U+00F0 to their textmode LaTeX equivalents
+%% Data originally from https://www.w3.org/Math/characters/unicode.xml, 2016-07-23
+%% Lines marked in XSL with "$" were converted from mathmode to textmode
+\lstset{extendedchars=true}
+\lstset{literate={ }{{~}}{1}{¡}{{\textexclamdown }}{1}{¢}{{\textcent }}{1}{£}{{\textsterling }}{1}{¤}{{\textcurrency }}{1}{¥}{{\textyen }}{1}{¦}{{\textbrokenbar }}{1}{§}{{\textsection }}{1}{¨}{{\textasciidieresis }}{1}{©}{{\textcopyright }}{1}{ª}{{\textordfeminine }}{1}{«}{{\guillemotleft }}{1}{¬}{{\textlnot }}{1}{­}{{\-}}{1}{®}{{\textregistered }}{1}{¯}{{\textasciimacron }}{1}{°}{{\textdegree }}{1}{±}{{\textpm }}{1}{²}{{\texttwosuperior }}{1}{³}{{\textthreesuperior }}{1}{´}{{\textasciiacute }}{1}{µ}{{\textmu }}{1}{¶}{{\textparagraph }}{1}{·}{{\textperiodcentered }}{1}{¸}{{\c{}}}{1}{¹}{{\textonesuperior }}{1}{º}{{\textordmasculine }}{1}{»}{{\guillemotright }}{1}{¼}{{\textonequarter }}{1}{½}{{\textonehalf }}{1}{¾}{{\textthreequarters }}{1}{¿}{{\textquestiondown }}{1}{À}{{\`{A}}}{1}{Á}{{\'{A}}}{1}{Â}{{\^{A}}}{1}{Ã}{{\~{A}}}{1}{Ä}{{\"{A}}}{1}{Å}{{\AA }}{1}{Æ}{{\AE }}{1}{Ç}{{\c{C}}}{1}{È}{{\`{E}}}{1}{É}{{\'{E}}}{1}{Ê}{{\^{E}}}{1}{Ë}{{\"{E}}}{1}{Ì}{{\`{I}}}{1}{Í}{{\'{I}}}{1}{Î}{{\^{I}}}{1}{Ï}{{\"{I}}}{1}{Ð}{{\DH }}{1}{Ñ}{{\~{N}}}{1}{Ò}{{\`{O}}}{1}{Ó}{{\'{O}}}{1}{Ô}{{\^{O}}}{1}{Õ}{{\~{O}}}{1}{Ö}{{\"{O}}}{1}{×}{{\texttimes }}{1}{Ø}{{\O }}{1}{Ù}{{\`{U}}}{1}{Ú}{{\'{U}}}{1}{Û}{{\^{U}}}{1}{Ü}{{\"{U}}}{1}{Ý}{{\'{Y}}}{1}{Þ}{{\TH }}{1}{ß}{{\ss }}{1}{à}{{\`{a}}}{1}{á}{{\'{a}}}{1}{â}{{\^{a}}}{1}{ã}{{\~{a}}}{1}{ä}{{\"{a}}}{1}{å}{{\aa }}{1}{æ}{{\ae }}{1}{ç}{{\c{c}}}{1}{è}{{\`{e}}}{1}{é}{{\'{e}}}{1}{ê}{{\^{e}}}{1}{ë}{{\"{e}}}{1}{ì}{{\`{\i}}}{1}{í}{{\'{\i}}}{1}{î}{{\^{\i}}}{1}{ï}{{\"{\i}}}{1}{ð}{{\dh }}{1}{ñ}{{\~{n}}}{1}{ò}{{\`{o}}}{1}{ó}{{\'{o}}}{1}{ô}{{\^{o}}}{1}{õ}{{\~{o}}}{1}{ö}{{\"{o}}}{1}{÷}{{\textdiv }}{1}{ø}{{\o }}{1}{ù}{{\`{u}}}{1}{ú}{{\'{u}}}{1}{û}{{\^{u}}}{1}{ü}{{\"{u}}}{1}{ý}{{\'{y}}}{1}{þ}{{\th }}{1}{ÿ}{{\"{y}}}{1}}
+%% end: pdflatex-specific listings configuration
+}
+%% End of generic listing adjustments
+%% The listings package as tcolorbox for Sage code
+%% We do as much styling as possible with tcolorbox, not listings
+%% Sage's blue is 50%, we go way lighter (blue!05 would also work)
+%% Note that we defuse listings' default "aboveskip" and "belowskip"
+\definecolor{sageblue}{rgb}{0.95,0.95,1}
+\tcbset{ sagestyle/.style={left=0pt, right=0pt, top=0ex, bottom=0ex, middle=0pt, toptitle=0pt, bottomtitle=0pt,
+boxsep=4pt, listing only, fontupper=\small\ttfamily,
+breakable, 
+listing options={language=Python,breaklines=true,breakatwhitespace=true, extendedchars=true, aboveskip=0pt, belowskip=0pt}} }
+\newtcblisting{sageinput}{sagestyle, colback=sageblue, sharp corners, boxrule=0.5pt, toprule at break=-0.3pt, bottomrule at break=-0.3pt, }
+\newtcblisting{sageoutput}{sagestyle, colback=white, colframe=white, frame empty, before skip=0pt, after skip=0pt, }
+%% hyperref driver does not need to be specified, it will be detected
+%% Footnote marks in tcolorbox have broken linking under
+%% hyperref, so it is necessary to turn off all linking
+%% It *must* be given as a package option, not with \hypersetup
+\usepackage[hyperfootnotes=false]{hyperref}
+%% Hyperlinking active in electronic PDFs, all links without surrounding boxes and blue
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue}
+%% Less-clever names for hyperlinks are more reliable, *especially* for structural parts
+%% See comments in the code to learn more about the importance of this setting
+\hypersetup{hypertexnames=false}
+%%The  hypertexnames  setting then confuses the hyperlinking from the index
+%%This patch resolves the incorrect links, see code for StackExchange post.
+\makeatletter
+\patchcmd\Hy@EveryPageBoxHook{\Hy@EveryPageAnchor}{\Hy@hypertexnamestrue\Hy@EveryPageAnchor}{}{\fail}
+\makeatother
+\hypersetup{pdftitle={Invariant Rings in Macaulay2}}
+%% If you manually remove hyperref, leave in this next command
+%% This will allow LaTeX compilation, employing this no-op command
+\providecommand\phantomsection{}
+%% Division Numbering: Chapters, Sections, Subsections, etc
+%% Division numbers may be turned off at some level ("depth")
+%% A section *always* has depth 1, contrary to us counting from the document root
+%% The latex default is 3.  If a larger number is present here, then
+%% removing this command may make some cross-references ambiguous
+%% The precursor variable $numbering-maxlevel is checked for consistency in the common XSL file
+\setcounter{secnumdepth}{3}
+%%
+%%
+%% A faux tcolorbox whose only purpose is to provide common numbering
+%% facilities for most blocks (possibly not projects, 2D displays)
+%% Controlled by  numbering.theorems.level  processing parameter
+\newtcolorbox[auto counter, number within=section]{block}{}
+%%
+%% This document is set to number PROJECT-LIKE on a separate numbering scheme
+%% So, a faux tcolorbox whose only purpose is to provide this numbering
+%% Controlled by  numbering.projects.level  processing parameter
+\newtcolorbox[auto counter, number within=section]{project-distinct}{}
+%% A faux tcolorbox whose only purpose is to provide common numbering
+%% facilities for 2D displays which are subnumbered as part of a "sidebyside"
+\makeatletter
+\newtcolorbox[auto counter, number within=tcb@cnt@block, number freestyle={\noexpand\thetcb@cnt@block(\noexpand\alph{\tcbcounter})}]{subdisplay}{}
+\makeatother
+%%
+%% tcolorbox, with styles, for THEOREM-LIKE
+%%
+%% theorem: fairly simple numbered block/structure
+\tcbset{ theoremstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\setparstyle}, } }
+\newtcolorbox[use counter from=block]{theorem}[4]{title={{#1~\thetcbcounter\notblank{#2#3}{\space}{}\notblank{#2}{\space#2}{}\notblank{#3}{\space(#3)}{}}}, phantomlabel={#4}, breakable, after={\par}, fontupper=\itshape, theoremstyle, }
+%% proposition: fairly simple numbered block/structure
+\tcbset{ propositionstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\setparstyle}, } }
+\newtcolorbox[use counter from=block]{proposition}[4]{title={{#1~\thetcbcounter\notblank{#2#3}{\space}{}\notblank{#2}{\space#2}{}\notblank{#3}{\space(#3)}{}}}, phantomlabel={#4}, breakable, after={\par}, fontupper=\itshape, propositionstyle, }
+%% algorithm: fairly simple numbered block/structure
+\tcbset{ algorithmstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\setparstyle}, } }
+\newtcolorbox[use counter from=block]{algorithm}[4]{title={{#1~\thetcbcounter\notblank{#2#3}{\space}{}\notblank{#2}{\space#2}{}\notblank{#3}{\space(#3)}{}}}, phantomlabel={#4}, breakable, after={\par}, fontupper=\itshape, algorithmstyle, }
+%%
+%% tcolorbox, with styles, for DEFINITION-LIKE
+%%
+%% definition: fairly simple numbered block/structure
+\tcbset{ definitionstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, after upper={\space\space\hspace*{\stretch{1}}\(\lozenge\)}, before upper app={\setparstyle}, } }
+\newtcolorbox[use counter from=block]{definition}[3]{title={{#1~\thetcbcounter\notblank{#2}{\space\space#2}{}}}, phantomlabel={#3}, breakable, after={\par}, definitionstyle, }
+%%
+%% xparse environments for introductions and conclusions of divisions
+%%
+%% introduction: in a structured division
+\NewDocumentEnvironment{introduction}{m}
+{\notblank{#1}{\noindent\textbf{#1}\space}{}}{\par\medskip}
+%% Graphics Preamble Entries
+\usepackage{tikz}
+%% If tikz has been loaded, replace ampersand with \amp macro
+%% Custom Preamble Entries, late (use latex.preamble.late)
+%% extpfeil package for certain extensible arrows,
+%% as also provided by MathJax extension of the same name
+%% NB: this package loads mtools, which loads calc, which redefines
+%%     \setlength, so it can be removed if it seems to be in the 
+%%     way and your math does not use:
+%%     
+%%     \xtwoheadrightarrow, \xtwoheadleftarrow, \xmapsto, \xlongequal, \xtofrom
+%%     
+%%     we have had to be extra careful with variable thickness
+%%     lines in tables, and so also load this package late
+\usepackage{extpfeil}
+%% Begin: Author-provided macros
+%% (From  docinfo/macros  element)
+%% Plus three from PTX for XML characters
+\newcommand{\R}{\mathbb R}
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+\newcommand{\amp}{&}
+%% End: Author-provided macros
+\begin{document}
+%% bottom alignment is explicit, since it normally depends on oneside, twoside
+\raggedbottom
+%
+%
+\typeout{************************************************}
+\typeout{Chapter 1 Invariant Theory}
+\typeout{************************************************}
+%
+\begin{chapterptx}{Chapter}{Invariant Theory}{}{Invariant Theory}{}{}{ch-invarianttheory}
+\renewcommand*{\chaptername}{Chapter}
+\begin{introduction}{}%
+This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar%
+\end{introduction}%
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.1 Invariant Rings Theory}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Invariant Rings Theory}{}{Invariant Rings Theory}{}{}{sec-invariantrings-theory}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.1 Finite Matrix Groups}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Finite Matrix Groups}{}{Finite Matrix Groups}{}{}{subsec-finite-matrix-groups}
+Example: Consider%
+\begin{equation*}
+M =  \begin{pmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{pmatrix} 
+\end{equation*}
+and the vector \(\bar x = \begin{pmatrix} x\\ y\\ \end{pmatrix}\) This gives \(M \bar x = \begin{bmatrix}
+x \\
+-y  \\
+\end{bmatrix}\). Thus for the polynomial%
+\begin{equation*}
+f(\bar x) = f(\begin{bmatrix}
+x \\
+y  \\
+\end{bmatrix}) = x+y
+\end{equation*}
+and we have,%
+\begin{equation*}
+f(M\bar x) = f(\begin{bmatrix}
+x \\
+-y  \\
+\end{bmatrix})= x-y\text{.}
+\end{equation*}
+%
+\par
+\begin{definition}{Definition}{}{subsec-finite-matrix-groups-3-1}%
+\(G \leq GL_m(\mathbb{K}), |G| < \infty\), then \(G\) is a finite matrix group.%
+\end{definition}
+%
+\par
+NOTE: An action of a finite group \(G \curvearrowright \mathbb{K}^n\) given a realization of \(G\) as a finite matrix group.%
+\par
+Example:%
+\begin{equation*}
+\langle \begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix} \rangle = \{ \begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix},\begin{bmatrix}
+1 \amp 0 \\
+0 \amp 1 \\
+\end{bmatrix}\} \cong C_2
+\end{equation*}
+%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.2 Invariant Rings}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Invariant Rings}{}{Invariant Rings}{}{}{subsec-invariant-rings}
+Notation \(\bar x = (x_1, x_2,..., x_n)\), with \(R = \mathbb{K}[x_1,x_2,...,x_n]\) \begin{definition}{Definition}{}{subsec-invariant-rings-2-3}%
+\(G\) is a finite matrix group within \(GL_m(\mathbb{K})\) when \(f\in \mathbb{K}[x_1,x_2,...,x_n]\) is invariant under the action of \(G\) if and only if \(f(A\bar x) = f(\bar x)\),  \(\forall A \in G\).%
+\end{definition}
+%
+\par
+Ex. \(f(\bar x)=x\) and \(f(\bar x) = x +y^2\) in \(\mathbb{K}[x_1,x_2,...,x_n]\) is invariant under%
+\begin{equation*}
+C_2 = \langle\begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix} \rangle
+\end{equation*}
+However \(f(\bar x)=x+y\) is not.%
+\par
+\begin{definition}{Definition}{}{subsec-invariant-rings-4-1}%
+\(R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \forall A \in G\} \subseteq R\) is the invariant ring for the action of \(G\)%
+\end{definition}
+%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.3 Reynolds Operator}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Reynolds Operator}{}{Reynolds Operator}{}{}{subsec-reynolds-operator}
+Idea: "Averaging" over the action of \(G\) we get an invariant%
+\par
+\begin{definition}{Definition}{}{subsec-reynolds-operator-3-1}%
+\(R_G: R \xrightarrow{} R^G\)%
+\begin{equation*}
+R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) 
+\end{equation*}
+%
+\end{definition}
+%
+\par
+Example for the Group action \(C_2 = \langle\begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix}\rangle\):%
+\begin{equation*}
+R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G
+\end{equation*}
+%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.4 Nöether Degree Bound(NDB)}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Nöether Degree Bound(NDB)}{}{Nöether Degree Bound(NDB)}{}{}{subsec-noether-degree-bound}
+\begin{theorem}{Theorem}{}{}{subsec-noether-degree-bound-2-1}%
+(Noether):%
+\begin{equation*}
+R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]
+\end{equation*}
+\(\implies\) NDB : The ring of invariants is generated in degrees \(\leq |G|\)%
+\end{theorem}
+%
+\par
+Note: This is a computational tool! We can apply \(R_G\) to all the finitely many monomials in degrees \(\leq |G|\) to get generators for \(R^G\).%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.5 Hilbert Ideal}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Hilbert Ideal}{}{Hilbert Ideal}{}{}{subsec-hilbert-ideal}
+Note: In general for \(\{ f_1,..., f_s\} \subseteq \R\), \(\{f_1,...f_s\}\) and \(\R\) can be quite different objects%
+\par
+\begin{theorem}{Theorem}{}{}{subsec-hilbert-ideal-3-1}%
+Let \(J_G = R(R^G)_t\), ideal generated by all positive degree invariants. If \(J_G = (f_1,...,f_s)\) and \(f_i\in R^G, \,\, \forall i\) (apply \(R^G\) if it is not), then \(R^G = \mathbb{K}[f_1,...f_s]\)%
+\end{theorem}
+%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.6 Presentations}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Presentations}{}{Presentations}{}{}{subsec-presentations}
+\begin{definition}{Definition}{}{subsec-presentations-2-1}%
+Definition: Let \(S = \mathbb{K}[f_1,...f_s] \subset R\). A presentation of \(S\) is a map,%
+\begin{equation*}
+T=: \mathbb{K}[u_1,...u_s] \xrightarrow{\phi}S
+\end{equation*}
+such that \(\frac{T}{\text{ker}(\phi)} \cong S\) With the syzygies of \(f_i\)'s giving the presentation ideal.%
+\end{definition}
+%
+\par
+\begin{proposition}{Proposition}{}{}{subsec-presentations-3-1}%
+(Elimination Theory): In \(S \bigotimes \mathbb{K}[u_1,...,u_s] = \mathbb{K}[x_1,...,x_n,u_1,...u_s]\) consider the ideal,%
+\begin{equation*}
+I = (u_i - f_x(\bar x) | \, \langle f_i\rangle = S
+\end{equation*}
+Then,%
+\begin{equation*}
+\text{ker} (\phi)= I \cap \mathbb{K}[u_1,...,u_s]
+\end{equation*}
+%
+\end{proposition}
+%
+\par
+\begin{algorithm}{Algorithm}{}{}{subsec-presentations-4-1}%
+Compute a Groebner Basis \(G\) for \(I\) with elimination order for the \(x\)'s. Then, \(G \cap \mathbb{K}[y_1,...y_s]\)  is the Groebner Basis for \(ker \phi\)%
+\end{algorithm}
+%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.7 Graph of Linear Actions}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Graph of Linear Actions}{}{Graph of Linear Actions}{}{}{subsec-graph-of-linear-actions}
+\begin{definition}{Definition}{}{subsec-graph-of-linear-actions-2-1}%
+Let \(G \leq GL_n(\mathbb{K}), \,\, G\curvearrowright \mathbb{K}^n =:V, \,\, |G|\infty\). For \(A\in G\) consider,%
+\begin{equation*}
+V_A = \{(\bar v, A\bar v)|\,\,v\in V\} \subseteq V\bigotimes V
+\end{equation*}
+Then \(A_G = \cup_{A\in G}V_A\) is the subspace arrangement associated to the action of G.%
+\end{definition}
+%
+\par
+Note: \(V_A\) is a linear subspace, \(\mathbb{I}(V_A):=\) set of polynomials vanishing on \(\mathbb{V}_A\) is a linear ideal. Example:%
+\begin{equation*}
+V_{\begin{bmatrix}
+1 \amp 0 \\
+0 \amp -1 \\
+\end{bmatrix}} = \{(x_1,x_2,x_1,-x_2)\} = V(y_1,-x_1, y_2+x_2)
+\end{equation*}
+%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.8 Subspace Arrangement Approach}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Subspace Arrangement Approach}{}{Subspace Arrangement Approach}{}{}{subsec-subspace-arrangement-approach}
+\begin{theorem}{Theorem}{}{}{subsec-subspace-arrangement-approach-2-1}%
+(Dekseu): Let \(I_G = \mathbb{I}(A_G) = \cap_{A\in G}\mathbb{I}(V_A) \subseteq \mathbb{K}[x_1,...x_n,y_1,...y_n].\) Then%
+\begin{equation*}
+(I_G +(y_1,...,y_n)) \cap \R = J_G
+\end{equation*}
+This uses elimination theory and the Hilbert ideal.%
+\end{theorem}
+%
+\par
+Note: The same approach works in the exterior algebra!%
+\par
+\begin{theorem}{Theorem}{}{}{subsec-subspace-arrangement-approach-4-1}%
+Let \(I_G^{'} = \cap_{A\in G} \mathbb{I}(V_A) \subseteq \Lambda(\bar x, \bar y)\). Then%
+\begin{equation*}
+(I_G^{'} +(y_1,...y_n)) \cap \Lambda(x_1,...,x_n) = J_G^{'} : = \Lambda(\bar x)(\Lambda(\bar x)^G)_+
+\end{equation*}
+%
+\end{theorem}
+%
+\par
+Note: This approach is slow for polynomials, but might be fast for skew polynomials.%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.9 Abelian GPS and Weight Matrices}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Abelian GPS and Weight Matrices}{}{Abelian GPS and Weight Matrices}{}{}{subsec-AGWM}
+Let \(G \cong \mathbb{Z}_d, \bigoplus....\bigoplus \mathbb{Z}_{dr}, \,\,\,\,\, d_i|d_{i+1}\) for \(1 \leq i \leq r-1\)%
+\begin{equation*}
+\langle g_1\rangle \bigoplus...\bigoplus\langle g_r \rangle, \,\,\,\,\, |g_i| =d_i
+\end{equation*}
+A diagonal action of \(G\) on \(R\) is given by%
+\begin{equation*}
+g_i \cdot x_j = \mu_i^{\omega ij}x_j
+\end{equation*}
+for \(\mu_i : d_i^{th}\) primitive root of unity and \(i \in [x]\),\(j \in [n]\). And encoded in the weight matrix \(W = (\omega_{ij})_{ij} =  
+\begin{bmatrix}
+x_1 \amp \cdots     \amp   x_n   \\
+\vdots \amp \ddots \amp      \\
+x_n \amp      \amp
+\end{bmatrix}\)%
+\par
+\begin{theorem}{Theorem}{}{}{subsec-AGWM-3-1}%
+\(\bar x^{\bar \beta} \in R^G \iff W_{\bar \beta}\cong (0,...,0)\) for zeros being the weight of \(g_1\) acting on \(\bar x^{\bar \beta}\) and being modulo \(d_i\).%
+\end{theorem}
+%
+\par
+Note: We can examine all monomials \(|\bar \beta| \leq |G|\) and sort them by their weight \(W\bar \beta\). The ones with weight \(\bar 0\) will be invariant!%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.1.10 Orbit Sums}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Orbit Sums}{}{Orbit Sums}{}{}{subsec-orbitsums}
+Say the symmetric group \(\Sigma_n \) acts on \(\{1, ... , n\}\) by permuting its elements. Then the representation of \(\Sigma_n \) is \(V = \mathbb{F}^n\) with a set of basis vectors \(\{e_1, ... , e_n\}\). This means that \(\Sigma_n \) acts on \(V\) by permuting its basis vectors, \(\{\sigma(e_1),...,\sigma(e_n)\}\) we have a permutation representation.%
+\par
+Example of left acting matrix on the basis:%
+\begin{equation*}
+(1 \,2\,3\,4) =  \begin{bmatrix}
+0 \amp 1 \amp 0 \amp 0 \\
+0 \amp 0 \amp 1 \amp 0 \\
+0 \amp 0 \amp 0 \amp 1 \\
+1 \amp 0 \amp 0 \amp 0 
+\end{bmatrix}   
+\end{equation*}
+and then we have it acting,%
+\begin{equation*}
+\begin{bmatrix}
+0 \amp 1 \amp 0 \amp 0 \\
+0 \amp 0 \amp 1 \amp 0 \\
+0 \amp 0 \amp 0 \amp 1 \\
+1 \amp 0 \amp 0 \amp 0 
+\end{bmatrix} \begin{bmatrix}
+v_1 \\
+v_2 \\
+v_3\\
+v_4
+\end{bmatrix}   =    \begin{bmatrix}
+v_4 \\
+v_1 \\
+v_2\\
+v_3
+\end{bmatrix}
+\end{equation*}
+%
+\par
+These are useful tools for calculating invariants because we simplify to Linear Algebra! An example of invariants are symmetric polynomials which we can use permutation representations on.%
+\begin{definition}{Definition}{}{def-symmetricpolynomial}%
+Symmetric Polynomial: For \(f \in R[x_1,x_2,...,x_n]\) a polynomial is a Symmetric Polynomial if \(f(x_1,x_2,...,x_n) = f(x_{\sigma(1)},x_{\sigma(2)},...,x_{\sigma(n)})\) for all permutations of \(\sigma \in S_n\)%
+\end{definition}
+\begin{definition}{Definition}{}{def-elemsymm}%
+Elementary Symmetric Polynomials: \(e_0,e_1,...,e_n\) in \(R[x_1,...,x_n]\) are defined by%
+\begin{equation*}
+e_{m}=\sum x_{j_1}x_{j_2}...x_{j_m} 
+\end{equation*}
+%
+\end{definition}
+We now introduce some tools for calculating properties of these permutation groups. Such as Orbit sums and Special Monomials.%
+\begin{definition}{Definition}{}{def-orbitsum}%
+Orbit Sums are the sum of all orbit elements. An orbit is A \(G-orbit\) for the left acting group on an element \(x_0\) is%
+\begin{equation*}
+G-orbit = \{gx_0 | g \in G\}
+\end{equation*}
+%
+\end{definition}
+\begin{proposition}{Proposition}{}{}{prop-orbitsumsformvectorspace}%
+The orbit sums of any given degree \(d\) form a basis for the vector space \(\mathbb{F}(V)^G\)%
+\end{proposition}
+\begin{definition}{Definition}{}{def-specialmonomials}%
+A monomial is special within \(\mathbb{F}[x_1, ... , x_n]\) if the partitions satisfy \(x_1^n x_2^{n-1}....x_n^0\).%
+\end{definition}
+Statement: \(x_1^n x_2^{n-1}....x_n^0\) would not be special within \(\mathbb{F}[x_1, ... , x_{n-1}]\).%
+\par
+Algorithmically, we can reduce any monomial to special by reducing the upper degrees repeatedly until the monomial is special. Example: within \(\mathbb{F}[x_1,x_2,x_3]\)%
+\begin{equation*}
+x_1^4x_2^2x_3 \mapsto x_1^2 x_2
+\end{equation*}
+%
+\par
+This all leads to a theorem.%
+\begin{theorem}{Theorem}{}{}{thm-gobel}%
+(Göbel): Let \(\phi:G \mapsto GL(n,\mathbb{F})\) be a permutation representation of a finite group for \(\mathbb{F} = \mathbb{F}[x_1,...,x_n]\). Then the ring of invariants \(\mathbb{F}[V]^G\) is generated as an algebra by the top elementary symmetric function \(s_n = x_1...x_n\) and the orbit sum of monomials.%
+\end{theorem}
+This theorem is a possibly important tool for reducing computational need to generate these algebra.%
+\end{subsectionptx}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2 InvariantRings package}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{InvariantRings package}{}{InvariantRings package}{}{}{sec-invariantrings-packages}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2.1 InvariantRing Library Demos}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{InvariantRing Library Demos}{}{InvariantRing Library Demos}{}{}{sec-invariantring-demoss}
+The InvariantRing package in Macaulay2 provides tools to study and compute invariant rings of group actions. To get started, install the package:%
+\begin{sageinput}
+installPackage "InvariantRing"
+\end{sageinput}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2.1.1 SL₂ Actions on C² and Variants}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{SL₂ Actions on C² and Variants}{}{SL₂ Actions on C² and Variants}{}{}{sec-invariantring-demoss-4}
+A classical example: the standard action of SL₂ on ℂ². The ring R carries a linearly reductive action from SL₂ defined via the matrix SL2std. The invariants and Hilbert ideal are then computed:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+B = QQ[a,b,c,d]
+A = ideal(a*d - b*c - 1)
+SL2std = matrix{{a,b},{c,d}}
+R = QQ[x_1..x_2]
+V = linearlyReductiveAction(A,SL2std,R) 
+invariants V
+elapsedTime hilbertIdeal V
+\end{sageinput}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2.1.2 Diagonal Actions of Abelian Groups}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Diagonal Actions of Abelian Groups}{}{Diagonal Actions of Abelian Groups}{}{}{sec-invariantring-demoss-5}
+This example demonstrates a diagonal action of the abelian group ℂ₃ × ℂ₃ on a polynomial ring. After defining the diagonal weights, we compute the invariant ring and its Hilbert series:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+R = QQ[x_1..x_3]
+W = matrix{{1,0,1},{0,1,1}}
+L = {3,3}
+T = diagonalAction(W,L,R)
+S = R^T
+invariantRing T
+I = definingIdeal S
+Q = ring I
+F = res I
+hilbertSeries S
+equivariantHilbertSeries T
+\end{sageinput}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2.1.3 Linearly Reductive Actions: Permutations and Binary Forms}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Linearly Reductive Actions: Permutations and Binary Forms}{}{Linearly Reductive Actions: Permutations and Binary Forms}{}{}{sec-invariantring-demoss-6}
+Here's how the symmetric group S₂ acts via a matrix of projection operators. We identify which polynomials are invariant under the group action:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+S = QQ[z]
+A = ideal(z^2 - 1)
+M = matrix{{(1+z)/2, (1-z)/2},{(1-z)/2,(1+z)/2}}
+R = QQ[a,b]
+X = linearlyReductiveAction(A,M,R)
+isInvariant(a,X)
+invariants X
+\end{sageinput}
+Now we compute the invariants of binary quadratics and quartics using SL₂ actions. These involve basis substitutions in a ring of forms and are more computationally demanding:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+S = QQ[a,b,c,d]
+I = ideal(a*d - b*c - 1)
+A = S[u,v]
+M = transpose (map(S,A)) last coefficients sub(basis(2,A),{u=>a*u+b*v,v=>c*u+d*v})
+R = QQ[x_1..x_3]
+L = linearlyReductiveAction(I,M,R)
+hilbertIdeal L
+invariants L
+invariants(L,4)
+invariants(L,5)
+\end{sageinput}
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+S = QQ[a,b,c,d]
+I = ideal(a*d - b*c - 1)
+A = S[u,v]
+M4 = transpose (map(S,A)) last coefficients sub(basis(4,A),{u=>a*u+b*v,v=>c*u+d*v})
+R4 = QQ[x_1..x_5]
+L4 = linearlyReductiveAction(I,M4,R4)
+elapsedTime hilbertIdeal L4
+elapsedTime X = invariants L4
+g2 = X_0/12
+g3 = -X_1/216
+256*(g2^3 - 27*g3^2)
+1728*(g2^3)/(g2^3 - 27*g3^2)
+\end{sageinput}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2.1.4 Matrix Invariants and Conjugation Actions}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Matrix Invariants and Conjugation Actions}{}{Matrix Invariants and Conjugation Actions}{}{}{sec-invariantring-demoss-7}
+We define SL₂ actions on 2×2 and 3×3 matrices of binary or ternary forms. The conjugation action creates sophisticated invariants under change of basis:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+S = QQ[g_(1,1)..g_(2,2),t]
+I = ideal((det genericMatrix(S,2,2))*t-1)
+Q = S/I
+A = Q[y_(1,1)..y_(2,2)]
+Y = transpose genericMatrix(A,2,2)
+g = promote(genericMatrix(S,2,2),A)
+G = reshape(A^1,A^4,g*Y*inverse(g)) // (vars A)
+G = lift(map(A^4,A^4,G),S)
+R = QQ[x_(1,1)..x_(2,2)]
+L = linearlyReductiveAction(I,G,R)
+elapsedTime H=hilbertIdeal(L)
+elapsedTime invariants L
+\end{sageinput}
+The same process is repeated for 3×3 matrices. This involves 9-dimensional vector spaces and is more computationally demanding:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+S = QQ[g_(1,1)..g_(3,3),t]
+I = ideal((det genericMatrix(S,3,3))*t-1)
+Q = S/I
+A = Q[y_(1,1)..y_(3,3)]
+Y = transpose genericMatrix(A,3,3)
+g = promote(genericMatrix(S,3,3),A)
+G = reshape(A^1,A^9,g*Y*inverse(g)) // (vars A)
+G = lift(map(A^9,A^9,G),S)
+R = QQ[x_(1,1)..x_(3,3)]
+L = linearlyReductiveAction(I,G,R)
+elapsedTime H=hilbertIdeal(L)
+elapsedTime invariants(L,1)
+elapsedTime invariants(L,2)
+elapsedTime invariants(L,3)
+\end{sageinput}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2.1.5 Finite Group Actions: S₄ Example}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Finite Group Actions: S₄ Example}{}{Finite Group Actions: S₄ Example}{}{}{sec-invariantring-demoss-8}
+Finally, we examine the symmetric group S₄ acting on 4 variables. We use both King’s algorithm and a slower linear algebra method to compute primary and secondary invariants:%
+\begin{sageinput}
+restart
+needsPackage "InvariantRing"
+R = QQ[x_1..x_4]
+L = apply({[2,1,3,4],[2,3,4,1]},permutationMatrix);
+S4 = finiteAction(L,R)
+elapsedTime invariants S4
+elapsedTime invariants(S4,Strategy=>"LinearAlgebra")
+elapsedTime p=primaryInvariants S4
+elapsedTime secondaryInvariants(p,S4)
+elapsedTime hironakaDecomposition(S4)
+\end{sageinput}
+\end{sectionptx}
+\end{sectionptx}
+\end{sectionptx}
+\end{chapterptx}
+\end{document}
