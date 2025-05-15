@@ -105,7 +105,8 @@ x \\
         <p> We will work with a polynomial ring in <m>n</m> variables over the field <m>\mathbb{K}</m>.  
           We use the 
             notation <m>\bar x = (x_1, x_2,..., x_n)</m> and abuse it by saying <m>\mathbb{K}[x_1,x_2,...,x_n]=\mathbb{K}[\bar x]</m> and 
-            <m>f(x_1,x_2,...,x_n)=f(\bar x)</m> for <m>f \in R = \mathbb{K}[\bar x]</m>. 
+            <m>f(x_1,x_2,...,x_n)=f(\bar x)</m> for <m>f \in \mathbb{K}[\bar x]</m>. 
+</p>
 
             <definition> <p> Let <m>G</m> be a finite matrix group within <m>GL_n(\mathbb{K})</m>. We say that
 <m>f\in \mathbb{K}[\bar x]</m> is invariant under the action of <m>G</m> if and only if
@@ -114,61 +115,115 @@ x \\
 </me>
 for all <m>A \in G</m>.
  </p></definition>
-</p><p>
-Ex. <m>f(\bar x)=x</m> and <m>f(\bar x) = x +y^2</m> in <m>\mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under <me>C_2 = \left\langle\begin{bmatrix}
+
+
+<example>
+  <p>
+The polynomials <m>f(\bar x)=x</m> and <m>f(\bar x) = x +y^2</m> in <m>\mathbb{K}[x,y]</m> are invariant under the action of <me>C_2 = \left\langle\begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix} \right\rangle</me>
-However <m>f(\bar x)=x+y</m> is not.
+\end{pmatrix} \right\rangle</me>
+However the polynoial <m>f(\bar x)=x+y</m> is not.
         </p>
-        <p>
-            <definition><p> <m>R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \forall A \in G\} \subseteq R</m>
-            is the invariant ring for the action of <m>G</m>
+</example>
+
+        <p> We can consider the set of all invariant polynomials under some action of a group <m>G </m>. 
+          A good exercise is to prove that this set has the structure of a ring.
+           </p>
+            <definition><p> Let <m>R= \mathbb{K}[\bar x]</m>. We define 
+              <me>R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \, \forall A \in G\} \subseteq R</me>
+            to be the invariant ring for the action of <m>G</m> on <m>R</m>.
             </p></definition>
-        </p>
     </subsection>
+
+
     <subsection xml:id="subsec-reynolds-operator">
         <title>Reynolds Operator</title>
-        <p>
-            Idea: "Averaging" over the action of <m>G</m> we get an invariant
+        <p> We have that the invariant ring <m>R^G</m> is a subring of the ring <m>R= \mathbb{K}[\bar x]</m>. 
+          However, it is not an ordinary subring. In characteristic zero, 
+          we have a <term>projection</term> from <m>R</m> to <m>R^G</m> 
+          that respects the action of <m>G</m>. The idea: "averaging" over the action of <m>G</m> we get an invariant polynomial.
         </p>
-        <p>
-            <definition> <p> <m>R_G: R \xrightarrow{} R^G</m> <me>R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) </me>
-        </p></definition>
+       
+            <definition> 
+              <p> The averaging (or Reynolds) map <m>R_G: R \xrightarrow{} R^G</m> is given by 
+                <me>R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) </me>
         </p>
-        <p>Example for the Group action <m>C_2 = \left\langle\begin{bmatrix}
+      </definition>
+        <example>
+          <p>Example for the Group action <m>C_2 = \left\langle\begin{pmatrix}
             1 \amp 0 \\
             0 \amp -1 \\
-            \end{bmatrix}\right\rangle</m>: <me>R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G</me>
-
+            \end{pmatrix}\right\rangle</m>. Consider the polynomial <m>x+y</m>, which is not invariant under the action of <m>C_2</m>.
+            We have that: 
+            <me>R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G</me>
+and we can check that <m>R_G(x+y)=x</m> is indeed invariant.
         </p>
+        </example>
     </subsection>
 </section>
 
     <section xml:id="sec-degree-bounds-algorithms">
      <title>Degree bounds and algorithms</title>
+<p>
+  Our goal is to find algorithms that provide us with a description of all possible invariants in an efficient way. 
+     Formally, we look for <term>minimal generators</term> for the ring of invariants <m>R^G</m> and more precisely for minimal algebra generators for
+     <m>R^G</m> as an algebra over the coefficient field <m>\mathbb{K}</m>. 
+</p>
+
+<p>
+  
+     For our search to be successful, we need to hope that there are finitely many generators. 
+     In our setup (finite groups and characteristic zero) a consequence of Hilbert's Basis Theorem is that our invariant rings are finitely generated.
+     However, we will run in computational troubles if we do not have a stopping point for our search. The most effective way is to provide a 
+     bound the degrees of these generators. 
+</p>
+
     <subsection xml:id="subsec-noether-degree-bound">
-        <title>Nöether Degree Bound(NDB)</title>
-        <p>
-            <theorem><p> (Noether): <me>R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]</me>
-            <m>\implies</m> NDB : The ring of invariants is generated in degrees <m>\leq |G|</m>
+        <title>Noether Degree Bound</title>
+        <p> A beautiful theorem of Noether establishes that we have a bound on the degree of a minimal generator independent from the action itself, 
+          but just in terms of the order of the group. Moreover, we only need to look at images of monomials under the Reynolds operator.</p>
+            <theorem><p> (Noether): 
+              <me>R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]</me>
             </p></theorem>
-        </p>
+  <corollary>
+      <p>
+        (Noether Degree Bound) The ring of invariants is generated in degrees <m>\leq |G|</m>. 
+      </p>
+  </corollary>
         <p>
-            Note: This is a computational tool! We can apply <m>R_G</m> to all the finitely many monomials in degrees <m>\leq |G|</m> to get generators for <m>R^G</m>.
+           Noether's result is a constructive one and provides us with a first computational strategy! 
+           We can apply <m>R_G</m> to all the finitely many monomials in degrees <m>\leq |G|</m> to get generators for <m>R^G</m>.
+           As the number of monomials grows exponentially with the number of variables and the degree, this is more of a theoretical algorithm,
+           but it does tell us that our goal is at least possible!
         </p>
     </subsection>
+
     <subsection xml:id="subsec-hilbert-ideal">
         <title>Hilbert Ideal</title>
         <p>
-            Note: In general for <m>\{ f_1,..., f_s\} \subseteq \R</m>, <m>\{f_1,...f_s\}</m> and <m>\R</m> can be quite different objects
-        </p>
-        <p>
-            <theorem><p> Let <m>J_G = R(R^G)_t</m>, ideal generated by all positive degree invariants.
-            If <m>J_G = (f_1,...,f_s)</m> and <m>f_i\in R^G, \,\, \forall i</m>
-             (apply <m>R^G</m> if it is not), then <m>R^G = \mathbb{K}[f_1,...f_s]</m>
+                To describe a more sophisticated approach to the search for minimal algebra generators for an invariant ring, we will actually need to consider an ideal instead!
+  Note: for amy <m>\{ f_1,..., f_s\} \subseteq R</m>, the ideal generatd by <m>\{f_1,...f_s\}</m> 
+  and the subalgebra generated by  <m>\{f_1,...f_s\}</m> over <m>\mathbb{K}</m> are very different objects.
+       </p>
+       <definition xml:id="def-">
+          <p>
+            Let <m>J_G := R(R^G)_+</m> be the ideal in <m>R</m> generated by all positive degree invariants. 
+            We call <m>J_G</m> the Hilbert Ideal for this action of <m>G</m>.
+          </p>
+       </definition>
+        
+            <theorem><p> Let <m>J_G </m> be the Hilbert ideal in <m>R</m> for the action of <m>G</m>.
+            If <m>J_G = (f_1,...,f_s)</m> and every <m>f_i</m> is invariant so <m>f_i\in R^G, \,\, \forall i</m>,
+            then <m>R^G = \mathbb{K}[f_1,...f_s]</m>
             </p></theorem>
-        </p>
+       <p>
+       Note that the condition that every generator is invariant is not hard to satisfy as if you have a generator that is not invariant, 
+       then you can apply the Reynolds operator <m>R^G</m> to obtain a new generator that is. You can now replace the old generator 
+       with this new one and still get the same ideal. What is special here is that a set of ideal generators work as algebra generators!
+       Computationally, algebra generators are much harder to find as there is no guarantee to have finitely many of them. 
+       However, Hilbert Basis Theorem tells us that every ideal is finitely generated.
+          </p>
     </subsection>
     <subsection xml:id="subsec-presentations">
         <title>Presentations</title>
@@ -203,10 +258,10 @@ However <m>f(\bar x)=x+y</m> is not.
         </p>
         <p>
             Note: <m>V_A</m> is a linear subspace, <m>\mathbb{I}(V_A):=</m> set of polynomials vanishing on <m>\mathbb{V}_A</m> is a linear ideal.
-            Example: <me>V_{\begin{bmatrix}
+            Example: <me>V_{\begin{pmatrix}
             1 \amp 0 \\
             0 \amp -1 \\
-            \end{bmatrix}} = \{(x_1,x_2,x_1,-x_2)\} = V(y_1,-x_1, y_2+x_2)</me>
+            \end{pmatrix}} = \{(x_1,x_2,x_1,-x_2)\} = V(y_1,-x_1, y_2+x_2)</me>
         </p>
     </subsection>
     <subsection xml:id="subsec-subspace-arrangement-approach">
@@ -238,11 +293,11 @@ However <m>f(\bar x)=x+y</m> is not.
             <me>g_i \cdot x_j = \mu_i^{\omega ij}x_j</me>
             for <m> \mu_i : d_i^{th}</m> primitive root of unity and <m>i \in [x]</m>,<m>j \in [n]</m>.
              And encoded in the weight matrix <m>W = (\omega_{ij})_{ij} =  
-            \begin{bmatrix}
+            \begin{pmatrix}
                 x_1 \amp \cdots     \amp   x_n   \\
                 \vdots \amp \ddots \amp      \\
                 x_n \amp      \amp
-            \end{bmatrix}
+            \end{pmatrix}
 </m>
         </p>
         <p>
@@ -268,30 +323,30 @@ However <m>f(\bar x)=x+y</m> is not.
 
 <p>
     Example of left acting matrix on the basis:
-<me> (1 \,2\,3\,4) =  \begin{bmatrix}
+<me> (1 \,2\,3\,4) =  \begin{pmatrix}
 0 \amp 1 \amp 0 \amp 0 \\
 0 \amp 0 \amp 1 \amp 0 \\
 0 \amp 0 \amp 0 \amp 1 \\
 1 \amp 0 \amp 0 \amp 0 
-\end{bmatrix}   
+\end{pmatrix}   
 </me>
 and then we have it acting,
-<me> \begin{bmatrix}
+<me> \begin{pmatrix}
 0 \amp 1 \amp 0 \amp 0 \\
 0 \amp 0 \amp 1 \amp 0 \\
 0 \amp 0 \amp 0 \amp 1 \\
 1 \amp 0 \amp 0 \amp 0 
-\end{bmatrix} \begin{bmatrix}
+\end{pmatrix} \begin{pmatrix}
 v_1 \\
 v_2 \\
 v_3\\
 v_4
-\end{bmatrix}   =    \begin{bmatrix}
+\end{pmatrix}   =    \begin{pmatrix}
 v_4 \\
 v_1 \\
 v_2\\
 v_3
-\end{bmatrix}
+\end{pmatrix}
 </me>
 </p>
 <p>These are useful tools for calculating invariants because we simplify to Linear Algebra! 
