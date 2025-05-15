@@ -3,13 +3,34 @@
     <title>Invariant Theory</title>
     <introduction>
         <p>
-This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
+This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar. 
+In this chapter we will present an overview of the theory behind the algorithms implemented in the <url href="https://www.macaulay2.com/doc/Macaulay2/share/doc/Macaulay2/InvariantRing/html/index.html">InvariantRing</url> software package 
+in the open-source Computer Algebra System <url href="http://www2.macaulay2.com">Macaulay2 (M2)</url>.
+        </p>
+
+        <p>
+          You can access an online version of this chapter with live code cell at <url href="https://fragandi.github.io/CURITutorialDevelopment2025/"></url>.
+          There you can also learn how to set up a virtual machine on Github with Codespaces so that you write and run M2 code from anywhere.
+          A turn-key repository for creating a Codespace
+           <!-- (<xref ref="sec-codespaces"/>)  -->
+           for Macaulay2 is available at
+        <url href="https://github.com/fragandi/M2-codespace">fragandi/M2-codespace</url>. 
+        </p>
+        <p>
+          We also include some background on orbit sums necessary to implement an algorithm to compute invariants for permutations actions. 
+          We have worked with a group of collaborators on the first version of the code for this algorithm at the Macaulay2 Workshop at Tulane University in April 2025
+          and plan to further test it and release it with Macaulay2 in Fall 2025.
+        </p>
+        <p>
+          We finish the chapter with a selection of examples that illustrate the current capabilities of the InvariantRing package.
+          You can run the provided code in your local installation of M2 or go to the online version and execute the code cells on your browser.
+          Works well even on mobile devices!
         </p>
     </introduction>
 
-<section xml:id="sec-invariantrings-theory">
-       <title>Invariant Theory</title>
-       <subsection xml:id="subsec-introduction">
+<section xml:id="sec-invariantrings">
+       <title>A concrete introduction to invariant rings</title>
+       <!-- <subsection xml:id="subsec-introduction">
         <title>Introduction to invariant theory</title>
                 <p>
                     With our research we also had  a large focus on making the theory behind invariant rings accessible 
@@ -18,52 +39,80 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
                   within invariant rings.
 
                 </p>
-    </subsection>
+    </subsection> -->
        <subsection xml:id="subsec-finite-matrix-groups">
         <title>Finite Matrix Groups</title>
-                  <p>Example:
+        <p>
+          We can think of a (linear) action of a group on a vector space
+          concretely by interpreting each group element as a matrix and describing the action as matrix multiplication on vectors.
+          We can then evaluate any polynomial on a vector and its image after the action.
+        </p>
+<example>
+   <p>
         Consider <me>M =  \begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
 \end{pmatrix} </me> and the vector <m>\bar x = \begin{pmatrix} x\\ y\\ \end{pmatrix}</m>
-This gives <m>M \bar x = \begin{bmatrix}
+This gives <m>M \bar x = \begin{pmatrix}
 x \\
 -y  \\
-\end{bmatrix}</m>. Thus for the polynomial <me> f(\bar x) = f(\begin{bmatrix}
+\end{pmatrix}</m>. Thus for the polynomial <me> f(\bar x) = f(\begin{pmatrix}
 x \\
 y  \\
-\end{bmatrix}) = x+y</me> and we have, <me>f(M\bar x) = f(\begin{bmatrix}
+\end{pmatrix}) = x+y</me> and we have, <me>f(M\bar x) = f(\begin{pmatrix}
 x \\
 -y  \\
-\end{bmatrix})= x-y</me>.
+\end{pmatrix})= x-y</me>.
 
     </p>
-    <p>
-        <definition><p> <m>G \leq GL_m(\mathbb{K}), |G| &lt; \infty</m>, then <m>G</m> is a finite matrix group.
+</example>
+<p>
+  More formally, for <m> G </m> a finite group we will consider a linear representation of <m> G </m>  
+        via its action on a finite dimensional vector space <m>V </m> over a field <m>K </m> of characteristics zero. 
+        In general, most of the results in this chapter hold in the non-modular case 
+        i.e., when the characteristics of the field does not divide the order of the group. 
+        However finite fields are not fully supported by the current version of the InvariantRing package 
+        and the development of such functionalities is an active area of development.  
+</p>
+      
+<p>
+  If <m> V </m> is faithful representation of <m> G </m> of dimension <m> m</m>, the image of the representation is isomorphic to <m> G </m> 
+  and so we consider <m> G </m> as a finite <term>matrix group</term>.
+</p>
+   
+        <definition><p> Suppose <m>|G| &lt; \infty</m> and <m>G \leq GL_m(\mathbb{K})</m>,  then <m>G</m> is a finite matrix group.
         
         </p></definition>
-    </p>
-    <p>
-        NOTE: An action of a finite group <m>G \curvearrowright \mathbb{K}^n</m> given a realization of <m>G</m> as a finite matrix group. </p><p>
-Example: <me>\left\langle \begin{bmatrix}
+  <example>
+     <p>
+        Let us consider a two-dimesional representation of <m>C_2</m>, the cyclic group of order 2. <me>\left\langle \begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix} \right\rangle = \{ \begin{bmatrix}
+\end{pmatrix} \right\rangle = \left\{ \begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix},\begin{bmatrix}
+\end{pmatrix},\begin{pmatrix}
 1 \amp 0 \\
 0 \amp 1 \\
-\end{bmatrix}\} \cong C_2</me>
+\end{pmatrix} \right \} \cong C_2</me>
     </p>
+  </example>
     </subsection>
+
+
     <subsection xml:id="subsec-invariant-rings">
         <title>Invariant Rings</title>
-        <p>
-            Notation <m>\bar x = (x_1, x_2,..., x_n)</m>, with <m>R = \mathbb{K}[x_1,x_2,...,x_n]</m>
-            <definition> <p> <m>G</m> is a finite matrix group within <m>GL_m(\mathbb{K})</m> when
-<m>f\in \mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under the action of <m>G</m> if and only if
- <m>f(A\bar x) = f(\bar x)</m>,  <m>\forall A \in G</m>.
+        <p> We will work with a polynomial ring in <m>n</m> variables over the field <m>\mathbb{K}</m>.  
+          We use the 
+            notation <m>\bar x = (x_1, x_2,..., x_n)</m> and abuse it by saying <m>\mathbb{K}[x_1,x_2,...,x_n]=\mathbb{K}[\bar x]</m> and 
+            <m>f(x_1,x_2,...,x_n)=f(\bar x)</m> for <m>f \in R = \mathbb{K}[\bar x]</m>. 
+
+            <definition> <p> Let <m>G</m> be a finite matrix group within <m>GL_n(\mathbb{K})</m>. We say that
+<m>f\in \mathbb{K}[\bar x]</m> is invariant under the action of <m>G</m> if and only if
+<me>
+  f(A\bar x) = f(\bar x),
+</me>
+for all <m>A \in G</m>.
  </p></definition>
 </p><p>
 Ex. <m>f(\bar x)=x</m> and <m>f(\bar x) = x +y^2</m> in <m>\mathbb{K}[x_1,x_2,...,x_n]</m> is invariant under <me>C_2 = \left\langle\begin{bmatrix}
@@ -94,6 +143,10 @@ However <m>f(\bar x)=x+y</m> is not.
 
         </p>
     </subsection>
+</section>
+
+    <section xml:id="sec-degree-bounds-algorithms">
+     <title>Degree bounds and algorithms</title>
     <subsection xml:id="subsec-noether-degree-bound">
         <title>Nöether Degree Bound(NDB)</title>
         <p>
@@ -316,26 +369,54 @@ representations on.
 
 
     </subsection>
+  </section>
 
-<subsection xml:id="subsec-references">
-        <title>References</title>
-        <p>
-          Mara D. Neusel, Texas Tech University, Lubbock, TX. Publication: The Student Mathematical Library. Publication Year 2007: Volume 36
-. ISBNs: 978-0-8218-4132-7 (print); 978-1-4704-2147-2 (online)
-. DOI: http://dx.doi.org/10.1090/stml/036
 
-        </p>
-       <p> An elimination theory algorithm that computes the Hilbert ideal for any linearly reductive group: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.1.9, pp 159-164
-       </p><p>A simple and efficient algorithm for invariants of tori based on: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.3.1 pp 174-177
-        </p><p>An adaptation of the tori algorithm for invariants of finite abelian groups based on: Gandini, F. Ideals of Subspace Arrangements. Thesis (Ph.D.)-University of Michigan. 2019. ISBN: 978-1392-76291-2. pp 29-34.
-        </p><p>King's algorithm and the linear algebra method for invariants of finite groups: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 3.8.2, pp 107-109; pp 72-74
-        </p><p>The algorithms for primary and secondary invariants, and Molien series of finite groups implemented in version 1.1.0 of this package by: Hawes, T. Computing the invariant ring of a finite group. JSAG, Vol. 5 (2013). pp 15-19. DOI: 10.2140/jsag.2013.5.15
-        </p>
-    </subsection>
-   </section>
    <section xml:id="sec-invariantrings-packages">
         <title>InvariantRings package </title>
-        <section xml:id="sec-invariantring-demoss">
+<p>
+  
+We conclude with references to the algorithms implemented in the InvariantRing package and examples of its implementation. 
+Version 2.0 of this package was accepted for publication in volume 14 of Journal of Software for Algebra and Geometry on 2023-09-14, in the article The InvariantRing package for Macaulay2 
+(DOI: 10.2140/jsag.2024.14.5). That version can be obtained from the journal or from the Macaulay2 source code repository.
+</p>
+
+
+<subsection xml:id="subsec-references">
+        <title>References for the implemented algorithms</title>
+  
+<ul>
+  <li>
+    <p> An elimination theory algorithm that computes the Hilbert ideal for any linearly reductive group: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.1.9, pp 159-164
+  </p>
+    </li>
+  <li>
+    <p>A simple and efficient algorithm for invariants of tori based on: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.3.1 pp 174-177
+    </p>  
+    </li>   
+      <li>
+          <p>An adaptation of the tori algorithm for invariants of finite abelian groups based on: Gandini, F. Ideals of Subspace Arrangements. Thesis (Ph.D.)-University of Michigan. 2019. ISBN: 978-1392-76291-2. pp 29-34.
+        </p>
+         </li>
+          <li>
+            <p>King's algorithm and the linear algebra method for invariants of finite groups: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 3.8.2, pp 107-109; pp 72-74
+        </p>
+         </li>
+        <li>
+          <p>The algorithms for primary and secondary invariants, and Molien series of finite groups implemented in version 1.1.0 of this package by: Hawes, T. Computing the invariant ring of a finite group. JSAG, Vol. 5 (2013). pp 15-19. DOI: 10.2140/jsag.2013.5.15
+        </p>
+  </li>
+  <li>
+    <p>
+      The orbit sum approach is under development following  Mara D. Neusel, Texas Tech University, Lubbock, TX. Publication: The Student Mathematical Library. Publication Year 2007: Volume 36, 
+      DOI: <url href="http://dx.doi.org/10.1090/stml/036"/>
+    </p>
+  </li>
+</ul>
+      
+    </subsection>
+
+        <subsection xml:id="sec-invariantring-demos">
           <title>InvariantRing Library Demos</title>
         
           <p>
@@ -349,7 +430,7 @@ representations on.
             </input>
           </sage>
         
-          <section>
+          <subsubsection>
             <title>SL₂ Actions on C² and Variants</title>
         
             <p>
@@ -369,9 +450,9 @@ representations on.
                 elapsedTime hilbertIdeal V
               </input>
             </sage>
-          </section>
+          </subsubsection>
         
-          <section>
+          <subsubsection>
             <title>Diagonal Actions of Abelian Groups</title>
         
             <p>
@@ -395,9 +476,9 @@ representations on.
                 equivariantHilbertSeries T
               </input>
             </sage>
-          </section>
+          </subsubsection>
         
-          <section>
+          <subsubsection>
             <title>Linearly Reductive Actions: Permutations and Binary Forms</title>
         
             <p>
@@ -457,9 +538,9 @@ representations on.
                 1728*(g2^3)/(g2^3 - 27*g3^2)
               </input>
             </sage>
-          </section>
+          </subsubsection>
         
-          <section>
+          <subsubsection>
             <title>Matrix Invariants and Conjugation Actions</title>
         
             <p>
@@ -509,9 +590,9 @@ representations on.
                 elapsedTime invariants(L,3)
               </input>
             </sage>
-          </section>
+          </subsubsection>
         
-          <section>
+          <subsubsection>
             <title>Finite Group Actions: S₄ Example</title>
         
             <p>
@@ -532,9 +613,8 @@ representations on.
                 elapsedTime hironakaDecomposition(S4)
               </input>
             </sage>
-          </section>
-        
-        </section>
-        
-    </section>
+          </subsubsection>
+          </subsection>
+   </section>
+
 </chapter>
