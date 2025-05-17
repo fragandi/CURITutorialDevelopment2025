@@ -1,6 +1,6 @@
 %********************************************%
 %*       Generated from PreTeXt source      *%
-%*       on 2025-05-14T07:05:55Z       *%
+%*       on 2025-05-17T01:41:00Z       *%
 %*   A recent stable commit (2022-07-01):   *%
 %* 6c761d3dba23af92cba35001c852aac04ae99a5f *%
 %*                                          *%
@@ -74,6 +74,15 @@ colback=white, colbacktitle=white, coltitle=black, opacityfill=0.0} }
 %% See:  https://tug.org/TUGboat/tb36-3/tb114ltnews22.pdf
 %% and read "Fewer fragile commands" in distribution's  latexchanges.pdf
 \IfFileExists{latexrelease.sty}{}{\usepackage{fixltx2e}}
+%% Footnote counters and part/chapter counters are manipulated
+%% April 2018:  chngcntr  commands now integrated into the kernel,
+%% but circa 2018/2019 the package would still try to redefine them,
+%% so we need to do the work of loading conditionally for old kernels.
+%% From version 1.1a,  chngcntr  should detect defintions made by LaTeX kernel.
+\ifdefined\counterwithin
+\else
+    \usepackage{chngcntr}
+\fi
 %% Text height identically 9 inches, text width varies on point size
 %% See Bringhurst 2.1.1 on measure for recommendations
 %% 75 characters per line (count spaces, punctuation) is target
@@ -352,7 +361,14 @@ colback=white, colbacktitle=white, coltitle=black, opacityfill=0.0} }
 %% Following semantic macros are only defined here if their
 %% use is required only in this specific document
 %%
+%% Used for inline definitions of terms
+\newcommand{\terminology}[1]{\textbf{#1}}
 %% End: Semantic Macros
+%% Footnote Numbering
+%% Specified by numbering.footnotes.level
+%% Undo counter reset by chapter for a book
+\counterwithout{footnote}{chapter}
+\counterwithin*{footnote}{section}
 %% Program listing support: for listings, programs, consoles, and Sage code
 \ifthenelse{\boolean{xetex} \or \boolean{luatex}}%
   {\tcbuselibrary{listings}}%
@@ -389,11 +405,16 @@ breakable,
 listing options={language=Python,breaklines=true,breakatwhitespace=true, extendedchars=true, aboveskip=0pt, belowskip=0pt}} }
 \newtcblisting{sageinput}{sagestyle, colback=sageblue, sharp corners, boxrule=0.5pt, toprule at break=-0.3pt, bottomrule at break=-0.3pt, }
 \newtcblisting{sageoutput}{sagestyle, colback=white, colframe=white, frame empty, before skip=0pt, after skip=0pt, }
+%% More flexible list management, esp. for references
+%% But also for specifying labels (i.e. custom order) on nested lists
+\usepackage{enumitem}
 %% hyperref driver does not need to be specified, it will be detected
 %% Footnote marks in tcolorbox have broken linking under
 %% hyperref, so it is necessary to turn off all linking
 %% It *must* be given as a package option, not with \hypersetup
 \usepackage[hyperfootnotes=false]{hyperref}
+%% configure hyperref's  \href{}{}  and  \nolinkurl  to match listings' inline verbatim
+\renewcommand\UrlFont{\small\ttfamily}
 %% Hyperlinking active in electronic PDFs, all links without surrounding boxes and blue
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue}
 %% Less-clever names for hyperlinks are more reliable, *especially* for structural parts
@@ -437,6 +458,9 @@ listing options={language=Python,breaklines=true,breakatwhitespace=true, extende
 %% theorem: fairly simple numbered block/structure
 \tcbset{ theoremstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\setparstyle}, } }
 \newtcolorbox[use counter from=block]{theorem}[4]{title={{#1~\thetcbcounter\notblank{#2#3}{\space}{}\notblank{#2}{\space#2}{}\notblank{#3}{\space(#3)}{}}}, phantomlabel={#4}, breakable, after={\par}, fontupper=\itshape, theoremstyle, }
+%% corollary: fairly simple numbered block/structure
+\tcbset{ corollarystyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\setparstyle}, } }
+\newtcolorbox[use counter from=block]{corollary}[4]{title={{#1~\thetcbcounter\notblank{#2#3}{\space}{}\notblank{#2}{\space#2}{}\notblank{#3}{\space(#3)}{}}}, phantomlabel={#4}, breakable, after={\par}, fontupper=\itshape, corollarystyle, }
 %% proposition: fairly simple numbered block/structure
 \tcbset{ propositionstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\setparstyle}, } }
 \newtcolorbox[use counter from=block]{proposition}[4]{title={{#1~\thetcbcounter\notblank{#2#3}{\space}{}\notblank{#2}{\space#2}{}\notblank{#3}{\space(#3)}{}}}, phantomlabel={#4}, breakable, after={\par}, fontupper=\itshape, propositionstyle, }
@@ -449,6 +473,12 @@ listing options={language=Python,breaklines=true,breakatwhitespace=true, extende
 %% definition: fairly simple numbered block/structure
 \tcbset{ definitionstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, after upper={\space\space\hspace*{\stretch{1}}\(\lozenge\)}, before upper app={\setparstyle}, } }
 \newtcolorbox[use counter from=block]{definition}[3]{title={{#1~\thetcbcounter\notblank{#2}{\space\space#2}{}}}, phantomlabel={#3}, breakable, after={\par}, definitionstyle, }
+%%
+%% tcolorbox, with styles, for EXAMPLE-LIKE
+%%
+%% example: fairly simple numbered block/structure
+\tcbset{ examplestyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, after upper={\space\space\hspace*{\stretch{1}}\(\square\)}, before upper app={\setparstyle}, } }
+\newtcolorbox[use counter from=block]{example}[3]{title={{#1~\thetcbcounter\notblank{#2}{\space\space#2}{}}}, phantomlabel={#3}, breakable, after={\par}, examplestyle, }
 %%
 %% xparse environments for introductions and conclusions of divisions
 %%
@@ -490,15 +520,21 @@ listing options={language=Python,breaklines=true,breakatwhitespace=true, extende
 \begin{chapterptx}{Chapter}{Invariant Theory}{}{Invariant Theory}{}{}{ch-invarianttheory}
 \renewcommand*{\chaptername}{Chapter}
 \begin{introduction}{}%
-This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar%
+This chapter is co-authored by Francesca Gandini, Al Ashir Intisar, and Sumner Strom. In this chapter we will present an overview of the theory behind the algorithms implemented in the \href{https://www.macaulay2.com/doc/Macaulay2/share/doc/Macaulay2/InvariantRing/html/index.html}{InvariantRing}\footnote{\nolinkurl{www.macaulay2.com/doc/Macaulay2/share/doc/Macaulay2/InvariantRing/html/index.html}\label{ch-invarianttheory-2-1-2}} software package in the open-source Computer Algebra System \href{http://www2.macaulay2.com}{Macaulay2 (M2)}\footnote{\nolinkurl{www2.macaulay2.com}\label{ch-invarianttheory-2-1-4}}.%
+\par
+You can access an online version of this chapter with live code cell at \href{https://fragandi.github.io/CURITutorialDevelopment2025/}{\nolinkurl{https://fragandi.github.io/CURITutorialDevelopment2025/}}. There you can also learn how to set up a virtual machine on Github with Codespaces so that you write and run M2 code from anywhere. A turn-key repository for creating a Codespace  for Macaulay2 is available at \href{https://github.com/fragandi/M2-codespace}{fragandi\slash{}M2-codespace}\footnote{\nolinkurl{github.com/fragandi/M2-codespace}\label{ch-invarianttheory-2-2-3}}.%
+\par
+We also include some background on orbit sums necessary to implement an algorithm to compute invariants for permutations actions. We have worked with a group of collaborators on the first version of the code for this algorithm at the Macaulay2 Workshop at Tulane University in April 2025 and plan to further test it and release it with Macaulay2 in Fall 2025.%
+\par
+We finish the chapter with a selection of examples that illustrate the current capabilities of the InvariantRing package. You can run the provided code in your local installation of M2 or go to the online version and execute the code cells on your browser. This works  well even on mobile devices!%
 \end{introduction}%
 %
 %
 \typeout{************************************************}
-\typeout{Section 1.1 Invariant Rings Theory}
+\typeout{Section 1.1 A concrete introduction to invariant rings}
 \typeout{************************************************}
 %
-\begin{sectionptx}{Section}{Invariant Rings Theory}{}{Invariant Rings Theory}{}{}{sec-invariantrings-theory}
+\begin{sectionptx}{Section}{A concrete introduction to invariant rings}{}{A concrete introduction to invariant rings}{}{}{sec-invariantrings}
 %
 %
 \typeout{************************************************}
@@ -506,53 +542,56 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Finite Matrix Groups}{}{Finite Matrix Groups}{}{}{subsec-finite-matrix-groups}
-Example: Consider%
+We can think of a (linear) action of a group on a vector space concretely by interpreting each group element as a matrix and describing the action as matrix multiplication on vectors. We can then evaluate any polynomial on a vector and its image after the action.%
+\begin{example}{Example}{}{subsec-finite-matrix-groups-3}%
+Consider%
 \begin{equation*}
 M =  \begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
 \end{pmatrix} 
 \end{equation*}
-and the vector \(\bar x = \begin{pmatrix} x\\ y\\ \end{pmatrix}\) This gives \(M \bar x = \begin{bmatrix}
+and the vector \(\bar x = \begin{pmatrix} x\\ y\\ \end{pmatrix}\) This gives \(M \bar x = \begin{pmatrix}
 x \\
 -y  \\
-\end{bmatrix}\). Thus for the polynomial%
+\end{pmatrix}\). Thus for the polynomial%
 \begin{equation*}
-f(\bar x) = f(\begin{bmatrix}
+f(\bar x) = f(\begin{pmatrix}
 x \\
 y  \\
-\end{bmatrix}) = x+y
+\end{pmatrix}) = x+y
 \end{equation*}
 and we have,%
 \begin{equation*}
-f(M\bar x) = f(\begin{bmatrix}
+f(M\bar x) = f(\begin{pmatrix}
 x \\
 -y  \\
-\end{bmatrix})= x-y\text{.}
+\end{pmatrix})= x-y\text{.}
 \end{equation*}
 %
+\end{example}
+More formally, for \(G \) a finite group we will consider a linear representation of \(G \) via its action on a finite dimensional vector space \(V \) over a field \(K \) of characteristics zero. In general, most of the results in this chapter hold in the non-modular case i.e., when the characteristics of the field does not divide the order of the group. As of now finite fields are not fully supported by the current version of the InvariantRing package and such functionalities is an active area of development.%
 \par
-\begin{definition}{Definition}{}{subsec-finite-matrix-groups-3-1}%
-\(G \leq GL_m(\mathbb{K}), |G| < \infty\), then \(G\) is a finite matrix group.%
+If \(V \) is faithful representation of \(G \) of dimension \(m\), the image of the representation is isomorphic to \(G \) and so we consider \(G \) as a finite \terminology{matrix group}.%
+\begin{definition}{Definition}{}{subsec-finite-matrix-groups-6}%
+Suppose \(|G| < \infty\) and \(G \leq GL_m(\mathbb{K})\),  then \(G\) is a finite matrix group.%
 \end{definition}
-%
-\par
-NOTE: An action of a finite group \(G \curvearrowright \mathbb{K}^n\) given a realization of \(G\) as a finite matrix group.%
-\par
-Example:%
+\begin{example}{Example}{}{subsec-finite-matrix-groups-7}%
+Let us consider a two-dimesional representation of \(C_2\), the cyclic group of order 2.%
 \begin{equation*}
-\langle \begin{bmatrix}
+\left\langle \begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix} \rangle = \{ \begin{bmatrix}
+\end{pmatrix} \right\rangle = \left\{ \begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix},\begin{bmatrix}
+\end{pmatrix},\begin{pmatrix}
 1 \amp 0 \\
 0 \amp 1 \\
-\end{bmatrix}\} \cong C_2
+\end{pmatrix} \right \} \cong C_2
 \end{equation*}
 %
+\end{example}
 \end{subsectionptx}
 %
 %
@@ -561,24 +600,32 @@ Example:%
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Invariant Rings}{}{Invariant Rings}{}{}{subsec-invariant-rings}
-Notation \(\bar x = (x_1, x_2,..., x_n)\), with \(R = \mathbb{K}[x_1,x_2,...,x_n]\) \begin{definition}{Definition}{}{subsec-invariant-rings-2-3}%
-\(G\) is a finite matrix group within \(GL_m(\mathbb{K})\) when \(f\in \mathbb{K}[x_1,x_2,...,x_n]\) is invariant under the action of \(G\) if and only if \(f(A\bar x) = f(\bar x)\),  \(\forall A \in G\).%
-\end{definition}
-%
-\par
-Ex. \(f(\bar x)=x\) and \(f(\bar x) = x +y^2\) in \(\mathbb{K}[x_1,x_2,...,x_n]\) is invariant under%
+We will work with a polynomial ring in \(n\) variables over the field \(\mathbb{K}\). We use the notation \(\bar x = (x_1, x_2,..., x_n)\) and abuse it by saying \(\mathbb{K}[x_1,x_2,...,x_n]=\mathbb{K}[\bar x]\) and \(f(x_1,x_2,...,x_n)=f(\bar x)\) for \(f \in \mathbb{K}[\bar x]\).%
+\begin{definition}{Definition}{}{subsec-invariant-rings-3}%
+Let \(G\) be a finite matrix group within \(GL_n(\mathbb{K})\). We say that \(f\in \mathbb{K}[\bar x]\) is invariant under the action of \(G\) if and only if%
 \begin{equation*}
-C_2 = \langle\begin{bmatrix}
+f(A\bar x) = f(\bar x),
+\end{equation*}
+for all \(A \in G\).%
+\end{definition}
+\begin{example}{Example}{}{subsec-invariant-rings-4}%
+The polynomials \(f(\bar x)=x\) and \(f(\bar x) = x +y^2\) in \(\mathbb{K}[x,y]\) are invariant under the action of%
+\begin{equation*}
+C_2 = \left\langle\begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix} \rangle
+\end{pmatrix} \right\rangle
 \end{equation*}
-However \(f(\bar x)=x+y\) is not.%
-\par
-\begin{definition}{Definition}{}{subsec-invariant-rings-4-1}%
-\(R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \forall A \in G\} \subseteq R\) is the invariant ring for the action of \(G\)%
+However the polynoial \(f(\bar x)=x+y\) is not.%
+\end{example}
+We can consider the set of all invariant polynomials under some action of a group \(G \). A good exercise is to prove that this set has the structure of a ring.%
+\begin{definition}{Definition}{}{subsec-invariant-rings-6}%
+Let \(R= \mathbb{K}[\bar x]\). We define%
+\begin{equation*}
+R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \, \forall A \in G\} \subseteq R
+\end{equation*}
+to be the invariant ring for the action of \(G\) on \(R\).%
 \end{definition}
-%
 \end{subsectionptx}
 %
 %
@@ -587,78 +634,92 @@ However \(f(\bar x)=x+y\) is not.%
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Reynolds Operator}{}{Reynolds Operator}{}{}{subsec-reynolds-operator}
-Idea: "Averaging" over the action of \(G\) we get an invariant%
-\par
-\begin{definition}{Definition}{}{subsec-reynolds-operator-3-1}%
-\(R_G: R \xrightarrow{} R^G\)%
+We have that the invariant ring \(R^G\) is a subring of the ring \(R= \mathbb{K}[\bar x]\). However, it is not an ordinary subring. In characteristic zero, we have a \terminology{projection} from \(R\) to \(R^G\) that respects the action of \(G\). The idea: "averaging" over the action of \(G\) we get an invariant polynomial.%
+\begin{definition}{Definition}{}{subsec-reynolds-operator-3}%
+The averaging (or Reynolds) map \(R_G: R \xrightarrow{} R^G\) is given by%
 \begin{equation*}
 R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) 
 \end{equation*}
 %
 \end{definition}
-%
-\par
-Example for the Group action \(C_2 = \langle\begin{bmatrix}
+\begin{example}{Example}{}{subsec-reynolds-operator-4}%
+Example for the Group action \(C_2 = \left\langle\begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix}\rangle\):%
+\end{pmatrix}\right\rangle\). Consider the polynomial \(x+y\), which is not invariant under the action of \(C_2\). We have that:%
 \begin{equation*}
 R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G
 \end{equation*}
-%
+and we can check that \(R_G(x+y)=x\) is indeed invariant.%
+\end{example}
 \end{subsectionptx}
+\end{sectionptx}
 %
 %
 \typeout{************************************************}
-\typeout{Subsection 1.1.4 Nöether Degree Bound(NDB)}
+\typeout{Section 1.2 Degree bounds and algorithms}
 \typeout{************************************************}
 %
-\begin{subsectionptx}{Subsection}{Nöether Degree Bound(NDB)}{}{Nöether Degree Bound(NDB)}{}{}{subsec-noether-degree-bound}
-\begin{theorem}{Theorem}{}{}{subsec-noether-degree-bound-2-1}%
+\begin{sectionptx}{Section}{Degree bounds and algorithms}{}{Degree bounds and algorithms}{}{}{sec-degree-bounds-algorithms}
+Our goal is to find algorithms that provide us with a description of all possible invariants in an efficient way. Formally, we look for \terminology{minimal generators} for the ring of invariants \(R^G\) and more precisely for minimal algebra generators for \(R^G\) as an algebra over the coefficient field \(\mathbb{K}\).%
+\par
+For our search to be successful, we need to hope that there are finitely many generators. In our setup (finite groups and characteristic zero) a consequence of Hilbert's Basis Theorem is that our invariant rings are finitely generated. However, we will run in computational troubles if we do not have a stopping point for our search. The most effective way is to provide a bound the degrees of these generators.%
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.2.1 Noether Degree Bound}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Noether Degree Bound}{}{Noether Degree Bound}{}{}{subsec-noether-degree-bound}
+A beautiful theorem of Noether establishes that we have a bound on the degree of a minimal generator independent from the action itself, but just in terms of the order of the group. Moreover, we only need to look at images of monomials under the Reynolds operator.%
+\begin{theorem}{Theorem}{}{}{subsec-noether-degree-bound-3}%
 (Noether):%
 \begin{equation*}
 R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]
 \end{equation*}
-\(\implies\) NDB : The ring of invariants is generated in degrees \(\leq |G|\)%
-\end{theorem}
 %
-\par
-Note: This is a computational tool! We can apply \(R_G\) to all the finitely many monomials in degrees \(\leq |G|\) to get generators for \(R^G\).%
+\end{theorem}
+\begin{corollary}{Corollary}{}{}{subsec-noether-degree-bound-4}%
+(Noether Degree Bound) The ring of invariants is generated in degrees \(\leq |G|\).%
+\end{corollary}
+Noether's result is a constructive one and provides us with a first computational strategy! We can apply \(R_G\) to all the finitely many monomials in degrees \(\leq |G|\) to get generators for \(R^G\). As the number of monomials grows exponentially with the number of variables and the degree, this is more of a theoretical algorithm, but it does tell us that our goal is at least possible!%
 \end{subsectionptx}
 %
 %
 \typeout{************************************************}
-\typeout{Subsection 1.1.5 Hilbert Ideal}
+\typeout{Subsection 1.2.2 Hilbert Ideal}
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Hilbert Ideal}{}{Hilbert Ideal}{}{}{subsec-hilbert-ideal}
-Note: In general for \(\{ f_1,..., f_s\} \subseteq \R\), \(\{f_1,...f_s\}\) and \(\R\) can be quite different objects%
-\par
-\begin{theorem}{Theorem}{}{}{subsec-hilbert-ideal-3-1}%
-Let \(J_G = R(R^G)_t\), ideal generated by all positive degree invariants. If \(J_G = (f_1,...,f_s)\) and \(f_i\in R^G, \,\, \forall i\) (apply \(R^G\) if it is not), then \(R^G = \mathbb{K}[f_1,...f_s]\)%
+To describe a more sophisticated approach to the search for minimal algebra generators for an invariant ring, we will actually need to consider an ideal instead! Note: for  any \(\{ f_1,..., f_s\} \subseteq R\), the ideal generatd by \(\{f_1,...f_s\}\) and the subalgebra generated by  \(\{f_1,...f_s\}\) over \(\mathbb{K}\) are very different objects.%
+\begin{definition}{Definition}{}{subsec-hilbert-ideal-3}%
+Let \(J_G := R(R^G)_+\) be the ideal in \(R\) generated by all positive degree invariants. We call \(J_G\) the Hilbert Ideal for this action of \(G\).%
+\end{definition}
+\begin{theorem}{Theorem}{}{}{subsec-hilbert-ideal-4}%
+Let \(J_G \) be the Hilbert ideal in \(R\) for the action of \(G\). If \(J_G = (f_1,...,f_s)\) and every \(f_i\) is invariant so \(f_i\in R^G, \,\, \forall i\), then \(R^G = \mathbb{K}[f_1,...f_s]\)%
 \end{theorem}
-%
+Note that the condition that every generator is invariant is not hard to satisfy as if you have a generator that is not invariant, then you can apply the Reynolds operator \(R^G\) to obtain a new generator that is. You can now replace the old generator with this new one and still get the same ideal. What is special here is that a set of ideal generators work as algebra generators! Computationally, algebra generators are much harder to find as there is no guarantee to have finitely many of them. However, the Hilbert Basis Theorem tells us that every ideal is finitely generated.%
 \end{subsectionptx}
 %
 %
 \typeout{************************************************}
-\typeout{Subsection 1.1.6 Presentations}
+\typeout{Subsection 1.2.3 Presentations}
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Presentations}{}{Presentations}{}{}{subsec-presentations}
-\begin{definition}{Definition}{}{subsec-presentations-2-1}%
-Definition: Let \(S = \mathbb{K}[f_1,...f_s] \subset R\). A presentation of \(S\) is a map,%
+When we say that  \(\{f_1,...f_s\} \subseteq R\) are minimal generators for a subring \(S\), we do not exclude the possibility that there is some relation, some polynomial identity, that they satisfy as elements in the bigger ring \(R\). We can describe the relations between the generators via a \terminology{presentation} of the subring.%
+\begin{definition}{Definition}{}{subsec-presentations-3}%
+Let \(S = \mathbb{K}[f_1,...f_s] \subset R\). A presentation of \(S\) is a map,%
 \begin{equation*}
 T=: \mathbb{K}[u_1,...u_s] \xrightarrow{\phi}S
 \end{equation*}
-such that \(\frac{T}{\text{ker}(\phi)} \cong S\) With the syzygies of \(f_i\)'s giving the presentation ideal.%
+such that \(\frac{T}{\text{ker}(\phi)} \cong S\). We call the elements of the presentation ideal \(\text{ker}(\phi)\) the syzygies of \(f_i\)'s.%
 \end{definition}
-%
-\par
-\begin{proposition}{Proposition}{}{}{subsec-presentations-3-1}%
-(Elimination Theory): In \(S \bigotimes \mathbb{K}[u_1,...,u_s] = \mathbb{K}[x_1,...,x_n,u_1,...u_s]\) consider the ideal,%
+Algorithms for finding generators for ideals have been intensely studied and especially in relation with the theory of Groebener bases. We cannot go in the details of these tools, but what is of notice is that they are implemented in Macaulay2 and so we can rely on them in our implementation. In particular, these methods are particularly effective in solving problems in Elimnination Theory.  Often the goal is to compute an ideal of relations hoping that this is less complicated than the original structure, possibly elimnating some variables.%
+\begin{proposition}{Proposition}{}{}{subsec-presentations-5}%
+(Elimination Theory): In \(S \otimes \mathbb{K}[u_1,...,u_s] = \mathbb{K}[x_1,...,x_n,u_1,...u_s]\) consider the ideal,%
 \begin{equation*}
-I = (u_i - f_x(\bar x) | \, \langle f_i\rangle = S
+I = (u_i - f_x(\bar x) | \, \left\langle f_i\right\rangle = S
 \end{equation*}
 Then,%
 \begin{equation*}
@@ -666,58 +727,56 @@ Then,%
 \end{equation*}
 %
 \end{proposition}
-%
-\par
-\begin{algorithm}{Algorithm}{}{}{subsec-presentations-4-1}%
+\begin{algorithm}{Algorithm}{}{}{subsec-presentations-6}%
 Compute a Groebner Basis \(G\) for \(I\) with elimination order for the \(x\)'s. Then, \(G \cap \mathbb{K}[y_1,...y_s]\)  is the Groebner Basis for \(ker \phi\)%
 \end{algorithm}
-%
 \end{subsectionptx}
 %
 %
 \typeout{************************************************}
-\typeout{Subsection 1.1.7 Graph of Linear Actions}
+\typeout{Subsection 1.2.4 Graph of Linear Actions}
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Graph of Linear Actions}{}{Graph of Linear Actions}{}{}{subsec-graph-of-linear-actions}
-\begin{definition}{Definition}{}{subsec-graph-of-linear-actions-2-1}%
-Let \(G \leq GL_n(\mathbb{K}), \,\, G\curvearrowright \mathbb{K}^n =:V, \,\, |G|\infty\). For \(A\in G\) consider,%
+We can use Elimination Theory to solve our original problem of finding minimal generators for the ring of invariants. We first need to construct a geometric description of the action of a group \(G\).%
+\begin{definition}{Definition}{}{subsec-graph-of-linear-actions-3}%
+Let \(G\) be a finite matrix group in \(GL_n(\mathbb{K})\). For \(A\in G\) consider,%
 \begin{equation*}
-V_A = \{(\bar v, A\bar v)|\,\,v\in V\} \subseteq V\bigotimes V
+V_A = \left\{ ( \bar v, A \bar v) \mid ,v \in V \right \} \subseteq V \oplus V 
 \end{equation*}
 Then \(A_G = \cup_{A\in G}V_A\) is the subspace arrangement associated to the action of G.%
 \end{definition}
-%
-\par
-Note: \(V_A\) is a linear subspace, \(\mathbb{I}(V_A):=\) set of polynomials vanishing on \(\mathbb{V}_A\) is a linear ideal. Example:%
+Note that \(V_A\) is a linear subspace. So \(\mathbb{I}(V_A)\), the set of polynomials vanishing on \(V_A\), is an ideal generated by linear polynomials, we call this a \terminology{linear ideal}.%
+\begin{example}{Example}{}{subsec-graph-of-linear-actions-5}%
+Consider%
 \begin{equation*}
-V_{\begin{bmatrix}
+V_{\begin{pmatrix}
 1 \amp 0 \\
 0 \amp -1 \\
-\end{bmatrix}} = \{(x_1,x_2,x_1,-x_2)\} = V(y_1,-x_1, y_2+x_2)
+\end{pmatrix}} = \{(x_1,x_2,x_1,-x_2) \mid x_1, x_2 \in V\} = \mathbb{V}(y_1-x_1, y_2+x_2)
 \end{equation*}
 %
+\end{example}
 \end{subsectionptx}
 %
 %
 \typeout{************************************************}
-\typeout{Subsection 1.1.8 Subspace Arrangement Approach}
+\typeout{Subsection 1.2.5 Subspace Arrangement Approach}
 \typeout{************************************************}
 %
 \begin{subsectionptx}{Subsection}{Subspace Arrangement Approach}{}{Subspace Arrangement Approach}{}{}{subsec-subspace-arrangement-approach}
-\begin{theorem}{Theorem}{}{}{subsec-subspace-arrangement-approach-2-1}%
-(Dekseu): Let \(I_G = \mathbb{I}(A_G) = \cap_{A\in G}\mathbb{I}(V_A) \subseteq \mathbb{K}[x_1,...x_n,y_1,...y_n].\) Then%
+The finite union of the subspaces \(V_A\), denoted \(\mathcal{A}\) is a subspace arrangement, called the \terminology{group action arrangement}. Via Elimination Theory, we can use the vanishing ideal of \(\mathcal{A}\) to recover the Hilbert Ideal.%
+\begin{theorem}{Theorem}{}{}{subsec-subspace-arrangement-approach-3}%
+(Derksen): Let \(I_G = \mathbb{I}(A_G) = \cap_{A\in G}\mathbb{I}(V_A) \subseteq \mathbb{K}[x_1,...x_n,y_1,...y_n].\) Then%
 \begin{equation*}
-(I_G +(y_1,...,y_n)) \cap \R = J_G
+(I_G +(y_1,...,y_n)) \cap \R = J_G.
 \end{equation*}
-This uses elimination theory and the Hilbert ideal.%
-\end{theorem}
 %
+\end{theorem}
+Recent work has shown that the same approach works in the exterior algebra.%
 \par
-Note: The same approach works in the exterior algebra!%
-\par
-\begin{theorem}{Theorem}{}{}{subsec-subspace-arrangement-approach-4-1}%
-Let \(I_G^{'} = \cap_{A\in G} \mathbb{I}(V_A) \subseteq \Lambda(\bar x, \bar y)\). Then%
+\begin{theorem}{Theorem}{}{}{subsec-subspace-arrangement-approach-5-1}%
+(Gandini) Let \(I_G^{'} = \cap_{A\in G} \mathbb{I}(V_A) \subseteq \Lambda(\bar x, \bar y)\). Then%
 \begin{equation*}
 (I_G^{'} +(y_1,...y_n)) \cap \Lambda(x_1,...,x_n) = J_G^{'} : = \Lambda(\bar x)(\Lambda(\bar x)^G)_+
 \end{equation*}
@@ -725,142 +784,189 @@ Let \(I_G^{'} = \cap_{A\in G} \mathbb{I}(V_A) \subseteq \Lambda(\bar x, \bar y)\
 \end{theorem}
 %
 \par
-Note: This approach is slow for polynomials, but might be fast for skew polynomials.%
-\end{subsectionptx}
-%
-%
-\typeout{************************************************}
-\typeout{Subsection 1.1.9 Abelian GPS and Weight Matrices}
-\typeout{************************************************}
-%
-\begin{subsectionptx}{Subsection}{Abelian GPS and Weight Matrices}{}{Abelian GPS and Weight Matrices}{}{}{subsec-AGWM}
-Let \(G \cong \mathbb{Z}_d, \bigoplus....\bigoplus \mathbb{Z}_{dr}, \,\,\,\,\, d_i|d_{i+1}\) for \(1 \leq i \leq r-1\)%
-\begin{equation*}
-\langle g_1\rangle \bigoplus...\bigoplus\langle g_r \rangle, \,\,\,\,\, |g_i| =d_i
-\end{equation*}
-A diagonal action of \(G\) on \(R\) is given by%
-\begin{equation*}
-g_i \cdot x_j = \mu_i^{\omega ij}x_j
-\end{equation*}
-for \(\mu_i : d_i^{th}\) primitive root of unity and \(i \in [x]\),\(j \in [n]\). And encoded in the weight matrix \(W = (\omega_{ij})_{ij} =  
-\begin{bmatrix}
-x_1 \amp \cdots     \amp   x_n   \\
-\vdots \amp \ddots \amp      \\
-x_n \amp      \amp
-\end{bmatrix}\)%
-\par
-\begin{theorem}{Theorem}{}{}{subsec-AGWM-3-1}%
-\(\bar x^{\bar \beta} \in R^G \iff W_{\bar \beta}\cong (0,...,0)\) for zeros being the weight of \(g_1\) acting on \(\bar x^{\bar \beta}\) and being modulo \(d_i\).%
-\end{theorem}
-%
-\par
-Note: We can examine all monomials \(|\bar \beta| \leq |G|\) and sort them by their weight \(W\bar \beta\). The ones with weight \(\bar 0\) will be invariant!%
-\end{subsectionptx}
-%
-%
-\typeout{************************************************}
-\typeout{Subsection 1.1.10 Orbit Sums}
-\typeout{************************************************}
-%
-\begin{subsectionptx}{Subsection}{Orbit Sums}{}{Orbit Sums}{}{}{subsec-orbitsums}
-Say the symmetric group \(\Sigma_n \) acts on \(\{1, ... , n\}\) by permuting its elements. Then the representation of \(\Sigma_n \) is \(V = \mathbb{F}^n\) with a set of basis vectors \(\{e_1, ... , e_n\}\). This means that \(\Sigma_n \) acts on \(V\) by permuting its basis vectors, \(\{\sigma(e_1),...,\sigma(e_n)\}\) we have a permutation representation.%
-\par
-Example of left acting matrix on the basis:%
-\begin{equation*}
-(1 \,2\,3\,4) =  \begin{bmatrix}
-0 \amp 1 \amp 0 \amp 0 \\
-0 \amp 0 \amp 1 \amp 0 \\
-0 \amp 0 \amp 0 \amp 1 \\
-1 \amp 0 \amp 0 \amp 0 
-\end{bmatrix}   
-\end{equation*}
-and then we have it acting,%
-\begin{equation*}
-\begin{bmatrix}
-0 \amp 1 \amp 0 \amp 0 \\
-0 \amp 0 \amp 1 \amp 0 \\
-0 \amp 0 \amp 0 \amp 1 \\
-1 \amp 0 \amp 0 \amp 0 
-\end{bmatrix} \begin{bmatrix}
-v_1 \\
-v_2 \\
-v_3\\
-v_4
-\end{bmatrix}   =    \begin{bmatrix}
-v_4 \\
-v_1 \\
-v_2\\
-v_3
-\end{bmatrix}
-\end{equation*}
-%
-\par
-These are useful tools for calculating invariants because we simplify to Linear Algebra! An example of invariants are symmetric polynomials which we can use permutation representations on.%
-\begin{definition}{Definition}{}{def-symmetricpolynomial}%
-Symmetric Polynomial: For \(f \in R[x_1,x_2,...,x_n]\) a polynomial is a Symmetric Polynomial if \(f(x_1,x_2,...,x_n) = f(x_{\sigma(1)},x_{\sigma(2)},...,x_{\sigma(n)})\) for all permutations of \(\sigma \in S_n\)%
-\end{definition}
-\begin{definition}{Definition}{}{def-elemsymm}%
-Elementary Symmetric Polynomials: \(e_0,e_1,...,e_n\) in \(R[x_1,...,x_n]\) are defined by%
-\begin{equation*}
-e_{m}=\sum x_{j_1}x_{j_2}...x_{j_m} 
-\end{equation*}
-%
-\end{definition}
-We now introduce some tools for calculating properties of these permutation groups. Such as Orbit sums and Special Monomials.%
-\begin{definition}{Definition}{}{def-orbitsum}%
-Orbit Sums are the sum of all orbit elements. An orbit is A \(G-orbit\) for the left acting group on an element \(x_0\) is%
-\begin{equation*}
-G-orbit = \{gx_0 | g \in G\}
-\end{equation*}
-%
-\end{definition}
-\begin{proposition}{Proposition}{}{}{prop-orbitsumsformvectorspace}%
-The orbit sums of any given degree \(d\) form a basis for the vector space \(\mathbb{F}(V)^G\)%
-\end{proposition}
-\begin{definition}{Definition}{}{def-specialmonomials}%
-A monomial is special within \(\mathbb{F}[x_1, ... , x_n]\) if the partitions satisfy \(x_1^n x_2^{n-1}....x_n^0\).%
-\end{definition}
-Statement: \(x_1^n x_2^{n-1}....x_n^0\) would not be special within \(\mathbb{F}[x_1, ... , x_{n-1}]\).%
-\par
-Algorithmically, we can reduce any monomial to special by reducing the upper degrees repeatedly until the monomial is special. Example: within \(\mathbb{F}[x_1,x_2,x_3]\)%
-\begin{equation*}
-x_1^4x_2^2x_3 \mapsto x_1^2 x_2
-\end{equation*}
-%
-\par
-This all leads to a theorem.%
-\begin{theorem}{Theorem}{}{}{thm-gobel}%
-(Göbel): Let \(\phi:G \mapsto GL(n,\mathbb{F})\) be a permutation representation of a finite group for \(\mathbb{F} = \mathbb{F}[x_1,...,x_n]\). Then the ring of invariants \(\mathbb{F}[V]^G\) is generated as an algebra by the top elementary symmetric function \(s_n = x_1...x_n\) and the orbit sum of monomials.%
-\end{theorem}
-This theorem is a possibly important tool for reducing computational need to generate these algebra.%
+The exterior algebra approach has computational potential. Whilst Derken's approach leads to an algorithm with a long run time, first experiments suggest that a fast algorithm could be implemented for skew polynomials. We aim to pursue this line of inquiry in the near future.%
 \end{subsectionptx}
 \end{sectionptx}
 %
 %
 \typeout{************************************************}
-\typeout{Section 1.2 InvariantRings package}
+\typeout{Section 1.3 Specialized algorithms}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Specialized algorithms}{}{Specialized algorithms}{}{}{sec-}
+For some specific types of actions we have faster and simpler algorithms to find invariants.%
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.3.1 Abelian Groups and Weight Matrices}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Abelian Groups and Weight Matrices}{}{Abelian Groups and Weight Matrices}{}{}{subsec-AGWM}
+Every abelian group \(G\) can be written in its invariant factors decomposition as%
+\begin{equation*}
+G \cong \mathbb{Z}_{d_1} \oplus....\oplus \mathbb{Z}_{d_r}, 
+\end{equation*}
+for some unique \(d_i\) such that \(d_i \mid d_{1+1}\) where \(i=1, \ldots , r-1\). In multiplicative notation,%
+\begin{equation*}
+G \cong \left\langle g_1\right\rangle \oplus...\oplus\left\langle g_r \right\rangle, \,\,\,\,\, |g_i| =d_i.
+\end{equation*}
+A diagonal action of \(G\) on \(R= \mathbb{K}[\bar x]\) is given by%
+\begin{equation*}
+g_i \cdot x_j = \mu_i^{w_ij}x_j
+\end{equation*}
+for \(\mu_i \) a primitive \(d_i^{th}\) root of unity. We can encod the action in the weight matrix%
+\begin{equation*}
+W = (w_{ij})_{ij} =  
+\begin{pmatrix}
+\mu_{11} \amp \cdots     \amp   \mu_{1n}   \\
+\vdots \amp \ddots \amp      \\
+\mu_{r1}  \amp    \cdots     \amp   \mu_{rn}  
+\end{pmatrix}
+\end{equation*}
+where the rows are indexed by the generators \(g_i\) of \(G\) and the columns are indexed by the variables \(x_j\) of \(R\).%
+\begin{theorem}{Theorem}{}{}{subsec-AGWM-3}%
+A monomial is invariant under the action of \(G\) if an only if its exponent vector is in the kernel of the weigtht matrix \(W \). In symbols,%
+\begin{equation*}
+\bar x^{\bar \beta} \in R^G \iff W \bar \beta \cong (0,...,0),
+\end{equation*}
+where the entry in position \(i\) is computed modulo \(d_i\).%
+\end{theorem}
+Interpreting each row has the weight of the action of the generator \(g_i\), we have that \(g_i\) acts trivially on the monomial \(\bar x^{\bar \beta}\) precisely when%
+\begin{equation*}
+\mu_i^{\sum_j w_{ij} \beta_j} = 1
+\end{equation*}
+so \((W \bar \beta)_i =0\) modulo \(d_i\) as \(\mu_i\) is a primitve \(d_i^{th}\) root of unity.%
+\par
+We can use this result computationally. As the action is diagonal, the invariant ring is generated by monomials. By Noether Degree Bound we only need to examine all monomials of degree less than the order of the group \(G\). Then, by the theorem above, if we can sort the monomials in terms of their weigtht \(W\bar \beta\), then the monomials with weight \(\bar 0\) will be invariant.%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.3.2 Permutation actions}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{Permutation actions}{}{Permutation actions}{}{}{subsec-orbitsums}
+The symmetric group \(S_n \) acts naturally on \(\{1, ... , n\}\) by permuting its elements. This action allows us to define a representation \(V \cong \mathbb{K}^n\) where on the basis vectors \(\{e_1, ... , e_n\}\), the permutation \(\sigma\) acts by \(\sigma \cdot e_i = e_{\sigma(i)}\). As \(S_n \) acts on \(V\) by permuting its basis vectors, we have that \(V\) is a permutation representation induced by the permutation action of \(S_n\).%
+\begin{example}{Example}{}{subsec-orbitsums-3}%
+Consider the group \(S_4\). The matrix for the action of \((1 \,2\,3\,4) \) is given by%
+\begin{equation*}
+M_{(1 \,2\,3\,4)} =  \begin{pmatrix}
+0 \amp 1 \amp 0 \amp 0 \\
+0 \amp 0 \amp 1 \amp 0 \\
+0 \amp 0 \amp 0 \amp 1 \\
+1 \amp 0 \amp 0 \amp 0 
+\end{pmatrix}   
+\end{equation*}
+and then we have it acting on a vector by matrix multiplication,%
+\begin{equation*}
+\begin{pmatrix}
+0 \amp 1 \amp 0 \amp 0 \\
+0 \amp 0 \amp 1 \amp 0 \\
+0 \amp 0 \amp 0 \amp 1 \\
+1 \amp 0 \amp 0 \amp 0 
+\end{pmatrix} \begin{pmatrix}
+v_1 \\
+v_2 \\
+v_3\\
+v_4
+\end{pmatrix}   =    \begin{pmatrix}
+v_4 \\
+v_1 \\
+v_2\\
+v_3
+\end{pmatrix}
+\end{equation*}
+%
+\end{example}
+Now consider the action of the symmetric group \(S_n\) on the polynomial ring \(R=\mathbb{K}[x_1,x_2,...,x_n]\). The symmetric polynomials are the invariant polynomials under this action..%
+\begin{definition}{Definition}{}{def-symmetricpolynomial}%
+We call \(f \in R\), a symmetric polynomial if%
+\begin{equation*}
+f(x_1,x_2,...,x_n) = f(x_{\sigma(1)},x_{\sigma(2)},...,x_{\sigma(n)})
+\end{equation*}
+for all permutations of \(\sigma \in S_n\).%
+\end{definition}
+An example of symmetric polynomials is given by the \terminology{elementary symmetric polynomials}.%
+\begin{definition}{Definition}{}{def-elemsymm}%
+The elementary symmetric polynomials \(e_0,e_1,...,e_n\) in \(\mathbb{K}[x_1,...,x_n]\) are defined by%
+\begin{equation*}
+e_{m}=\sum_{|J|=m} \bar x_J = \sum_{j_1 \lt j_2 \lt ... \lt j_m} x_{j_1}x_{j_2}...x_{j_m}, 
+\end{equation*}
+with \(e_0=1\).%
+\end{definition}
+More generally, we can consider a permutation action by some subgroup \(G\) of \(S_n\). For any monomial in \(R\), we can consider its orbit under the action of \(G\).%
+\begin{definition}{Definition}{}{def-orbit}%
+The \(G-orbit\) of any element \(f \in R\) is%
+\begin{equation*}
+\text{orb}(f) = \{g \cdot f \mid g \in G\}\text{.}
+\end{equation*}
+%
+\end{definition}
+Any permutation in \(G\) acts on the orbit \(\text{orb}(f)\) by rearranging its elements. As a result, the orbit sums will give us invariant polynomials.%
+\begin{definition}{Definition}{}{def-orbitsum}%
+The orbit sum of \(f\) the sum of over the elements of  \(\text{orb}(f)\).%
+\end{definition}
+We can find a set of minimal invariants by computing all orbit sums of all monomials of degree \(\lt |G|\). But this is computationally expensive and will lead to a lot of redundant computations. Instead, we will use a result that tells us that we only need to compute the orbit sums of some special monomials. Consider the exponent sequence \(\beta\) of a monomial \(\bar x^{\bar \beta}\) and rearrange it to obtain an integer partition \(\lambda\), where \(\lambda_1 \gt \lambda_2 \gt ... \gt \lambda_m\)%
+\begin{definition}{Definition}{}{def-specialmonomials}%
+We call a monomial \terminology{special} if the entries in its associated partition decrease by at most one at each step and the last entry is 0.%
+\end{definition}
+The definition of special depends on the number of variables or the number of parts in the integer partition. So \(x_1^n x_2^{n-1}....x_{n-1}^1 x_n^0\) would not be special within \(\mathbb{K}[x_1, ... , x_{n-1}]\), but it is special in \(\mathbb{K}[x_1, ... , x_{n}]\).%
+\begin{theorem}{Theorem}{}{}{thm-gobel}%
+(Göbel) Let \(\phi:G \mapsto \text{GL}(n,\mathbb{K})\) be a permutation representation of a finite group acting on \(R = \mathbb{K}[x_1,...,x_n]\). Then the ring of invariants \(R^G\) is generated as an algebra by the top elementary symmetric function \(e_n = x_1...x_n\) and the orbit sum of the special monomials.%
+\end{theorem}
+\begin{corollary}{Corollary}{}{}{cor-gobel}%
+(Göbel's Bound) In a permutation representation of dimension at least 3, the degree of a minimal generating invariant is at most \(\binom{n}{2}\).%
+\end{corollary}
+We have that the bound follows from the theorem as the degree of a special momial is at most \(\binom{n}{2}\) and this is larger than \(n\), the degree of \(e_n\), when \(n \geq 3\).%
+\par
+To show that orbits of special monomial generate the ring of invariants, one needs to consider a reduction argument. If you start with a non-special monomial, the entries of its partition are not decreasing by at most 1 and we call the first place where there is a jump a \(gap\) in the partition. Starting from a non-special monomial we can obtain a reduced monomial by decreasing all the largest exponents up to the gap by one. The reduced monomial will be closer to being special as the gap itself will be reduced by 1.%
+\begin{example}{Example}{}{subsec-orbitsums-19}%
+\(\mathbb{K}[x_1,x_2,x_3,x_4]\)\(x_1^2x_2^4x_3 \)\((4,2,1)\)%
+\begin{equation*}
+x_1^2x_2^4x_3 \mapsto x_1^2x_2^3 x_3,
+\end{equation*}
+\end{example}
+Algorithmically, we can reduce any monomial to a special one by reducing the upper degrees repeatedly until the monomial is special. So the general idea of the proof of Gobel's theorem is to show that the orbit sum of any monomial can be rewritten as a sum of orbit sums of special monomials or special monomials times some power of \(e_n\). In our ongoing work we are using Gobel's theorem as a tool for reducing the complexity of computing invariants for permutation actions.%
+\end{subsectionptx}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.4 InvariantRings package}
 \typeout{************************************************}
 %
 \begin{sectionptx}{Section}{InvariantRings package}{}{InvariantRings package}{}{}{sec-invariantrings-packages}
+We conclude with references to the algorithms implemented in the InvariantRing package and examples of its implementation. Version 2.0 of this package was accepted for publication in volume 14 of Journal of Software for Algebra and Geometry on 2023-09-14, in the article The InvariantRing package for Macaulay2 (DOI: 10.2140\slash{}jsag.2024.14.5). That version can be obtained from the journal or from the Macaulay2 source code repository.%
 %
 %
 \typeout{************************************************}
-\typeout{Section 1.2.1 InvariantRing Library Demos}
+\typeout{Subsection 1.4.1 References for the implemented algorithms}
 \typeout{************************************************}
 %
-\begin{sectionptx}{Section}{InvariantRing Library Demos}{}{InvariantRing Library Demos}{}{}{sec-invariantring-demoss}
-The InvariantRing package in Macaulay2 provides tools to study and compute invariant rings of group actions. To get started, install the package:%
+\begin{subsectionptx}{Subsection}{References for the implemented algorithms}{}{References for the implemented algorithms}{}{}{subsec-references}
+%
+\begin{itemize}[label=\textbullet]
+\item{}An elimination theory algorithm that computes the Hilbert ideal for any linearly reductive group: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.1.9, pp 159-164%
+\item{}A simple and efficient algorithm for invariants of tori based on: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 4.3.1 pp 174-177%
+\item{}An adaptation of the tori algorithm for invariants of finite abelian groups based on: Gandini, F. Ideals of Subspace Arrangements. Thesis (Ph.D.)-University of Michigan. 2019. ISBN: 978-1392-76291-2. pp 29-34.%
+\item{}King's algorithm and the linear algebra method for invariants of finite groups: Derksen, H. and Kemper, G. (2015). Computational Invariant Theory. Heidelberg: Springer. Algorithm 3.8.2, pp 107-109; pp 72-74%
+\item{}The algorithms for primary and secondary invariants, and Molien series of finite groups implemented in version 1.1.0 of this package by: Hawes, T. Computing the invariant ring of a finite group. JSAG, Vol. 5 (2013). pp 15-19. DOI: 10.2140\slash{}jsag.2013.5.15%
+\end{itemize}
+The orbit sum approach is under development and will be released with version 3.0 of the package. Our implementation is following the description by Mara D. Neusel, in her book Invariant Theory from the AMS The Student Mathematical Library (2007, Volume 36), DOI: \href{http://dx.doi.org/10.1090/stml/036}{\nolinkurl{http://dx.doi.org/10.1090/stml/036}}%
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 1.4.2 InvariantRing Library Demos}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{InvariantRing Library Demos}{}{InvariantRing Library Demos}{}{}{sec-invariantring-demos}
+The InvariantRing package in Macaulay2 provides tools to study and compute invariant rings of group actions. To get started, install the package.%
 \begin{sageinput}
 installPackage "InvariantRing"
 \end{sageinput}
-%
-%
-\typeout{************************************************}
-\typeout{Section 1.2.1.1 SL₂ Actions on C² and Variants}
-\typeout{************************************************}
-%
-\begin{sectionptx}{Section}{SL₂ Actions on C² and Variants}{}{SL₂ Actions on C² and Variants}{}{}{sec-invariantring-demoss-4}
-A classical example: the standard action of SL₂ on ℂ². The ring R carries a linearly reductive action from SL₂ defined via the matrix SL2std. The invariants and Hilbert ideal are then computed:%
+\begin{example}{Example}{Special Linear Group Actions on two variables.}{sec-invariantring-demos-4}%
+A classical example: the standard action of \(\text{SL}_2\) on \(\mathbb{Q}^2\). The ring R carries a linearly reductive action defined via the matrix SL2std. The invariants and Hilbert ideal are then computed.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -872,15 +978,9 @@ V = linearlyReductiveAction(A,SL2std,R)
 invariants V
 elapsedTime hilbertIdeal V
 \end{sageinput}
-\end{sectionptx}
-%
-%
-\typeout{************************************************}
-\typeout{Section 1.2.1.2 Diagonal Actions of Abelian Groups}
-\typeout{************************************************}
-%
-\begin{sectionptx}{Section}{Diagonal Actions of Abelian Groups}{}{Diagonal Actions of Abelian Groups}{}{}{sec-invariantring-demoss-5}
-This example demonstrates a diagonal action of the abelian group ℂ₃ × ℂ₃ on a polynomial ring. After defining the diagonal weights, we compute the invariant ring and its Hilbert series:%
+\end{example}
+\begin{example}{Example}{Diagonal Actions of Abelian Groups.}{sec-invariantring-demos-5}%
+This example demonstrates a diagonal action of the abelian group \(C_3 \times C_3\) on a polynomial ring. After defining the diagonal weights, we compute the invariant ring and its Hilbert series.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -896,15 +996,9 @@ F = res I
 hilbertSeries S
 equivariantHilbertSeries T
 \end{sageinput}
-\end{sectionptx}
-%
-%
-\typeout{************************************************}
-\typeout{Section 1.2.1.3 Linearly Reductive Actions: Permutations and Binary Forms}
-\typeout{************************************************}
-%
-\begin{sectionptx}{Section}{Linearly Reductive Actions: Permutations and Binary Forms}{}{Linearly Reductive Actions: Permutations and Binary Forms}{}{}{sec-invariantring-demoss-6}
-Here's how the symmetric group S₂ acts via a matrix of projection operators. We identify which polynomials are invariant under the group action:%
+\end{example}
+\begin{example}{Example}{Linearly Reductive Actions: Permutations and Binary Forms.}{sec-invariantring-demos-6}%
+Here's how the symmetric group \(S_2\) acts via a matrix of projection operators. We identify which polynomials are invariant under the group action.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -916,7 +1010,7 @@ X = linearlyReductiveAction(A,M,R)
 isInvariant(a,X)
 invariants X
 \end{sageinput}
-Now we compute the invariants of binary quadratics and quartics using SL₂ actions. These involve basis substitutions in a ring of forms and are more computationally demanding:%
+Now we compute the invariants of binary quadratics and quartics using \(\text{SL}_2\) actions. These involve basis substitutions in a ring of forms and are more computationally demanding.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -947,15 +1041,9 @@ g3 = -X_1/216
 256*(g2^3 - 27*g3^2)
 1728*(g2^3)/(g2^3 - 27*g3^2)
 \end{sageinput}
-\end{sectionptx}
-%
-%
-\typeout{************************************************}
-\typeout{Section 1.2.1.4 Matrix Invariants and Conjugation Actions}
-\typeout{************************************************}
-%
-\begin{sectionptx}{Section}{Matrix Invariants and Conjugation Actions}{}{Matrix Invariants and Conjugation Actions}{}{}{sec-invariantring-demoss-7}
-We define SL₂ actions on 2×2 and 3×3 matrices of binary or ternary forms. The conjugation action creates sophisticated invariants under change of basis:%
+\end{example}
+\begin{example}{Example}{Matrix Invariants and Conjugation Actions.}{sec-invariantring-demos-7}%
+We define SL₂ actions on 2\(\times\)2 and 3\(\times\)3 matrices of binary or ternary forms. The conjugation action creates sophisticated invariants under change of basis.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -972,7 +1060,7 @@ L = linearlyReductiveAction(I,G,R)
 elapsedTime H=hilbertIdeal(L)
 elapsedTime invariants L
 \end{sageinput}
-The same process is repeated for 3×3 matrices. This involves 9-dimensional vector spaces and is more computationally demanding:%
+The same process is repeated for 3\(\times\) 3 matrices. This involves 9-dimensional vector spaces and is more computationally demanding.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -991,15 +1079,9 @@ elapsedTime invariants(L,1)
 elapsedTime invariants(L,2)
 elapsedTime invariants(L,3)
 \end{sageinput}
-\end{sectionptx}
-%
-%
-\typeout{************************************************}
-\typeout{Section 1.2.1.5 Finite Group Actions: S₄ Example}
-\typeout{************************************************}
-%
-\begin{sectionptx}{Section}{Finite Group Actions: S₄ Example}{}{Finite Group Actions: S₄ Example}{}{}{sec-invariantring-demoss-8}
-Finally, we examine the symmetric group S₄ acting on 4 variables. We use both King’s algorithm and a slower linear algebra method to compute primary and secondary invariants:%
+\end{example}
+\begin{example}{Example}{Finite Group Actions.}{sec-invariantring-demos-8}%
+Finally, we examine the symmetric group S₄ acting on 4 variables. The current version of the package can use both King's algorithm and a slower linear algebra method to compute primary and secondary invariants. Future methods using Gobel's theorem should improve on the speed of this computation.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
@@ -1012,8 +1094,8 @@ elapsedTime p=primaryInvariants S4
 elapsedTime secondaryInvariants(p,S4)
 elapsedTime hironakaDecomposition(S4)
 \end{sageinput}
-\end{sectionptx}
-\end{sectionptx}
+\end{example}
+\end{subsectionptx}
 \end{sectionptx}
 \end{chapterptx}
 \end{document}
