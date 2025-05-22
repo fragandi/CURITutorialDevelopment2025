@@ -280,7 +280,7 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
       </section>
     
     </section>    
-<section xml:id="sec-invariantrings-package">
+<!-- <section xml:id="sec-invariantrings-package">
         <title>InvariantRings package </title>
         <section xml:id="sec-invariantring-demos">
           <title>InvariantRing Library Demos</title>
@@ -483,6 +483,6 @@ This chapter is co-authored by Francesca Gandini, Sumner Strom, Al Ashir Intisar
         
         </section>
         
-    </section>
+    </section> -->
 
 </chapter>
