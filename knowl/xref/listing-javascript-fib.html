@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: denver                         *-->
+<!--*  Palette: leaves                       *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">3.2.7<span class="period">.</span></span><span class="space"> </span>Sample Javascript code</figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-javascript">// name this Javascript file something.js
+// execute by running this in a terminal:
+//   node something.js
+let a = 1, b = 1
+console.log(a)
+console.log(b)
+Array.from({ length: 10 }, _ =&gt; {
+  console.log(a+b)
+  let _a = a
+  a = b
+  b = _a + b
+})
+</code></pre></div></div></figure><span class="incontext"><a class="internal" href="ch-coding.html#listing-javascript-fib">in-context</a></span>
+</body>
+</html>

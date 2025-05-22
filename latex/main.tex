@@ -1,6 +1,6 @@
 %********************************************%
 %*       Generated from PreTeXt source      *%
-%*       on 2025-05-17T01:41:00Z       *%
+%*       on 2025-05-17T01:47:14Z       *%
 %*   A recent stable commit (2022-07-01):   *%
 %* 6c761d3dba23af92cba35001c852aac04ae99a5f *%
 %*                                          *%
@@ -661,9 +661,11 @@ and we can check that \(R_G(x+y)=x\) is indeed invariant.%
 \typeout{************************************************}
 %
 \begin{sectionptx}{Section}{Degree bounds and algorithms}{}{Degree bounds and algorithms}{}{}{sec-degree-bounds-algorithms}
+\begin{introduction}{}%
 Our goal is to find algorithms that provide us with a description of all possible invariants in an efficient way. Formally, we look for \terminology{minimal generators} for the ring of invariants \(R^G\) and more precisely for minimal algebra generators for \(R^G\) as an algebra over the coefficient field \(\mathbb{K}\).%
 \par
 For our search to be successful, we need to hope that there are finitely many generators. In our setup (finite groups and characteristic zero) a consequence of Hilbert's Basis Theorem is that our invariant rings are finitely generated. However, we will run in computational troubles if we do not have a stopping point for our search. The most effective way is to provide a bound the degrees of these generators.%
+\end{introduction}%
 %
 %
 \typeout{************************************************}
@@ -794,7 +796,9 @@ The exterior algebra approach has computational potential. Whilst Derken's appro
 \typeout{************************************************}
 %
 \begin{sectionptx}{Section}{Specialized algorithms}{}{Specialized algorithms}{}{}{sec-}
+\begin{introduction}{}%
 For some specific types of actions we have faster and simpler algorithms to find invariants.%
+\end{introduction}%
 %
 %
 \typeout{************************************************}
@@ -936,7 +940,9 @@ Algorithmically, we can reduce any monomial to a special one by reducing the upp
 \typeout{************************************************}
 %
 \begin{sectionptx}{Section}{InvariantRings package}{}{InvariantRings package}{}{}{sec-invariantrings-packages}
+\begin{introduction}{}%
 We conclude with references to the algorithms implemented in the InvariantRing package and examples of its implementation. Version 2.0 of this package was accepted for publication in volume 14 of Journal of Software for Algebra and Geometry on 2023-09-14, in the article The InvariantRing package for Macaulay2 (DOI: 10.2140\slash{}jsag.2024.14.5). That version can be obtained from the journal or from the Macaulay2 source code repository.%
+\end{introduction}%
 %
 %
 \typeout{************************************************}
@@ -1081,7 +1087,7 @@ elapsedTime invariants(L,3)
 \end{sageinput}
 \end{example}
 \begin{example}{Example}{Finite Group Actions.}{sec-invariantring-demos-8}%
-Finally, we examine the symmetric group S₄ acting on 4 variables. The current version of the package can use both King's algorithm and a slower linear algebra method to compute primary and secondary invariants. Future methods using Gobel's theorem should improve on the speed of this computation.%
+Finally, we examine the symmetric group \(S_4\) acting on 4 variables. The current version of the package can use both King's algorithm and a slower linear algebra method to compute primary and secondary invariants. Future methods using Gobel's theorem should improve on the speed of this computation.%
 \begin{sageinput}
 restart
 needsPackage "InvariantRing"
