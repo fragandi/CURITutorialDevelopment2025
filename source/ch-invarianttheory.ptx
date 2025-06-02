@@ -24,7 +24,7 @@ in the open-source Computer Algebra System <url href="http://www2.macaulay2.com"
         <p>
           We finish the chapter with a selection of examples that illustrate the current capabilities of the InvariantRing package.
           You can run the provided code in your local installation of M2 or go to the online version and execute the code cells on your browser.
-           This works  well even on mobile devices!
+          This works  well even on mobile devices!
         </p>
     </introduction>
 
@@ -40,12 +40,13 @@ in the open-source Computer Algebra System <url href="http://www2.macaulay2.com"
 
                 </p>
     </subsection> -->
+    <!--we should put an introduction into representation thoery here just for readability of notation at an undergraduate level-->
        <subsection xml:id="subsec-finite-matrix-groups">
         <title>Finite Matrix Groups</title>
         <p>
-          We can think of a (linear) action of a group on a vector space
+          We can think of a (linear) action within a group as acting on a vector space
           concretely by interpreting each group element as a matrix and describing the action as matrix multiplication on vectors.
-          We can then evaluate any polynomial on a vector and its image after the action.
+          We can then evaluate any polynomial on a vector space of its indeterminants and its image after the group action.
         </p>
 <example>
    <p>
@@ -72,7 +73,7 @@ x \\
         In general, most of the results in this chapter hold in the non-modular case 
         i.e., when the characteristics of the field does not divide the order of the group. 
         As of now finite fields are not fully supported by the current version of the InvariantRing package 
-        and such functionalities is an active area of development.   
+        and such functionalities are an active area of development.   
 </p>
       
 <p>
@@ -80,7 +81,8 @@ x \\
   and so we consider <m> G </m> as a finite <term>matrix group</term>.
 </p>
    
-        <definition><p> Suppose <m>|G| &lt; \infty</m> and <m>G \leq GL_m(\mathbb{K})</m>,  then <m>G</m> is a finite matrix group.
+        <definition><p> 
+          Suppose <m>|G| &lt; \infty</m> and <m>G \leq GL_m(\mathbb{K})</m>,  then <m>G</m> is a <em>finite matrix group.</em>
         
         </p></definition>
   <example>
@@ -130,9 +132,8 @@ However the polynoial <m>f(\bar x)=x+y</m> is not.
         <p> We can consider the set of all invariant polynomials under some action of a group <m>G </m>. 
           A good exercise is to prove that this set has the structure of a ring.
            </p>
-            <definition><p> Let <m>R= \mathbb{K}[\bar x]</m>. We define 
-              <me>R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \, \forall A \in G\} \subseteq R</me>
-            to be the invariant ring for the action of <m>G</m> on <m>R</m>.
+            <definition><p> Let <m>R= \mathbb{K}[\bar x]</m>. We define the <em>invariant ring</em> for the action of <m>G</m> on <m>R</m> as,
+              <me>R^G : =  \{f \in R \, | f(A\bar x) = f(\bar x), \, \forall A \in G\} \subseteq R.</me>
             </p></definition>
     </subsection>
 
@@ -146,15 +147,16 @@ However the polynoial <m>f(\bar x)=x+y</m> is not.
         </p>
        
             <definition> 
-              <p> The averaging (or Reynolds) map <m>R_G: R \xrightarrow{} R^G</m> is given by 
+              <p> The <em>Reynolds map</em> (averaging map) <m>R_G: R \xrightarrow{} R^G</m> is given by 
                 <me>R_G(f) = \frac{1}{|G|} \sum_{A\in G} f(A \bar x) </me>
         </p>
       </definition>
         <example>
-          <p>Example for the Group action <m>C_2 = \left\langle\begin{pmatrix}
+          <p>Example for a Group action <m>C_2 = \left\langle\begin{pmatrix}
             1 \amp 0 \\
             0 \amp -1 \\
-            \end{pmatrix}\right\rangle</m>. Consider the polynomial <m>x+y</m>, which is not invariant under the action of <m>C_2</m>.
+            \end{pmatrix}\right\rangle</m>. 
+            Consider the polynomial <m>x+y</m>, which is not invariant under the action of <m>C_2</m>.
             We have that: 
             <me>R_G(x+y) = \frac{1}{2} ((x+y) + (x-y)) = x\in R^G</me>
 and we can check that <m>R_G(x+y)=x</m> is indeed invariant.
@@ -167,7 +169,7 @@ and we can check that <m>R_G(x+y)=x</m> is indeed invariant.
      <title>Degree bounds and algorithms</title>
      <introduction>
      <p>
-  Our goal is to find algorithms that provide us with a description of all possible invariants in an efficient way. 
+      Our goal is to find algorithms that provide us with a description of all possible invariants in an efficient way. 
      Formally, we look for <term>minimal generators</term> for the ring of invariants <m>R^G</m> and more precisely for minimal algebra generators for
      <m>R^G</m> as an algebra over the coefficient field <m>\mathbb{K}</m>. 
 </p>
@@ -186,16 +188,15 @@ and we can check that <m>R_G(x+y)=x</m> is indeed invariant.
         <title>Noether Degree Bound</title>
         <p> A beautiful theorem of Noether establishes that we have a bound on the degree of a minimal generator independent from the action itself, 
           but just in terms of the order of the group. Moreover, we only need to look at images of monomials under the Reynolds operator.</p>
-            <theorem><p> (Noether): 
-              <me>R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|]</me>
+            <theorem><p> The <em>Noether Degree Bound</em> claims a ring of invariants is generated in degrees <m>\leq |G|</m> giving, 
+              <me>R^G = \mathbb{K} [ R_G(\bar x^{\bar \beta}) | \; |\bar \beta| \leq |G|].</me>
             </p></theorem>
-  <corollary>
       <p>
-        (Noether Degree Bound) The ring of invariants is generated in degrees <m>\leq |G|</m>. 
+        
       </p>
-  </corollary>
+
         <p>
-           Noether's result is a constructive one and provides us with a first computational strategy! 
+           Noether's result is a constructive tool that provides us with a computational strategy! 
            We can apply <m>R_G</m> to all the finitely many monomials in degrees <m>\leq |G|</m> to get generators for <m>R^G</m>.
            As the number of monomials grows exponentially with the number of variables and the degree, this is more of a theoretical algorithm,
            but it does tell us that our goal is at least possible!
@@ -205,9 +206,9 @@ and we can check that <m>R_G(x+y)=x</m> is indeed invariant.
     <subsection xml:id="subsec-hilbert-ideal">
         <title>Hilbert Ideal</title>
         <p>
-                To describe a more sophisticated approach to the search for minimal algebra generators for an invariant ring, we will actually need to consider an ideal instead!
-  Note: for  any <m>\{ f_1,..., f_s\} \subseteq R</m>, the ideal generatd by <m>\{f_1,...f_s\}</m> 
-  and the subalgebra generated by  <m>\{f_1,...f_s\}</m> over <m>\mathbb{K}</m> are very different objects.
+          To describe a more sophisticated approach to the search for minimal algebra generators for an invariant ring, we can actually consider an ideal instead!
+          Note: for  any <m>\{ f_1,..., f_s\} \subseteq R</m>, the ideal generatd by <m>\{f_1,...f_s\}</m> 
+          and the subalgebra generated by  <m>\{f_1,...f_s\}</m> over <m>\mathbb{K}</m> are very different objects.
        </p>
        <definition>
           <p>
