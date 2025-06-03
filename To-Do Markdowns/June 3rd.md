@@ -80,8 +80,11 @@ I'm working with [Sam](sumner9@stolaf.edu) so we're going to show that the invar
 > We just know that this is the case because <img src="images/identity1.png" style="width:50px">.
 > 
 > Now, we want to show that its **closed under addition**. 
+>
 ><img src="images/additive.png" style="width:400px">
 >
 > Now we're gonna show that it's closed under multiplication.
+>
 > <img src="images/closure.png" style="width:400px">
+>
 > And then we proved it i guess. 
