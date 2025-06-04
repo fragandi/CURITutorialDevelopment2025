@@ -1,0 +1,134 @@
+%document class
+\documentclass[10pt,oneisde]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{geometry}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{xcolor, mdframed}
+\usepackage{thmbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{changepage}
+\usepackage{xcolor}
+
+\pgfplotsset{compat=1.18}
+
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{-5mm}
+
+% a good babble textwidth is 5.75in
+\newcommand{\babblewidth}{\setlength\textwidth{5.75in}}
+
+
+% This will stretch out the page
+\newcommand{\bigpage}{  \setlength \oddsidemargin{-.25in}
+            \setlength \textwidth{6.75in}
+            \setlength \topmargin{-1in}
+            \setlength \textheight{9.75in}}
+
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+\newcommand{\separator}{\vglue .1in\hrule\vglue .1in}
+
+\newcommand{\pause}{\vglue .1in\hrulefill {\tiny Pause here}\hrulefill \vglue .1in}
+
+%%general stuff
+\newcommand{\caret}{\textasciicircum}
+
+%This will put a circle around something.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+% Commands for abstract
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\normal}{\triangleleft}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\aut}[1]{{\rm Aut}(#1)}
+\newcommand{\Ker}{{\rm Ker}\,}
+\newcommand{\im}{{\rm Im}\,}
+\newcommand{\cyclic}[1]{\langle #1 \rangle}
+\newcommand{\isom}{\cong}
+\newcommand{\autc}[1]{{\rm Aut_c}(#1)}
+\newcommand{\autsub}[2]{{\rm Aut}_{#1}(#2)}
+
+\newcommand{\vp}{\vspace{0.15cm}\\}
+\newcommand{\vpp}{\vspace{0.25cm}\\}
+\newcommand{\vpn}{\vspace{0.05cm}\\}
+\newcommand{\rmv}[1]{\,\backslash\{#1\}}
+\newcommand{\rmvs}[1]{\,\backslash{#1}}
+\newcommand{\md}[1]{\,\text{mod } #1}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{sasha}{rgb}{0.0, 0.6, 0.6}
+\definecolor{marcus}{rgb}{0.7, 0.3, 0.3}
+
+
+\begin{document}
+\section*{June 4th—Example 1}
+DEF Let $I$ be an ideal in $R$ (commutative ring).
+$$\sqrt I = \{r\mid r^n\in I\}$$
+\color{red}
+EX 
+\begin{align*}
+    \sqrt{(x^2,y^3)}, \; (x,y)\subseteq \sqrt I\\
+    I = (x^2,^3)\\
+    \sqrt I \subseteq (x,y)
+\end{align*}
+\color{blue}
+So now let's consider the ideal test. 
+$J$ is an ideal of $R$ if:
+\begin{enumerate}
+    \item [1)]$J$ is closed under addition
+    \item [2)]$rJ\subseteq J$, $\forall r \in R$. \\
+        Essentially says that it's closed under ANY multiplication.\\
+        \color{darkgreen}$\rightarrow $ NOTE: this gives also ADDITIVE INVERSES, so the subgroup test works!.
+\end{enumerate}
+\color{sasha}
+\textbf{Sasha's work}:\vpp
+WTS: $rJ\subseteq J,\quad \&(Jr\subseteq R)$ (commutative ring), and the additive subgroup.
+\begin{proof}
+    Let $r_1,r_2\in J$. We know that $\exists n,m$ such that $r_1^n, r_2^m \in I$. \vp
+    Let $a\in R$, WTS $ar_1\in J$.\vp
+    $(ar_1)^n=a^nr_1^n\quad\quad r_1^n\in I$\vp
+    so $a^nr_1^n \in I_1$ so $(ar_1)^n\in I$.\vp
+    Thus, $ar_1\in J$.
+\end{proof}
+\color{marcus}
+\textbf{Marcus work}:\vpp
+We want to show that $(r_1+r_2)^{n_1+n_2}\in I\Rightarrow r_1+r_2\in J$.
+\begin{proof}
+    We have that: 
+    $$(r_1+r_2)^{n_1+n_2}=r_1^{n_1+n_2}+b_1r_1^{n_1+n_2-1}+\cdots+b{n_2}r_1^{n_1}r_2^{n_2}+\cdots+r_2^{n_1+n_2}$$
+    What's useful is that we can group our terms such that we can pull out a $r_1^{n_1}$ from all of our terms, which we know that $r_1^{n_1}\in I$. \vp
+    Furthermore, the second group of terms will at least have a $r_2^{n_2}$ term, and we know that $r_2^{n_2}\in I$. \vp
+    So that means every term in the binomial sum is in $I$, and because $I$ is closed under addition, the sum must be in $I$, and therefore the sum must be in $J$. \vp
+    Thus, $J$ is an ideal. 
+\end{proof}
+
+
+
+\end{document}
