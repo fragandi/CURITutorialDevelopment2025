@@ -105,3 +105,10 @@ codechat_config.yaml
 # Don't track deprecated workflows
 .github/workflows/deploy.yml
 .github/workflows/test-build.yml
+
+# Don't track extra LaTeX-output files
+.aux
+.fdb_latexmk
+.fls
+.out
+.synctex.gz
