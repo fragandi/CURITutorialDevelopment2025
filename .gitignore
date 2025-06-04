@@ -107,8 +107,9 @@ codechat_config.yaml
 .github/workflows/test-build.yml
 
 # Don't track extra LaTeX-output files
-.aux
-.fdb_latexmk
-.fls
-.out
-.synctex.gz
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+LateX-notes/*.log
