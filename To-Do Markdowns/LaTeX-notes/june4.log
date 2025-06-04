@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  4 JUN 2025 14:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  4 JUN 2025 14:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -728,24 +728,24 @@ LaTeX Warning: Unused global option(s):
 (/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.aux)
 \openout1 = `june4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -781,7 +781,7 @@ LaTeX Font Info:    ... okay on input line 90.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 90.
+Package hyperref Info: Link coloring OFF on input line 92.
 (/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.out) (/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.out)
 \@outlinefile=\write4
 \openout4 = `june4.out'.
@@ -807,22 +807,29 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 92.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 94.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 92.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 94.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 92.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 94.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] (/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.aux)
+]
+Underfull \hbox (badness 10000) in paragraph at lines 159--162
+
+ []
+
+
+
+[2] (/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -831,18 +838,18 @@ Package rerunfilecheck Info: File `june4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32599 strings out of 473190
- 758380 string characters out of 5715801
+ 32612 strings out of 473190
+ 758483 string characters out of 5715801
  1265504 words of memory out of 5000000
- 55320 multiletter control sequences out of 15000+600000
- 565742 words of font info for 66 fonts, out of 8000000 for 9000
+ 55324 multiletter control sequences out of 15000+600000
+ 566347 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,8n,107p,788b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on "/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.pdf" (1 page, 164262 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on "/Users/gordienovak/fragandi/To-Do Markdowns/Latex-Notes/june4.pdf" (2 pages, 176974 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
- 3 named destinations out of 1000 (max. 500000)
+ 116 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
