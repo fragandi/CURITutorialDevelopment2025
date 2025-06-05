@@ -30,4 +30,11 @@ Gandini also went on about the standing desk. We can put 2 oreos on the standing
  * Read some of the Gandini book--read through chapter 2 completely and a bit of 4
  * Dirksen and Kemper as well (constructive invariant theory)--in the google drive. 
  * Look at Grobner Basis.pdf
+##### Marcus
+* Marcus got VSCode set up with PreTeXt
+ * Everything is compiling and doing it's stuff really well.
+ * Has his browser set up with PreText as well. 
+* Wrote the introduction to the book. 
+* **Note:** *Sam should add everyone to the repo*
+* Marcus spent too much time on PreTeXt local, but it is ok, and now he'll record what he did so future people are not so confused. 
 
