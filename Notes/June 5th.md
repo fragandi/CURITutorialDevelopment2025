@@ -37,4 +37,9 @@ Gandini also went on about the standing desk. We can put 2 oreos on the standing
 * Wrote the introduction to the book. 
 * **Note:** *Sam should add everyone to the repo*
 * Marcus spent too much time on PreTeXt local, but it is ok, and now he'll record what he did so future people are not so confused. 
-
+### Moving Forward
+* We all got M2 codespace set up on the cloud
+ * Marcus and gordie got it working. 
+ * Sam also has it working
+ * Sasha is doing sasha
+Here's a joke: what do you call a pig that has legs? ... josh. 
