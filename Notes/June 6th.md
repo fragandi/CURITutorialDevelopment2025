@@ -1,4 +1,4 @@
-## June 7th, 10:00 AM
+## June 6th, 10:00 AM
 #### Math and Coding Goal
 * Everyone CAN edit a PreTeXt
 * At least one commit to the Gröbner basis chapter
