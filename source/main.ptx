@@ -14,7 +14,7 @@
   </docinfo>
 
   <book xml:id="g4msto">
-    <title>Github for mathematicians</title>
+    <title>Github for math folks</title>
     <subtitle>St. Olaf edition</subtitle>
     <xi:include href="frontmatter.ptx" />
   
