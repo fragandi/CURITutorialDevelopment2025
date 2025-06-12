@@ -18,6 +18,12 @@
             <department>Mathematical Sciences</department>
             <institution>University of Northern Colorado</institution>
         </author>
+        <title>Contributing Authors</title>
+        <author>
+          <personname>Francesca Gandini</personname>
+          <department>MSCS</department>
+          <institution>St. Olaf College</institution>
+        </author>
       </credit>
       <date>
         <today />
