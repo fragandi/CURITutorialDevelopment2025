@@ -1,0 +1,101 @@
+\documentclass[10pt,oneside]{article}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{geometry}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+
+\setlength{\footskip}{-5mm}
+
+% a good babble textwidth is 5.75in
+\newcommand{\babblewidth}{\setlength\textwidth{5.75in}}
+
+
+% This will stretch out the page
+\newcommand{\bigpage}{  \setlength \oddsidemargin{-.25in}
+            \setlength \textwidth{6.75in}
+            \setlength \topmargin{-1in}
+            \setlength \textheight{9.75in}}
+
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+\newcommand{\separator}{\vglue .1in\hrule\vglue .1in}
+
+\newcommand{\pause}{\vglue .1in\hrulefill {\tiny Pause here}\hrulefill \vglue .1in}
+
+%%general stuff
+\newcommand{\caret}{\textasciicircum}
+
+%This will put a circle around something.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+% Commands for abstract
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\normal}{\triangleleft}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\aut}[1]{{\rm Aut}(#1)}
+\newcommand{\Ker}{{\rm Ker}\,}
+\newcommand{\im}{{\rm Im}\,}
+\newcommand{\cyclic}[1]{\langle #1 \rangle}
+\newcommand{\isom}{\cong}
+\newcommand{\autc}[1]{{\rm Aut_c}(#1)}
+\newcommand{\autsub}[2]{{\rm Aut}_{#1}(#2)}
+
+\newcommand{\vp}{\vspace{0.15cm}\\}
+\newcommand{\vpp}{\vspace{0.25cm}\\}
+\newcommand{\vpn}{\vspace{0.05cm}\\}
+\newcommand{\rmv}[1]{\,\backslash\{#1\}}
+\newcommand{\rmvs}[1]{\,\backslash{#1}}
+\newcommand{\md}[1]{\,\text{mod } #1}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+%}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{sasha}{rgb}{0.0, 0.5, 0.5}
+\definecolor{marcus}{rgb}{0.7, 0.3, 0.3}
+\definecolor{sam}{rgb}{0.2, 0.2, 0.8}
+
+
+\begin{document}
+\subsection*{Gandini Notes on Gröbner Bases}
+\begin{align*}
+    \begin{bmatrix}2&3&4&\mid &5 \\ 3&4&5&\mid &2\end{bmatrix}
+    \approx 
+    \begin{bmatrix}1&0&-1&\mid &-14 \\ 0&1&2&\mid &11\end{bmatrix}
+\end{align*}
+$F[x]$ is a PID: principal ideal domain. So we have that:
+\begin{align*}
+    (f_1,f_2)=(\gcd(f_1,f_2))
+\end{align*}
+In $F[x]$ the smallest monic polynomial in $I$ generates $I$.\\
+$\implies F[x]$ is a PID.\vpp
+Remember Bezout's:\\
+$\implies \gcd(f_1,f_2)=af_1+bf_2$\\
+$\implies \gcd \in I = (f_1,f_2)$
+
+
+\end{document}

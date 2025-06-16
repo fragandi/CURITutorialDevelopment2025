@@ -112,4 +112,4 @@ codechat_config.yaml
 *.fls
 *.out
 *.synctex.gz
-LateX-notes/*.log
+Notes/LateX-notes/*.log
