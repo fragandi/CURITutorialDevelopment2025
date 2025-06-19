@@ -1198,6 +1198,24 @@ var ptx_lunr_docs = [
   "body": " Finite Group Actions  Finally, we examine the symmetric group acting on 4 variables. The current version of the package can use both King's algorithm and a slower linear algebra method to compute primary and secondary invariants. Future methods using Gobel's theorem should improve on the speed of this computation.   "
 },
 {
+  "id": "ch-latex",
+  "level": "1",
+  "url": "ch-latex.html",
+  "type": "Chapter",
+  "number": "12",
+  "title": "LaTeX",
+  "body": " LaTeX   Creating a LaTeX Codespace  A turn-key repository for creating a Codespace ( ) for LaTeX is available at fragandi\/latex-codespace . Below we provide detailed instructions. If you have some experience with codespaces, you might be able to follow directly the README in the repo. Otherwise, keep reading!  Let me start a new paragraph. Without the p the text does not show!    MSCS is defined as wow!     "
+},
+{
+  "id": "def-wow",
+  "level": "2",
+  "url": "ch-latex.html#def-wow",
+  "type": "Definition",
+  "number": "12.1.1",
+  "title": "",
+  "body": "  MSCS is defined as wow!   "
+},
+{
   "id": "ax-related",
   "level": "1",
   "url": "ax-related.html",
