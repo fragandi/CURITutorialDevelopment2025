@@ -81,22 +81,31 @@
 
 
 \begin{document}
-\subsection*{Gandini Notes on Gröbner Bases}
+
+$$
+\begin{bmatrix}
+    1 & 0 & 1\\
+    0 & 1 & 1
+\end{bmatrix}
+$$
+
+We can imagine this as the first element leaving x and z alone, and setting y to 0. Additionally, we can imagine the second one setting x to 0 and leaving y and z alone. We need to worry about getting enough elements from the kernel so we can generate the whole ring.\vpp
+We have a set of powers that will be invariant no matter what:
+\begin{itemize}
+    \item $x^p$
+    \item $y^p$
+    \item $z^p$
+\end{itemize}
+The trick is to use this trick to lower exponents in the kernel. \\
+We also know that in the kernel we can consider:
+$$xyz^{p-1}$$
+So we have that:
 \begin{align*}
-    \begin{bmatrix}2&3&4&\mid &5 \\ 3&4&5&\mid &2\end{bmatrix}
-    \approx 
-    \begin{bmatrix}1&0&-1&\mid &-14 \\ 0&1&2&\mid &11\end{bmatrix}
+    g_0&: xz^{p-1}\\
+    g_1&: xy^{p-1}
 \end{align*}
-$F[x]$ is a PID: principal ideal domain. So we have that:
-\begin{align*}
-    (f_1,f_2)=(\gcd(f_1,f_2))
-\end{align*}
-In $F[x]$ the smallest monic polynomial in $I$ generates $I$.\\
-$\implies F[x]$ is a PID.\vpp
-Remember Bezout's:\\
-$\implies \gcd(f_1,f_2)=af_1+bf_2$\\
-$\implies \gcd \in I = (f_1,f_2)$\vpp
-BIG O-PLUS:
-$${\oplus\bigoplus_{\oplus\bigoplus\oplus}^{\oplus\bigoplus\oplus} \oplus}$$
+If we look at our roots of unity, we see that the total powers of each group action will result in a total order of $p$, so our root of unity $\mu^p = 1$. \vpp
+Because they are all multiples of this first invariant and we can generate the entire invariant ring. \vpp
+CLAIM: If we look at the $x^2y^2z^{p-2}$, it will also be invariant because the total order will be $p$. 
 
 \end{document}
