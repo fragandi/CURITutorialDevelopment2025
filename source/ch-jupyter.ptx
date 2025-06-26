@@ -24,9 +24,30 @@ sharing with other people.
     <p>
 Jupyter is a popular open-source tool used in
 data science, scientific computing, and computational journalism.
-GitHub provides a Codespace ready for running Jupyter notebooks
+Various online platforms allow you to create, edit, and share Jupyter notebooks.
+If you have a Google account, Google Colab allows you to easily create 
+Jupyter notebooks that are stored in your Google Drive:
+<url href="https://colab.research.google.com/"/>.
+Of course, you can also create Jupyter notebooks using GitHub, 
+which provides a Codespace ready for running Jupyter notebooks
 out of the box:
 <url href="https://github.com/github/codespaces-jupyter/"/>.
+    </p>
+  </section>
+  <section xml:id="sec-google-colab">
+    <title>Jupyter Notebooks on Google Colab</title>
+    <p>
+    To get started with Google Colab, go to <url href="https://colab.research.google.com/"/>. 
+    You should see a welcome screen that allows you to create a new notebook, 
+    open an example notebook, or load a notebook from Google Drive or GitHub.
+    </p>
+    <p>
+    You may open <url href="https://colab.research.google.com/drive/1xTAUoxWmz1pWdGVuCMP5UYZkN_ASToqr?usp=sharing">this sample notebook</url> in Google Colab.
+    This notebook provides a Python simulation of the famous <em>birthday problem</em>. 
+    Observe that the notebook contains both Markdown cells and code cells, as described in <xref ref="sec-cells"/>.
+    To run a code cell, first click in the cell, then either click the "play" symbol at the left of the cell or press SHIFT-ENTER.
+    The first time you run a code cell, Colab will start a Python runtime environment 
+    (a <em>kernel</em>, as described in <xref ref="sec-jupyter-kernel"/>), which only takes a few seconds to start up.
     </p>
   </section>
   <section xml:id="sec-github-codespaces-jupyter">
